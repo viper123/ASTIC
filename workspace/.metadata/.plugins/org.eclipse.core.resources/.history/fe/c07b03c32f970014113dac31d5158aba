@@ -37,7 +37,7 @@ public class ClutersTest {
 	}
 	
 	public void selectAllFromClusters(){
-		insertDummyData();
+		//insertDummyData();
 		String select = "select * from bw";
 		Dao dao = new Dao();
 		try{
