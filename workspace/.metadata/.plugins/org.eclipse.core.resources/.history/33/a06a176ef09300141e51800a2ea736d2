@@ -1,0 +1,29 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ro.info.asticlib.clustering;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+/**
+ *
+ * @author Elvis
+ */
+public class CosineCalculator {
+    
+    public  double computeCosine(double [] a,double []b){
+        if(a.length!=b.length){
+            return 0 ;
+        }
+        double topSum = 0,leftBSum=0,rightBSum=0;
+        for(int i=0;i<a.length;i++){
+            topSum+=(a[i]*b[i]);
+            leftBSum+=Math.pow(a[i],2) ;
+            rightBSum+=Math.pow(b[i], 2);
+        }
+        return topSum / (Math.sqrt(leftBSum)*Math.sqrt(rightBSum)) ;
+    }
+    
+}

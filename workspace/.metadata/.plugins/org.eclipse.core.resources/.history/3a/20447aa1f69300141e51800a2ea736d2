@@ -1,0 +1,71 @@
+package ro.info.asticlib.clustering;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import ro.info.asticlib.math.Math;
+
+public class Cluster {
+
+	public HashMap<String, Integer> wordWeightMap;
+	public HashMap<String, List<String>> fileWordMap;
+	
+	public void add(Cluster other){
+		//adauga la fileWordMap
+		for(String file:other.fileWordMap.keySet()){
+			fileWordMap.put(file, other.fileWordMap.get(file));
+		}
+		//adauga la wordWeightMap
+		for(String word:other.wordWeightMap.keySet()){
+			double currentWeight = getWeight(word, wordWeightMap);
+			wordWeightMap.put(word,(int) (currentWeight + other.wordWeightMap.get(word)));
+		}
+	}
+	
+	public double getDistance(Cluster other,DistanceFormula formula){
+		
+		switch (formula) {
+		case Cosine :
+			return getDistanceCosine(other);
+
+		}
+		
+		return 0f;
+	}
+	
+	private double getDistanceCosine(Cluster other){
+		
+		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
+		
+		double []c1Vect = new double[wordSet.size()];
+		double []c2Vect = new double[wordSet.size()];
+		int k = 0;
+		for(String word:wordSet){
+			c1Vect[k] = getWeight(word, wordWeightMap);
+			c2Vect[k++] = getWeight(word, other.wordWeightMap);
+		}
+		return Math.computeCosine(c1Vect, c2Vect);
+	}
+	
+	private Set<String> getWordSet(HashMap<String, Integer> map1,
+			HashMap<String, Integer> map2){
+		 
+		Set<String> wordSet = new HashSet<String>();
+		wordSet.addAll(map1.keySet());
+		wordSet.addAll(map2.keySet());
+		return wordSet;
+	}
+	
+	private double getWeight(String word,HashMap<String, Integer> map){
+		if(map.containsKey(word)){
+			return map.get(word);
+		}
+		return 0;
+	}
+	
+	public enum DistanceFormula {
+		Cosine
+	}
+}

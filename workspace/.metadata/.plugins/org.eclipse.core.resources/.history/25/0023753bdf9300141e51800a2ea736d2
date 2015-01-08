@@ -1,0 +1,14 @@
+package ro.info.asticlib.db;
+
+import java.sql.SQLException;
+
+/**
+ * This will contain only the methods that will be used to retrive objects,
+ * no sql utilitary methods will be present here
+ * @author Elvis
+ *
+ */
+public class Dao extends BaseDao {
+	
+	
+}

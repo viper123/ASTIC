@@ -1,0 +1,21 @@
+package ro.info.asticlib.tests;
+
+import ro.info.asticlib.db.Dao;
+
+public class ClutersTest {
+
+	public void testGetLastId(){
+		Dao dao = new Dao();
+		int id = dao.getLastClusterId();
+		System.out.println("Last id: "+id);
+		id++;
+		dao.saveCluster(id, "a file");
+		id = dao.getLastClusterId();
+		id++;
+		dao.saveCluster(id, "another file");
+		id++;
+		dao.saveCluster(id, "ok i got it");
+		System.out.println("last id = "+id);
+		
+	}
+}

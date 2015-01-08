@@ -1,0 +1,20 @@
+package ro.info.asticlib.db;
+
+import java.sql.SQLException;
+
+public class Dao extends BaseDao {
+	
+	public Dao(){
+		//create table if they do not exist
+	}
+	
+	private final void initTables(){
+		for(Table t:Table.values()){
+			try{
+				executeSQLCommand(t.creationSQL);
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+}

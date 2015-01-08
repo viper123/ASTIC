@@ -1,0 +1,5 @@
+package ro.info.asticlib.clustering;
+
+public class Cluster {
+
+}

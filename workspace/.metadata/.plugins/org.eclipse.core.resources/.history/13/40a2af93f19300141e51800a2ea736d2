@@ -1,0 +1,29 @@
+package ro.info.asticlib.clustering;
+
+import java.util.HashMap;
+
+public class Cluster {
+
+	public String file;
+	public HashMap<String, Integer> wordWeightMap;
+	
+	
+	public float getDistnace(Cluster other,DistanceFormula formula){
+		
+		switch (formula) {
+		case Cosine :
+			return getDistanceCosine(other);
+
+		}
+		
+		return 0f;
+	}
+	
+	private float getDistanceCosine(Cluster other){
+		return 0f;
+	}
+	
+	public enum DistanceFormula {
+		Cosine
+	}
+}
