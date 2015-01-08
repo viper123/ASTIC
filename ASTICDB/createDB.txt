@@ -1,0 +1,7 @@
+create table bw(
+	letter varchar2(1),
+	path varchar2(100),
+	word varchar2(100),
+	weight integer
+)
+/
