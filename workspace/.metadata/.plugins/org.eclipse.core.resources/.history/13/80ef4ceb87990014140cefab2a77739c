@@ -1,0 +1,135 @@
+package ro.info.asticlib.clustering;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
+import ro.info.asticlib.math.Math;
+
+public class Cluster {
+
+	public int id;
+	
+	public HashMap<String, Integer> wordWeightMap;
+	public HashMap<String, Set<String>> fileWordMap;
+	
+	public Cluster(){
+		fileWordMap = new HashMap<String, Set<String>>();
+		wordWeightMap = new HashMap<String, Integer>();
+	}
+	
+	public Cluster(int id){
+		this();
+		this.id = id;
+	}
+	
+	/**
+	 * Creez un cluster dintr-o mapare cuvant,greutate pentru un fisier
+	 * @param file
+	 * @param wordWeightMap
+	 */
+	public Cluster(int id,String file,HashMap<String,Integer> wordWeightMap){
+		this(id);
+		//creaza o lista cu toate cuvintele si adaugala la fileWordMap
+		fileWordMap.put(file, wordWeightMap.keySet());
+		//seteaza wordWeightMap
+		this.wordWeightMap = wordWeightMap;
+	}
+	
+	public void reunion(Cluster other){
+		//adauga la fileWordMap
+		for(String file:other.fileWordMap.keySet()){
+			if(!fileWordMap.containsKey(file)){
+				fileWordMap.put(file, other.fileWordMap.get(file));
+			}
+		}
+		//adauga la wordWeightMap
+		for(String word:other.wordWeightMap.keySet()){
+			double currentWeight = getWeight(word, wordWeightMap);
+			wordWeightMap.put(word,(int) (currentWeight + other.wordWeightMap.get(word)));
+		}
+	}
+	
+	public void intersection(Cluster other){
+		HashMap<String, Set<String>> fileWordMap = new HashMap<String, Set<String>>();
+		//intersecteaza maparile cuvant greutate
+		HashSet<String> meargedWords = new HashSet<>();
+		meargedWords.addAll(wordWeightMap.keySet());
+		meargedWords.addAll(other.wordWeightMap.keySet());
+		HashSet<String> intersection = new HashSet<>();
+		for(String word:wordWeightMap.keySet()){
+			if(other.wordWeightMap.containsKey(word)){
+				intersection.add(word);
+			}
+		}
+		meargedWords.removeAll(intersection);
+		
+	}
+	
+	public HashSet<String> diferance(Cluster other){
+		HashMap<String, Set<String>> fileWordMap = new HashMap<String, Set<String>>();
+		//intersecteaza maparile cuvant greutate
+		HashSet<String> meargedWords = new HashSet<>();
+		meargedWords.addAll(wordWeightMap.keySet());
+		meargedWords.addAll(other.wordWeightMap.keySet());
+		HashSet<String> intersection = new HashSet<>();
+		for(String word:wordWeightMap.keySet()){
+			if(other.wordWeightMap.containsKey(word)){
+				intersection.add(word);
+			}
+		}
+		meargedWords.removeAll(intersection);
+		return meargedWords;
+	}
+	
+	public double getDistance(Cluster other,DistanceFormula formula){
+		
+		switch (formula) {
+		case Cosine :
+			return getDistanceCosine(other);
+
+		}
+		
+		return 0f;
+	}
+	
+	/**
+	 * Calculeaza distanta dintre 2 clusterii
+	 * 
+	 * @param other
+	 * @return
+	 */
+	private double getDistanceCosine(Cluster other){
+		
+		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
+		
+		double []c1Vect = new double[wordSet.size()];
+		double []c2Vect = new double[wordSet.size()];
+		int k = 0;
+		for(String word:wordSet){
+			c1Vect[k] = getWeight(word, wordWeightMap);
+			c2Vect[k++] = getWeight(word, other.wordWeightMap);
+		}
+		return Math.computeCosine(c1Vect, c2Vect);
+	}
+	
+	private Set<String> getWordSet(HashMap<String, Integer> map1,
+			HashMap<String, Integer> map2){
+		 
+		Set<String> wordSet = new HashSet<String>();
+		wordSet.addAll(map1.keySet());
+		wordSet.addAll(map2.keySet());
+		return wordSet;
+	}
+	
+	private double getWeight(String word,HashMap<String, Integer> map){
+		if(map.containsKey(word)){
+			return map.get(word);
+		}
+		return 0;
+	}
+	
+	public enum DistanceFormula {
+		Cosine
+	}
+}

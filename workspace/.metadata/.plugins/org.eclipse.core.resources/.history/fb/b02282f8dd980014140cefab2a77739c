@@ -1,0 +1,18 @@
+package ro.info.asticlib.files;
+
+import java.io.File;
+import java.nio.file.FileVisitor;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+
+import org.basex.query.path.Path;
+
+public class Croisers {
+	
+	public void processFileTree(String root){
+		SimpleFileVisitor<Path> fileProcesor = new Croiser();
+		Files.walkFileTree(Paths.get(root), fileProcesor);
+	}
+
+}

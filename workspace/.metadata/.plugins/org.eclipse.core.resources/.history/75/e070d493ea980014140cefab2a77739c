@@ -1,0 +1,10 @@
+package ro.info.asticlib.tests;
+
+import ro.info.asticlib.files.Croisers;
+
+public class CroisersTests {
+
+	public void testCroisers(){
+		Croisers.instance().processFileTree("D:\\");
+	}
+}

@@ -1,0 +1,8 @@
+package ro.info.asticlib.tests;
+
+public class ClusterizerL0Tests {
+
+	public void testFileProcesing(){
+		
+	}
+}
