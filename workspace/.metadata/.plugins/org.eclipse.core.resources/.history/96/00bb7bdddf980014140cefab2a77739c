@@ -1,0 +1,20 @@
+package ro.info.asticlib.files;
+
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+
+public class Croiser extends SimpleFileVisitor<Path> {
+	public Croiser() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+		System.out.println(file);
+		return super.visitFile(file, attrs);
+	}
+
+}

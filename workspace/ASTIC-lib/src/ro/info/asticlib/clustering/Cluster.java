@@ -36,16 +36,76 @@ public class Cluster {
 		this.wordWeightMap = wordWeightMap;
 	}
 	
-	public void add(Cluster other){
+	public void reunion(Cluster other){
 		//adauga la fileWordMap
 		for(String file:other.fileWordMap.keySet()){
-			fileWordMap.put(file, other.fileWordMap.get(file));
+			if(!fileWordMap.containsKey(file)){
+				fileWordMap.put(file, other.fileWordMap.get(file));
+			}
 		}
 		//adauga la wordWeightMap
 		for(String word:other.wordWeightMap.keySet()){
 			double currentWeight = getWeight(word, wordWeightMap);
 			wordWeightMap.put(word,(int) (currentWeight + other.wordWeightMap.get(word)));
 		}
+	}
+	
+	public void intersection(Cluster other){
+		//nu mai este functionala
+		//HashMap<String, Set<String>> fileWordMap = new HashMap<String, Set<String>>();
+		//intersecteaza maparile cuvant greutate
+		HashSet<String> meargedWords = new HashSet<>();
+		meargedWords.addAll(wordWeightMap.keySet());
+		meargedWords.addAll(other.wordWeightMap.keySet());
+		HashSet<String> intersection = new HashSet<>();
+		for(String word:wordWeightMap.keySet()){
+			if(other.wordWeightMap.containsKey(word)){
+				intersection.add(word);
+			}
+		}
+		meargedWords.removeAll(intersection);
+		
+	}
+	
+	public HashMap<String, Set<String>> diferance(Cluster other){
+		HashMap<String, Set<String>> fileWordMap = new HashMap<String, Set<String>>();
+		//intersecteaza maparile cuvant greutate
+		HashSet<String> meargedWords = new HashSet<>();
+		meargedWords.addAll(wordWeightMap.keySet());
+		meargedWords.addAll(other.wordWeightMap.keySet());
+		HashSet<String> intersection = new HashSet<>();
+		for(String word:wordWeightMap.keySet()){
+			if(other.wordWeightMap.containsKey(word)){
+				intersection.add(word);
+			}
+		}
+		meargedWords.removeAll(intersection);
+		HashMap<String , Set<String>> diffileWordMap = new HashMap<String, Set<String>>();
+		for(String word:meargedWords){
+			for(String file:fileWordMap.keySet()){
+				if(fileWordMap.get(file).contains(word)){
+					if(diffileWordMap.containsKey(file)){
+						diffileWordMap.get(file).add(word);
+					}else{
+						HashSet<String> newSet = new HashSet<String>();
+						newSet.add(word);
+						diffileWordMap.put(file, newSet);
+					}
+				}
+			}
+			for(String file:other.fileWordMap.keySet()){
+				if(other.fileWordMap.get(file).contains(word)){
+					if(diffileWordMap.containsKey(file)){
+						diffileWordMap.get(file).add(word);
+					}else{
+						HashSet<String> newSet = new HashSet<String>();
+						newSet.add(word);
+						diffileWordMap.put(file, newSet);
+					}
+				}
+			}
+		}
+		return diffileWordMap;
 	}
 	
 	public double getDistance(Cluster other,DistanceFormula formula){
@@ -59,6 +119,12 @@ public class Cluster {
 		return 0f;
 	}
 	
+	/**
+	 * Calculeaza distanta dintre 2 clusterii
+	 * 
+	 * @param other
+	 * @return
+	 */
 	private double getDistanceCosine(Cluster other){
 		
 		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
