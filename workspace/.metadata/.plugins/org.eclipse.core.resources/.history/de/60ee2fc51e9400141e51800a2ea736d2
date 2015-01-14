@@ -1,0 +1,11 @@
+package ro.info.asticlib.tests;
+
+import ro.info.asticlib.db.Dao;
+
+public class ClutersTest {
+
+	public void testClustes(){
+		Dao dao = new Dao();
+		
+	}
+}

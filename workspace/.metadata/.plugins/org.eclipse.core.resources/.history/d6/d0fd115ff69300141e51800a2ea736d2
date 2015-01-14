@@ -1,0 +1,16 @@
+package ro.info.asticlib.clustering;
+
+import ro.info.asticlib.db.Dao;
+
+public class Clusters {
+	
+	private Dao dao;
+	
+	public Clusters(){
+		dao = new Dao();
+	}
+	
+	public int generateID(){
+		return dao.getLastCusterId() + 1;
+	}
+}

@@ -37,7 +37,6 @@ public class Dao extends BaseDao {
 				pst.setInt(3,wordWeightMap.get(word));
 				pst.setString(4, path);
 				pst.executeUpdate();
-				pst.close();
 			}
 			logFileTagging(path);
 		}catch(SQLException e){
@@ -57,8 +56,6 @@ public class Dao extends BaseDao {
 			while(result.next()){
 				return result.getInt("id");
 			}
-			stmt.close();
-			result.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,7 +69,6 @@ public class Dao extends BaseDao {
 			pst.setInt(1, id);
 			pst.setString(2, file);
 			pst.executeUpdate();
-			pst.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -95,8 +91,6 @@ public class Dao extends BaseDao {
 				Cluster c = map.get(id);
 				if(c==null){
 					c = new Cluster(id);
-					allClusters.add(c);
-					map.put(id, c);
 				}
 				Set<String> words = c.fileWordMap.get(file_path);
 				if(words==null){
@@ -108,32 +102,13 @@ public class Dao extends BaseDao {
 				savedWeight = savedWeight==null?0:savedWeight;
 				weight+=savedWeight;
 				c.wordWeightMap.put(word, weight);
+				allClusters.add(c);
 			}
-			stmt.close();
-			result.close();
 			return allClusters;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	public void deleteWords(HashMap<String, Set<String>> fileWordMap){
-		String deleteSQL = "delete from "+Tables.BW.name()+ " where "+
-				"word =? AND file_path = ?";
-		for(String file:fileWordMap.keySet()){
-			for(String word:fileWordMap.get(file)){
-				try {
-					PreparedStatement pst = connection.prepareStatement(deleteSQL);
-					pst.setString(1, word);
-					pst.setString(2, file);
-					pst.executeUpdate();
-					pst.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 	
 	private void logFileTagging(String file) throws SQLException{
@@ -142,6 +117,5 @@ public class Dao extends BaseDao {
 		pst.setString(1, file);
 		pst.setDate(2, new Date(System.currentTimeMillis()));
 		pst.executeUpdate();
-		pst.close();
 	}
 }

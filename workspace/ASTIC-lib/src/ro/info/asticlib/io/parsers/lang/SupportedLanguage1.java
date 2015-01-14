@@ -6,6 +6,9 @@ package ro.info.asticlib.io.parsers.lang;
 
 import java.util.ArrayList;
 
+import org.basex.query.regex.RegExp;
+import org.basex.query.regex.parse.RegExLexer;
+
 import edu.smu.tspell.wordnet.SynsetType;
 
 /**

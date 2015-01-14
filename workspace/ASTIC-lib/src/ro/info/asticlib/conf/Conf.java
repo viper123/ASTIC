@@ -6,5 +6,5 @@ public class Conf {
 	public static String TEST_FILE = "D://test.txt";
 	public static String TEST_FILE_2 = "D://reptiles.txt"; 
 	
-	public static final double ACCEPTABLE_DISTANCE = 0.35f;
+	public static final double ACCEPTABLE_DISTANCE = 0.5f;
 }

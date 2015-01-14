@@ -1,9 +1,0 @@
-package ro.info.asticlib.files;
-
-import java.io.File;
-
-public abstract class FileAnalyser {
-	
-	public  abstract void processFile(File file);
-
-}

@@ -2,7 +2,6 @@ package ro.info.asticlib.clustering;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import ro.info.asticlib.clustering.Cluster.DistanceFormula;
 import ro.info.asticlib.conf.Conf;
@@ -36,24 +35,16 @@ public class Clusters {
 	public void processFileTaging(String file,HashMap<String, Integer> wordWeightMap){
 		Cluster newCluster = new Cluster(generateID(), file, wordWeightMap);
 		boolean integrated = false;
-		List<Cluster> clusters = getAllClusters();
-		for(Cluster c:clusters){
-			double clusterDistance = newCluster.getDistance(c, DistanceFormula.Cosine);
-			System.out.println("Distance from "+c.id+" "+file+"\n\t= "+clusterDistance);
-			if(clusterDistance>Conf.ACCEPTABLE_DISTANCE){
+		for(Cluster c:getAllClusters()){
+			if(c.getDistance(newCluster, DistanceFormula.Cosine)>Conf.ACCEPTABLE_DISTANCE){
+				c.add(newCluster);
 				integrated = true;
 				dao.saveCluster(c.id, file);
-				dao.saveTags(file, wordWeightMap);
-				//save in bw the wordWeightMap;
 			}
 		}
 		if(!integrated){
-			addIndependentCluster(newCluster,file);
+			addIndependentCluster(newCluster.id,file);
 		}
-		
-	}
-	
-	public void processFile(String  file){
 		
 	}
 	
@@ -62,9 +53,8 @@ public class Clusters {
 	 * aseamana cu niciunul din clusterii deja prezenti
 	 * @param c
 	 */
-	public void addIndependentCluster(Cluster c,String file){
-		dao.saveCluster(c.id, file);
-		dao.saveTags(file,c.wordWeightMap );
+	public void addIndependentCluster(int id,String file){
+		dao.saveCluster(id, file);
 	}
 	
 	public int generateID(){
@@ -76,7 +66,9 @@ public class Clusters {
 	 * @return
 	 */
 	private List<Cluster> getAllClusters(){
-		return dao.getAllClusters();
+		// gaseste toti clusteri din tabelul clusters
+		
+		return null;
 	}
 	
 	

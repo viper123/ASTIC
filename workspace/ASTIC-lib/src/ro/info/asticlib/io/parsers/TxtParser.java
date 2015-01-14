@@ -42,6 +42,7 @@ public class TxtParser extends Parser {
 			MappedByteBuffer mb = channel.map( FileChannel.MapMode.READ_ONLY,
 			    0L, channel.size( ) );
 			byte[] barray = new byte[SIZE];
+			long checkSum = 0L;
 			int nGet;
 			String composedWord = null;
 			while( mb.hasRemaining( ) )

@@ -1,16 +1,11 @@
 package ro.info.astic;
 
-import ro.info.asticlib.tests.ClusterizerL0Tests;
 import ro.info.asticlib.tests.ClutersTest;
-import ro.info.asticlib.tests.CroisersTests;
-import ro.info.asticlib.tests.DropTablesTest;
-import ro.info.asticlib.tests.InitialFileProcesingTest;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		new DropTablesTest().dropAllTables();
 		//new TestWordNet().testNoun();
 		//new TagsReaderTests().testGetTag();
 		//new WordComparatorTests().testMatch();
@@ -25,10 +20,7 @@ public class Main {
 		//new ClutersTest().testGetLastId();
 		//new ClutersTest().testAllClusters();
 		//new ClutersTest().selectAllFromClusters();
-		//new CroisersTests().testCroisers();
-		new ClusterizerL0Tests().testFileProcesing();
-		//new Server().start();
-		//new InitialFileProcesingTest().test();
+		new Server().server();
 	}
 
 }

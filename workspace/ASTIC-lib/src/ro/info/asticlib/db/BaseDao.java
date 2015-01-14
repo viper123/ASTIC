@@ -37,9 +37,7 @@ public class BaseDao {
 			return null;
 		}
 		Statement stmt = connection.createStatement();
-		ResultSet resultSet = stmt.executeQuery(command);
-		stmt.close();
-	    return resultSet;
+	    return stmt.executeQuery(command);
 	}
 	
 	private final void createTables(){
