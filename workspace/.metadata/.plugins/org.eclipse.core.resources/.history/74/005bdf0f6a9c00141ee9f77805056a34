@@ -1,0 +1,36 @@
+package ro.info.asticlib.io.server;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public abstract class BaseServer {
+
+	private ClientIO clientIO;
+	private ServerSocket welcomeSocket;
+	private Socket connectionSocket;
+	
+	public abstract void run(ClientIO io);
+	
+	public ClientIO getClientIO(){
+		return clientIO;
+	}
+	
+	public void start(){
+		 try {
+			welcomeSocket = new ServerSocket();
+			System.out.println("waiting for clients:");
+			connectionSocket = welcomeSocket.accept(); 
+			System.out.println("client accepted");
+			InputStream in = connectionSocket.getInputStream();
+			OutputStream out = connectionSocket.getOutputStream();
+			ClientIO io = new ClientIO(in, out);
+			run(io);
+		} catch (IOException e) {
+			e.printStackTrace();
+			start();
+		} 
+	}
+}

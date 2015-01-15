@@ -1,0 +1,7 @@
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\ASTIC_client.exe
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\ASTIC_client.pdb
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.Properties.Resources.resources
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.QueryForm.resources
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csproj.GenerateResource.Cache
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.exe
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.pdb

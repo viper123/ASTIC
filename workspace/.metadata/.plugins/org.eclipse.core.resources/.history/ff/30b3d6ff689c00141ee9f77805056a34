@@ -1,0 +1,12 @@
+package ro.info.asticlib.io.server;
+
+public class Server {
+
+	ClientIO clientIO;
+	
+	public void start(){
+		
+	}
+	
+	public void 
+}

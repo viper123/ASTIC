@@ -1,0 +1,27 @@
+package ro.info.asticlib.io.server;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+
+public abstract class Server {
+
+	private ClientIO clientIO;
+	private ServerSocket welcomeSocket;
+	
+	public abstract void run();
+	
+	public ClientIO getClientIO(){
+		return clientIO;
+	}
+	
+	public void start(){
+		 try {
+			welcomeSocket = new ServerSocket();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			start();
+		} 
+	}
+}

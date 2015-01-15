@@ -1,0 +1,46 @@
+package ro.info.astic;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+
+public class Server {
+	
+	public void server(){
+		String clientSentence;         
+		String capitalizedSentence;      
+		try{
+		ServerSocket welcomeSocket = new ServerSocket(6789);          
+		while(true)          
+		{  
+			System.out.println("waiting for clients:");
+			Socket connectionSocket = welcomeSocket.accept();  
+			System.out.println("client accepted");
+			InputStream stream = connectionSocket.getInputStream();
+			OutputStream out = connectionSocket.getOutputStream();
+			
+			byte[] bytes = new byte[100];
+			int readed = stream.read(bytes);
+			String str = new String(bytes, "US-ASCII");
+			System.out.println("Message:"+str);
+			out.write(bytes, 0, readed);
+			/*BufferedReader inFromClient =                
+					new BufferedReader(new InputStreamReader(connectionSocket.getInputStream())); 
+			DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+			clientSentence = inFromClient.readLine(); */           
+			/*System.out.println("Received: " + clientSentence);             
+			capitalizedSentence = clientSentence.toUpperCase() + '\n'; */            
+			//outToClient.writeBytes(capitalizedSentence);          
+		} 
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}
+	

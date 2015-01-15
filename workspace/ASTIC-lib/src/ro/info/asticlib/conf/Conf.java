@@ -7,4 +7,6 @@ public class Conf {
 	public static String TEST_FILE_2 = "D://reptiles.txt"; 
 	
 	public static final double ACCEPTABLE_DISTANCE = 0.5f;
+	
+	public static final int SERVER_PORT_NUMBER = 6789;
 }

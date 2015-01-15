@@ -1,22 +1,39 @@
 package ro.info.astic;
 
-import org.apache.xmlrpc.webserver.WebServer;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import ro.info.asticlib.io.server.BaseServer;
+import ro.info.asticlib.io.server.ClientIO;
 
 
-public class Server {
+public class Server extends BaseServer {
+
 	
-	public void server(){
-	try {
-
-	     System.out.println("Attempting to start XML-RPC Server...");
-	     WebServer server = new WebServer(333);
-	     //server.addHandler("sample", new Server());
-	     server.start();
-	     System.out.println("Started successfully.");
-	     System.out.println("Accepting requests. (Halt program to stop.)");
-	   } catch (Exception exception) {
-	     System.err.println("JavaServer: " + exception);
-	   }
+	
+	
+	@Override
+	public void run(ClientIO io) {
+		byte[] bytes = new byte[1024];
+		while(true){
+			try{
+				int readed = io.in.read(bytes);
+				String str = new String(bytes, "US-ASCII");
+				System.out.println("Message:"+str);
+				io.out.write(bytes, 0, readed);
+			}catch(Exception e){
+				e.printStackTrace();
+				restart(retries++);
+				break;
+			}
+		}
 	}
+	
 }
 	

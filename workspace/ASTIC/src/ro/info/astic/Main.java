@@ -20,7 +20,7 @@ public class Main {
 		//new ClutersTest().testGetLastId();
 		//new ClutersTest().testAllClusters();
 		//new ClutersTest().selectAllFromClusters();
-		new Server().server();
+		new Server().start();
 	}
 
 }
