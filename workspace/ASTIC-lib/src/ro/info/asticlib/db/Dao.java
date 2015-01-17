@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 
 import ro.info.asticlib.clustering.Cluster;
+import ro.info.asticlib.query.QueryResult;
+import ro.info.asticlib.query.Result;
 
 
 /**
@@ -105,6 +107,57 @@ public class Dao extends BaseDao {
 				allClusters.add(c);
 			}
 			return allClusters;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<Result> selectInClusters(String wordQuery){
+		String joinClusterBW = "select b.id, a.file_path, a.word, a.weight "+
+				"from bw a,clusters b where a.file_path = b.file_path AND a.word = "
+				+wordQuery.toLowerCase();
+		try{
+			List<Result> results = new ArrayList<>();
+			Statement stmt = connection.createStatement();
+			ResultSet result = stmt.executeQuery(joinClusterBW);
+			while(result.next()){
+				int id = result.getInt("ID");
+				int weight = result.getInt("WEIGHT");
+				String filePath = result.getString("FILE_PATH");
+				results.add(new Result(filePath, weight, true, id+""));
+			}
+			return results;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Cluster getCluster(String id){
+		String selectFromClusters = "select b.id, a.file_path, a.word, a.weight "+
+				"from bw a,clusters b where a.file_path = b.file_path AND b.id = "+id;
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet result = stmt.executeQuery(selectFromClusters);
+			Cluster c = new Cluster();
+			c.id = Integer.parseInt(id);
+			while(result.next()){
+				String word = result.getString("WORD");
+				int weight = result.getInt("WEIGHT");
+				String file_path = result.getString("FILE_PATH");
+				Set<String> words = c.fileWordMap.get(file_path);
+				if(words==null){
+					words = new HashSet<>();
+					c.fileWordMap.put(file_path, words);
+				}
+				words.add(word);
+				Integer savedWeight = c.wordWeightMap.get(word);
+				savedWeight = savedWeight==null?0:savedWeight;
+				weight+=savedWeight;
+				c.wordWeightMap.put(word, weight);
+			}
+			return c;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
