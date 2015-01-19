@@ -26,9 +26,6 @@ namespace ASTIC_client
             client.connect();
 
             int readed = ServerIO.IO.Read(buffer, 0, buffer.Length);
-            String treeStr = EncodeUtil.decode(buffer,readed);
-            Tree<String> tree = Tree<String>.fromString(treeStr);
-            Console.WriteLine(tree!=null?"sucess":"idiot");
         }
 
         #region Actions
@@ -40,12 +37,13 @@ namespace ASTIC_client
 
         private void cb_query_TextChanged(object sender, EventArgs e)
         {
-            /*cb_query.DroppedDown = false;
+            cb_query.DroppedDown = false;
             if (cb_query.Text.Length < 3)
             {
+                
                 return;
             }
-            byte [] message  =EncodeUtil.encode(cb_query.Text.ToString());
+            /*byte [] message  =EncodeUtil.encode(cb_query.Text.ToString());
             ServerIO.IO.Write(message,0,message.Length);
             //clear the buffer;
             ServerIO.IO.Read(buffer, 0, buffer.Length);

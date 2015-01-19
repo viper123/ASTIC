@@ -6,3 +6,5 @@ E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csproj
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.exe
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.pdb
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csprojResolveAssemblyReference.cache
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.exe
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.pdb

@@ -11,33 +11,44 @@ import java.net.Socket;
 
 import ro.info.asticlib.io.server.BaseServer;
 import ro.info.asticlib.io.server.ClientIO;
+import ro.info.asticlib.query.Query;
+import ro.info.asticlib.query.QueryHq;
+import ro.info.asticlib.query.QueryResult;
 import ro.info.asticlib.tests.TestTree;
 import ro.info.asticlib.tree.Tree;
 
 
 public class Server extends BaseServer {
-
 	
+	private QueryHq queryHq;
 	
+	public Server(){
+		queryHq = new QueryHq();
+	}
 	
 	@Override
 	public void run(ClientIO io) {
-		
-		Tree<String> tree = new TestTree().getTree();
-		
-		byte[] bytes = new byte[1024];
+		byte[] buffer = new byte[1024];
 		while(true){
 			try{
-				io.out.write(tree.toString().getBytes());
-				/*int readed = io.in.read(bytes);
-				String str = new String(bytes, "US-ASCII");
-				System.out.println("Message:"+str);
-				io.out.write(bytes, 0, readed);*/
+				cleanBuffer(buffer);
+				io.in.read(buffer);
+				String query = new String(buffer,"US-ASCII");
+				String [] queryArray = query.split(Query.QUERY_SEP);
+				QueryResult result = queryHq.query(new Query(queryArray, Query.LEVEL_2));
+				//transforma result in string
+				// trimite la server;
 			}catch(Exception e){
 				e.printStackTrace();
 				restart(retries++);
 				break;
 			}
+		}
+	}
+	
+	private void cleanBuffer(byte[] buffer){
+		for(int i=buffer.length;i>=0;i--){
+			buffer[i] = 0;
 		}
 	}
 	

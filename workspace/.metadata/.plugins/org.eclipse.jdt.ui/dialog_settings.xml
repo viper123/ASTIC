@@ -5,7 +5,7 @@
 	<item value="2" key="CallHierarchyViewPart.field_mode"/>
 	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
 	<item value="0" key="CallHierarchyViewPart.call_mode"/>
-	<item value="D:\SourceCode\ASTIC\ExLibs" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="D:\Licenta\SourceCode\ASTIC\ExLibs" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
 	<item value="3" key="CallHierarchyViewPart.orientation"/>
 	<item value="500" key="CallHierarchyViewPart.ratio1"/>
@@ -38,10 +38,10 @@
 		<item value="1" key="rootMode"/>
 	</section>
 	<section name="DialogBounds_GenerateConstructorUsingFieldsSelectionDialog">
-		<item value="520" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="677" key="DIALOG_HEIGHT"/>
-		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="678" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="867" key="DIALOG_HEIGHT"/>
+		<item value="9" key="DIALOG_Y_ORIGIN"/>
 		<item value="431" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="NewClassWizardPage">
@@ -58,10 +58,10 @@
 		<item value="false" key="FinalModifier"/>
 	</section>
 	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
-		<item value="529" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="695" key="DIALOG_HEIGHT"/>
-		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="678" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="887" key="DIALOG_HEIGHT"/>
+		<item value="9" key="DIALOG_Y_ORIGIN"/>
 		<item value="427" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="RefactoringWizard.preview">

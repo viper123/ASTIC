@@ -1,17 +1,17 @@
 package ro.info.asticlib.query;
 
 public class Query {
-	public static final int LEVEL_0 = 0;
-	public static final int LEVEL_1 = 1;
-	public static final int LEVEL_2 = 2;
+	public static final int LEVEL_0 = 0; // predictie
+	public static final int LEVEL_1 = 1; // ignorat
+	public static final int LEVEL_2 = 2; // resultate sub forma de arbore
+	
+	public static final String QUERY_SEP = " ";
 	
 	private String query;
 	private String [] queryArray;
 	private int level;
 	
-	public Query(){
-		
-	}
+	public Query(){}
 	
 	public Query( String[] queryArray,int level) {
 		super();

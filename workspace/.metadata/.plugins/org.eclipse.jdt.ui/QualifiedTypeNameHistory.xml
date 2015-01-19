@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="javax.naming.spi.DirStateFactory.Result"/>
 <fullyQualifiedTypeName name="java.beans.Statement"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.db.Table"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tests.BaseDaoTests"/>
@@ -10,14 +8,12 @@
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.math.Math"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.clustering.Clusters"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.clustering.Cluster.DistanceFormula"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.clustering.Cluster"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.db.BaseDao"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tests.ClutersTest"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -29,11 +25,7 @@
 <fullyQualifiedTypeName name="ro.info.asticlib.io.server.ClientIO"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.conf.Conf"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.server.BaseServer"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.query.QueryHq"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.query.IDataInterpretor"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.query.Query"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.db.Dao"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.query.QueryResult"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.query.QueryResult.Result"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.query.Result"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Parser"/>
@@ -49,15 +41,23 @@
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.FileType.Extension"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.PDFParser"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tests.TagsReaderTests"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tree.Revivable"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Base64Coder"/>
 <fullyQualifiedTypeName name="java.beans.XMLEncoder"/>
 <fullyQualifiedTypeName name="java.beans.XMLDecoder"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.tree.Tree"/>
 <fullyQualifiedTypeName name="javax.xml.soap.Node"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.tree.Node"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tests.TestTree"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.clustering.Cluster.DistanceFormula"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.db.Dao"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.tree.Node"/>
+<fullyQualifiedTypeName name="java.lang.Cloneable"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.clustering.Cluster"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.tree.Tree"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.clustering.HAClusteering"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.query.QueryHq"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.query.Query"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.query.QueryResult"/>
 </qualifiedTypeNameHistroy>
