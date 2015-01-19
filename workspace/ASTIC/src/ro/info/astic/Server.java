@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.google.gson.Gson;
+
 import ro.info.asticlib.io.server.BaseServer;
 import ro.info.asticlib.io.server.ClientIO;
 import ro.info.asticlib.query.Query;
@@ -33,9 +35,10 @@ public class Server extends BaseServer {
 			try{
 				cleanBuffer(buffer);
 				io.in.read(buffer);
-				String query = new String(buffer,"US-ASCII");
-				String [] queryArray = query.split(Query.QUERY_SEP);
-				QueryResult result = queryHq.query(new Query(queryArray, Query.LEVEL_2));
+				
+				String clientRequest = new String(buffer,"US-ASCII");
+				Query query = new Gson().fromJson(clientRequest,Query.class);
+				QueryResult result = queryHq.query(query);
 				//transforma result in string
 				// trimite la server;
 			}catch(Exception e){

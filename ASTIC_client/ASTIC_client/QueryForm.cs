@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ASTIC_client.query;
+using Newtonsoft.Json;
 
 namespace ASTIC_client
 {
@@ -24,8 +26,6 @@ namespace ASTIC_client
             Client client = new Client();
             client.runListener += setServerIO;
             client.connect();
-
-            int readed = ServerIO.IO.Read(buffer, 0, buffer.Length);
         }
 
         #region Actions
@@ -43,15 +43,17 @@ namespace ASTIC_client
                 
                 return;
             }
-            /*byte [] message  =EncodeUtil.encode(cb_query.Text.ToString());
+            Query query = new Query();
+            query.setLevel(Query.LEVEL_0);
+            string output = JsonConvert.SerializeObject(query);
+            byte [] message  =EncodeUtil.encode(output);
             ServerIO.IO.Write(message,0,message.Length);
             //clear the buffer;
-            ServerIO.IO.Read(buffer, 0, buffer.Length);
-            String fromServer = EncodeUtil.decode(buffer);
+            int read = ServerIO.IO.Read(buffer, 0, buffer.Length);
+            String fromServer = EncodeUtil.decode(buffer,read);
             //cb_query.Items.Clear();
-            cb_query.Items.Add(fromServer);
-            cb_query.DroppedDown = true;*/
-
+            QueryResult result = JsonConvert.DeserializeObject<QueryResult>(fromServer);
+            Console.WriteLine(result!=null?"success":"cineva nu o sa doarma");
         }
 
         #endregion

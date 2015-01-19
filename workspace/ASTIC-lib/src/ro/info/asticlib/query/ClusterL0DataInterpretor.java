@@ -18,6 +18,22 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 	
 	@Override
 	public QueryResult query(Query q) {
+		
+		switch(q.getLevel()){
+		case 0:
+			
+			break;
+		}
+		
+		return null;
+	}
+	
+	private QueryResult queryL0(Query q){
+		QueryResult result = new QueryResult(q);
+		return result;
+	}
+	
+	private QueryResult queryL2(Query q){
 		List<Cluster> allSelectedClusters = new ArrayList<Cluster>();
 		for(String wordQuery:q.getQueryArray()){
 			allSelectedClusters.addAll(dao.selectInClusters(wordQuery,true));
