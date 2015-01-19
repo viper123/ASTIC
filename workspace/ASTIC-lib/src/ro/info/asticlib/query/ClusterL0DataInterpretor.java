@@ -1,6 +1,12 @@
 package ro.info.asticlib.query;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ro.info.asticlib.clustering.Cluster;
+import ro.info.asticlib.clustering.HAClusteering;
 import ro.info.asticlib.db.Dao;
+import ro.info.asticlib.tree.Tree;
 
 public class ClusterL0DataInterpretor implements IDataInterpretor {
 
@@ -12,8 +18,15 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 	
 	@Override
 	public QueryResult query(Query q) {
-		
-		return null;
+		List<Cluster> allSelectedClusters = new ArrayList<Cluster>();
+		for(String wordQuery:q.getQueryArray()){
+			allSelectedClusters.addAll(dao.selectInClusters(wordQuery,true));
+		}
+		HAClusteering logic = new HAClusteering(allSelectedClusters);
+		Tree<Cluster> tree = logic.applyLogic();
+		QueryResult result = new QueryResult(q);
+		result.setResultTree(tree);
+		return result;
 	}
 
 }

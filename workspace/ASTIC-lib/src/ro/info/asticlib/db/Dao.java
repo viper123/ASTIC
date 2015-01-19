@@ -134,6 +134,43 @@ public class Dao extends BaseDao {
 		return null;
 	}
 	
+	public List<Cluster> selectInClusters(String wordQuery,boolean returnCluster){
+		String joinClusterBW = "select b.id, a.file_path, a.word, a.weight "+
+				"from bw a,clusters b where a.file_path = b.file_path AND a.word = "
+				+wordQuery.toLowerCase();
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet result = stmt.executeQuery(joinClusterBW);
+			HashMap<Integer,Cluster> map = new HashMap<Integer, Cluster>();
+			List<Cluster> allClusters = new ArrayList<Cluster>();
+			while(result.next()){
+				int id = result.getInt("ID");
+				String word = result.getString("WORD");
+				int weight = result.getInt("WEIGHT");
+				String file_path = result.getString("FILE_PATH");
+				Cluster c = map.get(id);
+				if(c==null){
+					c = new Cluster(id);
+				}
+				Set<String> words = c.fileWordMap.get(file_path);
+				if(words==null){
+					words = new HashSet<>();
+					c.fileWordMap.put(file_path, words);
+				}
+				words.add(word);
+				Integer savedWeight = c.wordWeightMap.get(word);
+				savedWeight = savedWeight==null?0:savedWeight;
+				weight+=savedWeight;
+				c.wordWeightMap.put(word, weight);
+				allClusters.add(c);
+			}
+			return allClusters;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Cluster getCluster(String id){
 		String selectFromClusters = "select b.id, a.file_path, a.word, a.weight "+
 				"from bw a,clusters b where a.file_path = b.file_path AND b.id = "+id;

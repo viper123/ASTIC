@@ -37,7 +37,7 @@ public class Clusters {
 		boolean integrated = false;
 		for(Cluster c:getAllClusters()){
 			if(c.getDistance(newCluster, DistanceFormula.Cosine)>Conf.ACCEPTABLE_DISTANCE){
-				c.add(newCluster);
+				c = c.add(newCluster);
 				integrated = true;
 				dao.saveCluster(c.id, file);
 			}

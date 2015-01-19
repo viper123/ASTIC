@@ -1,14 +1,9 @@
-INDEX VERSION 1.127+E:\Licenta\svn\ASTIC\workspace\.metadata\.plugins\org.eclipse.jdt.core
-3548306064.index
-368423325.index
-2983240906.index
-2597514199.index
-2433186004.index
-2081989596.index
+INDEX VERSION 1.127+D:\Licenta\SourceCode\ASTIC\workspace\.metadata\.plugins\org.eclipse.jdt.core
+435973900.index
+2333566254.index
+3870854981.index
+302222529.index
+4103602733.index
+3979724510.index
 3060452469.index
-1141611642.index
-4252186979.index
-4134006319.index
-3893357116.index
-3955725423.index
-882083368.index
+3548306064.index

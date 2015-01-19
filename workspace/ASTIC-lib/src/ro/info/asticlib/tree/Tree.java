@@ -33,6 +33,10 @@ public class Tree<T> implements Serializable {
 		return null;
 	}
 	
+	public Node<T> getNode(String key){
+		return getNode(root.childrens,key);
+	}
+	
 	public List<Node<T>> getNodes(List<Node<T>> list,int level){
 		List<Node<T>> res = new ArrayList<>();
 		for(Node<T> node:list){
@@ -51,6 +55,10 @@ public class Tree<T> implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void addFirstNodes(Node<T> ...nodes){
 		root.addChildrens(nodes);
+	}
+	
+	public void addFirstNode(Node<T> node){
+		root.addChildren(node);
 	}
 	
 	public void addNode(String parentKey,Node<T> node){

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import ro.info.asticlib.math.Math;
 
-public class Cluster {
+public class Cluster implements Cloneable {
 
 	public int id;
 	
@@ -36,16 +36,20 @@ public class Cluster {
 		this.wordWeightMap = wordWeightMap;
 	}
 	
-	public void add(Cluster other){
+	public Cluster add(Cluster other){
+		Cluster newCluster = new Cluster();
+		newCluster.fileWordMap.putAll(fileWordMap);
+		newCluster.wordWeightMap.putAll(wordWeightMap);
 		//adauga la fileWordMap
 		for(String file:other.fileWordMap.keySet()){
-			fileWordMap.put(file, other.fileWordMap.get(file));
+			newCluster.fileWordMap.put(file, other.fileWordMap.get(file));
 		}
 		//adauga la wordWeightMap
 		for(String word:other.wordWeightMap.keySet()){
-			double currentWeight = getWeight(word, wordWeightMap);
-			wordWeightMap.put(word,(int) (currentWeight + other.wordWeightMap.get(word)));
+			double currentWeight = getWeight(word, newCluster.wordWeightMap);
+			newCluster.wordWeightMap.put(word,(int) (currentWeight + other.wordWeightMap.get(word)));
 		}
+		return newCluster;
 	}
 	
 	public double getDistance(Cluster other,DistanceFormula formula){
@@ -87,6 +91,15 @@ public class Cluster {
 			return map.get(word);
 		}
 		return 0;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Cluster c = new Cluster();
+		c.fileWordMap = fileWordMap;
+		c.wordWeightMap = wordWeightMap;
+		c.id = id;
+		return c;
 	}
 	
 	public enum DistanceFormula {

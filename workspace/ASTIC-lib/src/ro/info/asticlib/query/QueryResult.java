@@ -3,10 +3,13 @@ package ro.info.asticlib.query;
 import java.util.ArrayList;
 import java.util.List;
 
+import ro.info.asticlib.tree.Tree;
+
 public class QueryResult  {
 	
 	private Query query;
 	private List<Result> results;
+	private Tree resultTree;
 	
 	public QueryResult() {
 		results = new ArrayList<>();
@@ -38,6 +41,14 @@ public class QueryResult  {
 
 	public void setResults(List<Result> results) {
 		this.results = results;
+	}
+
+	public Tree getResultTree() {
+		return resultTree;
+	}
+
+	public void setResultTree(Tree<?> resultTree) {
+		this.resultTree = resultTree;
 	}
 
 	
