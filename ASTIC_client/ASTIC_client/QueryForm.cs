@@ -24,7 +24,11 @@ namespace ASTIC_client
             Client client = new Client();
             client.runListener += setServerIO;
             client.connect();
-            
+
+            int readed = ServerIO.IO.Read(buffer, 0, buffer.Length);
+            String treeStr = EncodeUtil.decode(buffer,readed);
+            Tree<String> tree = Tree<String>.fromString(treeStr);
+            Console.WriteLine(tree!=null?"sucess":"idiot");
         }
 
         #region Actions
@@ -75,8 +79,8 @@ namespace ASTIC_client
             String query = cb_query.Text;
             byte [] bytes = EncodeUtil.encode(query);
             ServerIO.IO.Write(bytes, 0, bytes.Length);
-            ServerIO.IO.Read(buffer, 0, buffer.Length);
-            MessageBox.Show(EncodeUtil.decode(buffer));
+            int read =ServerIO.IO.Read(buffer, 0, buffer.Length);
+            MessageBox.Show(EncodeUtil.decode(buffer,read));
         }
     }
 }

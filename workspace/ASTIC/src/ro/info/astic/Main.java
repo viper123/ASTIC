@@ -1,6 +1,7 @@
 package ro.info.astic;
 
 import ro.info.asticlib.tests.ClutersTest;
+import ro.info.asticlib.tests.TagsReaderTests;
 
 
 public class Main {
@@ -21,6 +22,7 @@ public class Main {
 		//new ClutersTest().testAllClusters();
 		//new ClutersTest().selectAllFromClusters();
 		new Server().start();
+		//new TagsReaderTests().testGetTagPDFFile();
 	}
 
 }

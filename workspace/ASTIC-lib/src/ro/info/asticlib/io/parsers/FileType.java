@@ -5,36 +5,41 @@
 package ro.info.asticlib.io.parsers;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author Elvis
  */
 public enum FileType {
-    App,Video,Audio,Photo,Text,Other;
+    App("ext"),
+    Video("mp4","avi"),
+    Audio("mp3","wav"),
+    Photo("jpg","png"),
+    Text("txt","pdf"),
+    Other;
+    
+    public List<String> acceptedExtensions;
+    public String selectedExtension;
+    
+    private FileType(String ...ext){
+    	this.acceptedExtensions = new ArrayList<>();
+    	if(ext!=null && ext.length>0){
+    		this.acceptedExtensions.addAll(Arrays.asList(ext));
+    	}
+    }
     
     public static FileType fromExtension(String extension)
     {
-        String [] mAppExt = {"exe"};
-        String [] mVideo = {"mp4","avi"};
-        String [] mAudio = {"mp3","wav"};
-        String [] mPhoto = {"jpg","png"};
-        String [] mText = {"txt"};
-        for(String ext:mAppExt)
-            if(ext.equals(extension))
-                return App;
-        for(String ext:mVideo)
-            if(ext.equals(extension))
-                return Video;
-        for(String ext:mAudio)
-            if(ext.equals(extension))
-                return Audio;
-        for(String ext:mPhoto)
-            if(ext.equals(extension))
-                return Photo;
-        for(String ext:mText)
-            if(ext.equals(extension))
-                return Text;
+        for(FileType type:values()){
+        	if(type.acceptedExtensions!=null &&
+        			type.acceptedExtensions.contains(extension)){
+        		type.selectedExtension = extension;
+        		return type;
+        	}
+        }
         return Other;
     } 
     
@@ -51,5 +56,14 @@ public enum FileType {
             return FileType.Other;
     }
   
+    public enum Extension{
+    	Pdf("pdf"),Txt("txt");
+    	
+    	public String extension;
+    	
+    	private Extension(String str){
+    		this.extension = str;
+    	}
+    }
    
 }

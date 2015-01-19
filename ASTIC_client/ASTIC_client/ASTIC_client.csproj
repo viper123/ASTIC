@@ -80,6 +80,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tree\Node.cs" />
+    <Compile Include="tree\Tree.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tree\Base64Coder.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

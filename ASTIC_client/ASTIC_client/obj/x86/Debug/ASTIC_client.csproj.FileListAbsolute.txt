@@ -5,3 +5,4 @@ E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.QueryF
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csproj.GenerateResource.Cache
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.exe
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.pdb
+E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csprojResolveAssemblyReference.cache

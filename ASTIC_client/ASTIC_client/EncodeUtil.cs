@@ -13,10 +13,10 @@ namespace ASTIC_client
             return  asen.GetBytes(message);
         }
 
-        public static String decode(byte[] bytes)
+        public static String decode(byte[] bytes,int length)
         {
             ASCIIEncoding asen = new ASCIIEncoding();
-            return asen.GetString(bytes);
+            return asen.GetString(bytes,0,length);
         }
     }
 }
