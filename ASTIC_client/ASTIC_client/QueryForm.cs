@@ -45,6 +45,7 @@ namespace ASTIC_client
             }
             Query query = new Query();
             query.setLevel(Query.LEVEL_0);
+            query.setQuery(cb_query.Text);
             string output = JsonConvert.SerializeObject(query);
             byte [] message  =EncodeUtil.encode(output);
             ServerIO.IO.Write(message,0,message.Length);
@@ -53,7 +54,7 @@ namespace ASTIC_client
             String fromServer = EncodeUtil.decode(buffer,read);
             //cb_query.Items.Clear();
             QueryResult result = JsonConvert.DeserializeObject<QueryResult>(fromServer);
-            Console.WriteLine(result!=null?"success":"cineva nu o sa doarma");
+            Console.WriteLine(fromServer);
         }
 
         #endregion

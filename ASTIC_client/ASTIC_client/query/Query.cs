@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace ASTIC_client.query
 {
@@ -12,9 +13,11 @@ namespace ASTIC_client.query
 	    public static  int LEVEL_2 = 2; // resultate sub forma de arbore
 	
 	    public static String QUERY_SEP = " ";
-	
+	    [JsonProperty]
 	    private String query;
+        [JsonProperty]
 	    private String [] queryArray;
+        [JsonProperty]
 	    private int level;
 	
 	    public Query(){}

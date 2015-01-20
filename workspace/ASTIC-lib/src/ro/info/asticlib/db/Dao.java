@@ -201,6 +201,23 @@ public class Dao extends BaseDao {
 		return null;
 	}
 	
+	public List<String> getWordsStarting(String q){
+		Set<String> list = new HashSet<String>();
+		String select = "select word from bw where letter = ?";;
+		try{
+			PreparedStatement stmt = connection.prepareStatement(select);
+			stmt.setString(1,q.substring(0,1));
+			ResultSet result = stmt.executeQuery();
+			while(result.next()){
+				String word = result.getString("WORD");
+				list.add(word);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return new ArrayList<>(list);
+	}
+	
 	private void logFileTagging(String file) throws SQLException{
 		String insertSQL = Tables.FILE_JURNAL.insertSQL;
 		PreparedStatement pst = connection.prepareStatement(insertSQL);

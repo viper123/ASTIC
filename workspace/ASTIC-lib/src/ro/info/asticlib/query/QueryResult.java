@@ -2,6 +2,7 @@ package ro.info.asticlib.query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import ro.info.asticlib.tree.Tree;
 
@@ -10,6 +11,7 @@ public class QueryResult  {
 	private Query query;
 	private List<Result> results;
 	private Tree resultTree;
+	private List<String> predictions;
 	
 	public QueryResult() {
 		results = new ArrayList<>();
@@ -50,6 +52,16 @@ public class QueryResult  {
 	public void setResultTree(Tree<?> resultTree) {
 		this.resultTree = resultTree;
 	}
+
+	public List<String> getPredictions() {
+		return predictions;
+	}
+
+	public void setPredictions(List<String> predictions) {
+		this.predictions = predictions;
+	}
+	
+	
 
 	
 	

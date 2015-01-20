@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.google.gson.Gson;
+
 import ro.info.asticlib.conf.Conf;
 
 public abstract class BaseServer {
@@ -16,6 +18,7 @@ public abstract class BaseServer {
 	private ServerSocket welcomeSocket;
 	private Socket connectionSocket;
 	protected int retries;
+	protected Gson gson = new Gson();
 	
 	public BaseServer(){
 		try {

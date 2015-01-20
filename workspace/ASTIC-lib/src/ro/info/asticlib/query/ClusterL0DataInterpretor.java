@@ -8,28 +8,38 @@ import ro.info.asticlib.clustering.HAClusteering;
 import ro.info.asticlib.db.Dao;
 import ro.info.asticlib.tree.Tree;
 
+
+
 public class ClusterL0DataInterpretor implements IDataInterpretor {
 
 	private Dao dao;
 	
 	public ClusterL0DataInterpretor() {
 		dao = new Dao();
+		
 	}
 	
 	@Override
 	public QueryResult query(Query q) {
 		
 		switch(q.getLevel()){
-		case 0:
-			
-			break;
+		case Query.LEVEL_0://predictie
+			return queryL0(q);
+		case Query.LEVEL_2://arbore
+			return queryL2(q);
 		}
 		
 		return null;
 	}
 	
+	/**
+	 * return predictions for a letter;
+	 * @param q
+	 * @return
+	 */
 	private QueryResult queryL0(Query q){
 		QueryResult result = new QueryResult(q);
+		result.setPredictions(dao.getWordsStarting(q.getQuery()));
 		return result;
 	}
 	
