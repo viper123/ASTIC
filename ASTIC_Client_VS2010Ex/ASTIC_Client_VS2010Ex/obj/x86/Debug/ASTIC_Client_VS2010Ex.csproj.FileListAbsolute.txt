@@ -1,0 +1,6 @@
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_Client_VS2010Ex\ASTIC_Client_VS2010Ex\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_Client_VS2010Ex\ASTIC_Client_VS2010Ex\obj\x86\Debug\ASTIC_Client_VS2010Ex.csprojResolveAssemblyReference.cache
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_Client_VS2010Ex\ASTIC_Client_VS2010Ex\obj\x86\Debug\MainWindow.g.cs
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_Client_VS2010Ex\ASTIC_Client_VS2010Ex\obj\x86\Debug\App.g.cs
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_Client_VS2010Ex\ASTIC_Client_VS2010Ex\obj\x86\Debug\ASTIC_Client_VS2010Ex_MarkupCompile.cache
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_Client_VS2010Ex\ASTIC_Client_VS2010Ex\obj\x86\Debug\ASTIC_Client_VS2010Ex_MarkupCompile.lref

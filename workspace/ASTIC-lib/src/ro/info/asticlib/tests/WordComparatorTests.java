@@ -1,6 +1,6 @@
 package ro.info.asticlib.tests;
 
-import ro.info.asticlib.tags.WordComparator;
+import ro.info.asticlib.word.WordComparator;
 
 public class WordComparatorTests {
 

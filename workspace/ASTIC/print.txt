@@ -1,0 +1,46 @@
+waiting for clients:
+client accepted
+{"query":"u","queryArray":null,"level":0}
+{"query":"univ","queryArray":null,"level":0}
+{"query":"unive","queryArray":null,"level":0}
+{"query":null,"queryArray":["universitare"],"level":2}
+{"query":"universitar","queryArray":null,"level":0}
+{"query":"universita","queryArray":null,"level":0}
+{"query":"universit","queryArray":null,"level":0}
+{"query":"universi","queryArray":null,"level":0}
+{"query":"univers","queryArray":null,"level":0}
+{"query":"univer","queryArray":null,"level":0}
+{"query":"unive","queryArray":null,"level":0}
+{"query":"univ","queryArray":null,"level":0}
+{"query":"uni","queryArray":null,"level":0}
+{"query":"un","queryArray":null,"level":0}
+{"query":"u","queryArray":null,"level":0}
+{"query":"f","queryArray":null,"level":0}
+{"query":"fa","queryArray":null,"level":0}
+{"query":"fac","queryArray":null,"level":0}
+{"query":"facu","queryArray":null,"level":0}
+{"query":"facul","queryArray":null,"level":0}
+{"query":"facult","queryArray":null,"level":0}
+{"query":"faculta","queryArray":null,"level":0}
+{"query":"facultat","queryArray":null,"level":0}
+{"query":"facultate","queryArray":null,"level":0}
+{"query":null,"queryArray":["facultate"],"level":2}
+Matrix[4][4]
+D:\StudPlace\Anul_I\Anul_I_sem_I\zi2_infobuget.pdf
+D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week1\TheDragonCurve.pdf
+D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week3\2.MpNT.pdf
+D:\StudPlace\Anul_I\Anul_I_sem_I\contract_info1.pdf
+    5   8   9   4   
+ 5 1    1    1    0,88 
+ 8 1    1    0,17 1    
+ 9 1    0,17 1    1    
+ 4 0,88 1    1    1    
+Matrix[3][3]
+D:\StudPlace\Anul_I\Anul_I_sem_I\zi2_infobuget.pdf
+D:\StudPlace\Anul_I\Anul_I_sem_I\contract_info1.pdf
+D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week1\TheDragonCurve.pdf
+    5   4   10   
+ 5 1    0,88 1    
+ 4 0,88 1    1    
+ 10 1    1    1    
+waiting for clients:

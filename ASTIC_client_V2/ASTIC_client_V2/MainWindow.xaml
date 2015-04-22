@@ -1,0 +1,49 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ASTIC_client_V2.MainWindow"
+        xmlns:local="clr-namespace:ASTIC_client_V2"
+        Title="ASTIC" Height="473.2" Width="807" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid>
+        <Label Content="Interogare:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="98.153" FontSize="16" FontWeight="Bold"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="27.28" Margin="113.153,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="426.4" FontSize="16" KeyUp="textBox1_KeyUp_1" GotFocus="textBox1_GotFocus"/>
+        <Button Content="Cauta" HorizontalAlignment="Left" Margin="556.4,10.396,0,0" VerticalAlignment="Top" Width="90.2" Height="33.884" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
+        <ComboBox x:Name="cb_types" HorizontalAlignment="Left" Margin="664.2,10,0,0" VerticalAlignment="Top" Width="120.4" Height="34.28" FontSize="16" FontWeight="Bold" SelectionChanged="cb_types_SelectionChanged"/>
+        <TreeView x:Name="treeView1" HorizontalAlignment="Left" Height="353.2" Margin="0,55.2,0,0" VerticalAlignment="Top" Width="309.6" SelectedItemChanged="treeView1_SelectedItemChanged"/>
+        <ListView x:Name="lb_results" 
+                  HorizontalAlignment="Left" Height="353.2" 
+                  Margin="309.6,55.2,0,0" VerticalAlignment="Top" Width="484.6"
+                  MouseDoubleClick="lb_results_MouseDoubleClick"
+                  >
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Width="240" Header="Nume" >
+                        <GridViewColumn.CellTemplate>
+                                   <DataTemplate>
+                                         <StackPanel Orientation="Vertical">
+                                            <TextBlock FontSize="20" FontStyle="Normal"  
+                                                       Text="{Binding Path=Name.FilePath}"/>
+                                    <TextBlock FontSize="10" 
+                                                       TextWrapping="Wrap" 
+                                               local:Attached.FormattedText="{Binding Path=Name.Preview}"/>
+                                </StackPanel>
+                                   </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="40" Header="Tip" DisplayMemberBinding="{Binding FileTypeName}"/>
+                    <GridViewColumn Width="80" Header="Dimensiune" DisplayMemberBinding="{Binding Size}"/>
+                    <GridViewColumn Width="120" Header="Data" DisplayMemberBinding="{Binding Date}" />
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="28" Margin="0,408.4,0,0" VerticalAlignment="Top" Width="309.6">
+            <Label x:Name="toolStripStatusLabel1" Content="Incepeti sa cautati" Margin="0,0,-1,0"/>
+        </Border>
+        <ProgressBar x:Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="28" Margin="309.6,408.4,0,0" VerticalAlignment="Top" Width="484.6"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55.2" VerticalAlignment="Top" Width="794.2">
+            <ListBox x:Name="lb_predictions" Margin="113.2,41.2,253.8,-80.4" Visibility="Hidden"  KeyUp="lb_predictions_KeyUp"/>
+        </Border>
+
+    </Grid>
+</Window>

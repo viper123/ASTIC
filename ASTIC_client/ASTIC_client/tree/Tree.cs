@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
+using Newtonsoft.Json;
 namespace ASTIC_client {
 
 public class Tree<T>  {
 
-	public static String ROOT_KEY = "root"; 
-
+	public static String ROOT_KEY = "root";
+    [JsonProperty]
 	private Node<T> root;
 
     public Tree()

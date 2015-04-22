@@ -2,7 +2,6 @@ package ro.info.asticlib.query;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import ro.info.asticlib.tree.Tree;
 
@@ -10,7 +9,12 @@ public class QueryResult  {
 	
 	private Query query;
 	private List<Result> results;
+	@SuppressWarnings("rawtypes")
 	private Tree resultTree;
+	/**
+	 * Numarul de grupuri care a dus la crearea structurii arborescente
+	 */
+	private int size;
 	private List<String> predictions;
 	
 	public QueryResult() {
@@ -22,11 +26,21 @@ public class QueryResult  {
 		this.query = q;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void add(QueryResult result){
-		if(result.getResults() == null){
-			return ;
+		if(result.getResults() != null){
+			this.results.addAll(result.getResults());
 		}
-		this.results.addAll(result.getResults());
+		if(resultTree == null){
+			resultTree = result.resultTree;
+		}else{
+			resultTree.addFirstNode(resultTree.getRoot());
+		}
+		if(predictions == null){
+			predictions = result.predictions;
+		}else{
+			predictions.addAll(result.predictions);
+		}
 	}
 
 	public Query getQuery() {
@@ -45,6 +59,7 @@ public class QueryResult  {
 		this.results = results;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Tree getResultTree() {
 		return resultTree;
 	}
@@ -60,6 +75,16 @@ public class QueryResult  {
 	public void setPredictions(List<String> predictions) {
 		this.predictions = predictions;
 	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	
 	
 	
 

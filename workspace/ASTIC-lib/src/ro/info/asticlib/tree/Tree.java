@@ -23,14 +23,17 @@ public class Tree<T> implements Serializable {
 	}
 	
 	public Node<T> getNode(List<Node<T>> list,String key){
+		Node<T> result = null;
 		for(Node<T> node:list){
 			if(node.key.equals(key)){
-				return node;
+				result = node;
+				break;
 			}else{
-				return getNode(node.childrens,key);
+				Node<T> temp = getNode(node.childrens,key);
+				result = temp!=null?temp:result;
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	public Node<T> getNode(String key){
@@ -46,6 +49,10 @@ public class Tree<T> implements Serializable {
 			res.addAll(getNodes(node.childrens,level));
 		}
 		return res;
+	}
+	
+	public Node<T> getRoot(){
+		return root;
 	}
 	
 	public List<Node<T>> getFirstCildrens(){
@@ -68,6 +75,17 @@ public class Tree<T> implements Serializable {
 		}
 	}
 	
+	public void visitNodes(OnNodeProcessListener<T> listener){
+		visitNodes(root,listener);
+	}
+	
+	private void visitNodes(Node<T> parent,OnNodeProcessListener<T> listener){
+		listener.processNode(parent);
+		for(Node<T> node:parent.childrens){
+			visitNodes(node,listener);
+		}
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public static Tree fromString( String s ) throws IOException ,
 	ClassNotFoundException {
@@ -86,5 +104,9 @@ public class Tree<T> implements Serializable {
 		encoder.writeObject(this);
 		encoder.close();
 		return new String( Base64Coder.encode( baos.toByteArray() ) );
+	}
+	
+	public interface OnNodeProcessListener<T>{
+		public void processNode(Node<T> node); 
 	}
 }

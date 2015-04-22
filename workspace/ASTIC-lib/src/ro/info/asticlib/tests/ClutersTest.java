@@ -56,14 +56,16 @@ public class ClutersTest {
 		int id = dao.getLastClusterId();
 		dao.saveCluster(id++, "test1");
 		dao.saveCluster(id, "test2");
-		HashMap<String, Integer> wordWeightMap = new HashMap<String, Integer>();
-		wordWeightMap.put("android", 2);
-		wordWeightMap.put("audi", 4);
-		wordWeightMap.put("black", 6);
-		dao.saveTags("test1", wordWeightMap);
-		wordWeightMap = new HashMap<String, Integer>();
-		wordWeightMap.put("bojack", 4);
-		wordWeightMap.put("bujor", 8);
-		dao.saveTags("test2", wordWeightMap);
+		dao.saveCluster(id, "test3");
+		HashMap<String, Float> wordWeightMap = new HashMap<String, Float>();
+		wordWeightMap.put("android", 0.2f);
+		wordWeightMap.put("audi", 0.4f);
+		wordWeightMap.put("black", 0.6f);
+		dao.saveWords("test1", wordWeightMap,6);
+		dao.saveWords("test3", wordWeightMap,6);
+		wordWeightMap = new HashMap<String, Float>();
+		wordWeightMap.put("bojack", 0.4f);
+		wordWeightMap.put("bujor", 0.8f);
+		dao.saveWords("test2", wordWeightMap,2);
 	}
 }

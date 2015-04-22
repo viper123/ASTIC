@@ -2,10 +2,23 @@ package ro.info.asticlib.io.parsers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.nio.file.WatchEvent.Kind;
+import java.nio.file.WatchEvent.Modifier;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TxtParser extends Parser {
 
@@ -42,7 +55,6 @@ public class TxtParser extends Parser {
 			MappedByteBuffer mb = channel.map( FileChannel.MapMode.READ_ONLY,
 			    0L, channel.size( ) );
 			byte[] barray = new byte[SIZE];
-			long checkSum = 0L;
 			int nGet;
 			String composedWord = null;
 			while( mb.hasRemaining( ) )
@@ -80,6 +92,17 @@ public class TxtParser extends Parser {
 	
 	private ArrayList<String> getAllWords(){
 		return lang.validate(getContentAsString().split(lang.getWordRegex()));
+	}
+
+	@Override
+	public List<String> getLines() {
+		try {
+			return Files.readAllLines(parsableFile.toPath(), Charset.forName("UTF-8"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

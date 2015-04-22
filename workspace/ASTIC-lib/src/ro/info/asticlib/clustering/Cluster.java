@@ -2,6 +2,7 @@ package ro.info.asticlib.clustering;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import ro.info.asticlib.math.Math;
@@ -10,12 +11,13 @@ public class Cluster implements Cloneable {
 
 	public int id;
 	
-	public HashMap<String, Integer> wordWeightMap;
+	public HashMap<String, Float> wordWeightMap;
 	public HashMap<String, Set<String>> fileWordMap;
+	public List<String> preview;
 	
 	public Cluster(){
 		fileWordMap = new HashMap<String, Set<String>>();
-		wordWeightMap = new HashMap<String, Integer>();
+		wordWeightMap = new HashMap<String, Float>();
 	}
 	
 	public Cluster(int id){
@@ -26,14 +28,14 @@ public class Cluster implements Cloneable {
 	/**
 	 * Creez un cluster dintr-o mapare cuvant,greutate pentru un fisier
 	 * @param file
-	 * @param wordWeightMap
+	 * @param wordTfMap
 	 */
-	public Cluster(int id,String file,HashMap<String,Integer> wordWeightMap){
+	public Cluster(int id,String file,HashMap<String,Float> wordTfMap){
 		this(id);
 		//creaza o lista cu toate cuvintele si adaugala la fileWordMap
-		fileWordMap.put(file, wordWeightMap.keySet());
+		fileWordMap.put(file, wordTfMap.keySet());
 		//seteaza wordWeightMap
-		this.wordWeightMap = wordWeightMap;
+		this.wordWeightMap = wordTfMap;
 	}
 	
 	public Cluster add(Cluster other){
@@ -46,8 +48,8 @@ public class Cluster implements Cloneable {
 		}
 		//adauga la wordWeightMap
 		for(String word:other.wordWeightMap.keySet()){
-			double currentWeight = getWeight(word, newCluster.wordWeightMap);
-			newCluster.wordWeightMap.put(word,(int) (currentWeight + other.wordWeightMap.get(word)));
+			float currentTf = getTF(word, newCluster.wordWeightMap);
+			newCluster.wordWeightMap.put(word, (currentTf + other.wordWeightMap.get(word)));
 		}
 		return newCluster;
 	}
@@ -63,6 +65,24 @@ public class Cluster implements Cloneable {
 		return 0f;
 	}
 	
+	public boolean containsTheSameFiles(Cluster other){
+		if(fileWordMap.size()<=other.fileWordMap.size()){
+			for(String file:fileWordMap.keySet()){
+				if(!other.fileWordMap.keySet().contains(file)){
+					return false;
+				}
+			}	
+		}else{
+			for(String file:other.fileWordMap.keySet()){
+				if(!fileWordMap.keySet().contains(file)){
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	private double getDistanceCosine(Cluster other){
 		
 		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
@@ -71,14 +91,14 @@ public class Cluster implements Cloneable {
 		double []c2Vect = new double[wordSet.size()];
 		int k = 0;
 		for(String word:wordSet){
-			c1Vect[k] = getWeight(word, wordWeightMap);
-			c2Vect[k++] = getWeight(word, other.wordWeightMap);
+			c1Vect[k] = getTF(word, wordWeightMap);
+			c2Vect[k++] = getTF(word, other.wordWeightMap);
 		}
 		return Math.computeCosine(c1Vect, c2Vect);
 	}
 	
-	private Set<String> getWordSet(HashMap<String, Integer> map1,
-			HashMap<String, Integer> map2){
+	private Set<String> getWordSet(HashMap<String, Float> map1,
+			HashMap<String, Float> map2){
 		 
 		Set<String> wordSet = new HashSet<String>();
 		wordSet.addAll(map1.keySet());
@@ -86,7 +106,7 @@ public class Cluster implements Cloneable {
 		return wordSet;
 	}
 	
-	private double getWeight(String word,HashMap<String, Integer> map){
+	private float getTF(String word,HashMap<String, Float> map){
 		if(map.containsKey(word)){
 			return map.get(word);
 		}

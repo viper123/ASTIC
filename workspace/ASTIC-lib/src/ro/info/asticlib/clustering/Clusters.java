@@ -1,5 +1,6 @@
 package ro.info.asticlib.clustering;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,30 +33,29 @@ public class Clusters {
 	 * @param file
 	 * @param wordMapWeight
 	 */
-	public void processFileTaging(String file,HashMap<String, Integer> wordWeightMap){
+	public void processFileWords(String file){
+		HashMap<String, Float> wordWeightMap= dao.getWordsWeightForFile(file);
+		int totalWordsCount = wordWeightMap.size();
 		Cluster newCluster = new Cluster(generateID(), file, wordWeightMap);
 		boolean integrated = false;
-		for(Cluster c:getAllClusters()){
-			if(c.getDistance(newCluster, DistanceFormula.Cosine)>Conf.ACCEPTABLE_DISTANCE){
-				c = c.add(newCluster);
+		List<Cluster> allClusters = getAllClusters();
+		allClusters = allClusters == null?new ArrayList<Cluster>():allClusters;
+		dao.saveWords(file, wordWeightMap,totalWordsCount);
+		System.out.println("File:"+file);
+		for(Cluster c:allClusters){
+			double distance = c.getDistance(newCluster, DistanceFormula.Cosine);
+			System.out.println("\tDistance from "+c.id +"=" + distance);	
+			if(distance > Conf.ACCEPTABLE_DISTANCE){
 				integrated = true;
 				dao.saveCluster(c.id, file);
 			}
 		}
 		if(!integrated){
-			addIndependentCluster(newCluster.id,file);
+			dao.saveCluster(newCluster.id, file);
 		}
 		
 	}
-	
-	/**
-	 * Adauga cluster c in baza de date ca cluster idependent. Asta inseamna ca nu se
-	 * aseamana cu niciunul din clusterii deja prezenti
-	 * @param c
-	 */
-	public void addIndependentCluster(int id,String file){
-		dao.saveCluster(id, file);
-	}
+
 	
 	public int generateID(){
 		return dao.getLastClusterId() + 1;
@@ -66,9 +66,7 @@ public class Clusters {
 	 * @return
 	 */
 	private List<Cluster> getAllClusters(){
-		// gaseste toti clusteri din tabelul clusters
-		
-		return null;
+		return dao.getAllClusters();
 	}
 	
 	

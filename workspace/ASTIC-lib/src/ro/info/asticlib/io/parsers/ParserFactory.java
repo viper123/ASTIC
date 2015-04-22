@@ -27,9 +27,9 @@ public class ParserFactory {
                 parser = retrive(type, NameParser.class ,inputFile);
                 break;
             case Text:
-            	if(type.selectedExtension.equals(FileType.Extension.Pdf.extension)){
+            	if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Pdf.extension)){
             		parser = retrive(type,PDFParser.class,inputFile);
-            	} else if(type.selectedExtension.equals(FileType.Extension.Txt.extension)){
+            	} else if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Txt.extension)){
             		parser = retrive(type, TxtParser.class ,inputFile);
             	}
                 break;
@@ -37,6 +37,7 @@ public class ParserFactory {
                 parser = retrive(type, NameParser.class ,inputFile);
                 break;
         }
+        parser.fileType = type;
         return parser ;
     }
     

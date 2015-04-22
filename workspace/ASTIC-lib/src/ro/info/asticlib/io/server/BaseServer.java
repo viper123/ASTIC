@@ -9,16 +9,18 @@ import java.net.Socket;
 import com.google.gson.Gson;
 
 import ro.info.asticlib.conf.Conf;
+import ro.info.asticlib.io.AsticStream;
 
-public abstract class BaseServer {
+public abstract class BaseServer implements Runnable {
 
-	private static final int RETRY_MAX = 40;
+	public static final int RETRY_MAX = 40;
 	
-	private ClientIO clientIO;
-	private ServerSocket welcomeSocket;
-	private Socket connectionSocket;
+	protected AsticStream stream;
+	protected ServerSocket welcomeSocket;
+	protected Socket connectionSocket;
 	protected int retries;
 	protected Gson gson = new Gson();
+	private boolean stoped = false;
 	
 	public BaseServer(){
 		try {
@@ -28,33 +30,22 @@ public abstract class BaseServer {
 		}
 	}
 	
-	public abstract void run(ClientIO io);
+	public abstract void run(AsticStream io);
 	
 	
-	
-	public ClientIO getClientIO(){
-		return clientIO;
+	public AsticStream getClientIO(){
+		return stream;
 	}
 	
-	public void start(){
-		 try {
-			
-			System.out.println("waiting for clients:");
-			connectionSocket = welcomeSocket.accept(); 
-			System.out.println("client accepted");
-			InputStream in = connectionSocket.getInputStream();
-			OutputStream out = connectionSocket.getOutputStream();
-			ClientIO io = new ClientIO(in, out);
-			run(io);
-		} catch (IOException e) {
-			e.printStackTrace();
-			restart(retries++);
-		} 
+	
+	public synchronized void stop(){
+		stoped = true;
+		Thread.currentThread().interrupt();
 	}
 	
-	public void restart(int retries){
-		if(retries<RETRY_MAX){
-			start();
-		}
+	public synchronized boolean isStoped(){
+		return stoped;
 	}
+	
+	
 }

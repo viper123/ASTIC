@@ -11,3 +11,12 @@ D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\Newtonsoft.Json.dll
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\Newtonsoft.Json.pdb
 E:\Licenta\svn\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\Newtonsoft.Json.xml
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\ASTIC_client.exe
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\ASTIC_client.pdb
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\Newtonsoft.Json.dll
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\Newtonsoft.Json.pdb
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\bin\Debug\Newtonsoft.Json.xml
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csprojResolveAssemblyReference.cache
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.Properties.Resources.resources
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.QueryForm.resources
+D:\Licenta\SourceCode\ASTIC\ASTIC_client\ASTIC_client\obj\x86\Debug\ASTIC_client.csproj.GenerateResource.Cache

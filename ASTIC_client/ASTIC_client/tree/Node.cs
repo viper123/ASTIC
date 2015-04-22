@@ -1,13 +1,18 @@
 
 using System.Collections.Generic;
 using System;
+using Newtonsoft.Json;
 namespace ASTIC_client{
 
 public class Node<T>  {
 	private const long serialVersionUID = -2721655138569191786L;
+    [JsonProperty]
 	public List<Node<T>> childrens;
+    [JsonProperty]
 	public int level;
+    [JsonProperty]
 	public T value;
+    [JsonProperty]
 	public String key;
 	
 	public Node(String key,T value){

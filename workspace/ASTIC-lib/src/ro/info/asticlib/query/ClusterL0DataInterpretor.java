@@ -1,12 +1,20 @@
 package ro.info.asticlib.query;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import ro.info.asticlib.clustering.Cluster;
 import ro.info.asticlib.clustering.HAClusteering;
 import ro.info.asticlib.db.Dao;
+import ro.info.asticlib.io.parsers.Parser;
+import ro.info.asticlib.io.parsers.ParserFactory;
+import ro.info.asticlib.tree.Node;
 import ro.info.asticlib.tree.Tree;
+import ro.info.asticlib.tree.Tree.OnNodeProcessListener;
 
 
 
@@ -43,16 +51,121 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 		return result;
 	}
 	
-	private QueryResult queryL2(Query q){
+	private QueryResult queryL2(final Query q){
 		List<Cluster> allSelectedClusters = new ArrayList<Cluster>();
 		for(String wordQuery:q.getQueryArray()){
-			allSelectedClusters.addAll(dao.selectInClusters(wordQuery,true));
+			List<Cluster> clusters = dao.selectInClusters(wordQuery,q.getIndex(),Query.COUNT,true);//index and count are ignored
+			allSelectedClusters.addAll(clusters);
 		}
-		HAClusteering logic = new HAClusteering(allSelectedClusters);
+		List<Cluster> fullClusters = new ArrayList<Cluster>();
+		for(Cluster c:allSelectedClusters){
+			fullClusters.add(dao.getCluster(c.id+""));
+		}
+		HAClusteering logic = new HAClusteering(fullClusters);
 		Tree<Cluster> tree = logic.applyLogic();
+		tree.visitNodes(new OnNodeProcessListener<Cluster>() {
+
+			@Override
+			public void processNode(Node<Cluster> node) {
+				if(node.value == null){
+					return ;
+				}
+				List<String> mostSignificantWords = getMostSignifiatWords(node.value.wordWeightMap);
+				float weight1 = 0,weight2 = 0,weight3 = 0;
+				if(mostSignificantWords.get(0) != null){
+					 weight1 = node.value.wordWeightMap.get(mostSignificantWords.get(0));
+				}
+				if(mostSignificantWords.get(1) != null){
+					weight2 = node.value.wordWeightMap.get(mostSignificantWords.get(1));
+						
+				}
+				if(mostSignificantWords.get(2) != null){
+					weight3 = node.value.wordWeightMap.get(mostSignificantWords.get(2));
+				}
+				node.value.wordWeightMap.clear();
+				node.value.wordWeightMap.put(mostSignificantWords.get(1),weight1);
+				node.value.wordWeightMap.put(mostSignificantWords.get(2),weight2);
+				node.value.wordWeightMap.put(mostSignificantWords.get(0),weight3);
+				for(String key:node.value.fileWordMap.keySet()){
+					if(node.value.fileWordMap.get(key).containsAll(mostSignificantWords)){
+						node.value.fileWordMap.put(key, new HashSet<String>());
+						node.value.fileWordMap.get(key).addAll(mostSignificantWords);
+					}else{
+						node.value.fileWordMap.put(key, new HashSet<String>());
+					}
+				}
+				node.value.preview = new ArrayList<>();
+				for(String file_path : node.value.fileWordMap.keySet()){
+				Parser parser = ParserFactory.getParser(new File(file_path));
+				List<String> lines = parser.getLines();
+				StringBuilder lineBuilder = null;
+				StringBuilder builder = new StringBuilder();
+				if(lines != null && !lines.isEmpty()){
+					int selectedLines = 0;
+		            for (String line : lines)
+		            {
+		                for (String query : q.getQueryArray())
+		                {
+		                    if (line.toLowerCase().contains(query.toLowerCase()) && selectedLines < 2)
+		                    {
+		                        lineBuilder = new StringBuilder();
+		                        lineBuilder.append("<Bold>");
+		                        lineBuilder.append(query);
+		                        lineBuilder.append("</Bold>");
+		                        String formatedLine = line.toLowerCase().replace(query.toLowerCase(), lineBuilder.toString());
+		                        builder.append(formatedLine);
+		                        builder.append("...");
+		                        selectedLines++;
+		                    }
+		                }
+		            }
+		           
+				}
+				 node.value.preview.add(builder.toString());
+				}
+			}
+		});
 		QueryResult result = new QueryResult(q);
 		result.setResultTree(tree);
+		result.setSize(allSelectedClusters.size());
 		return result;
+	}
+	
+	private List<String> getMostSignifiatWords(HashMap<String, Float> map){
+		String w1 = null,w2 = null,w3 = null;
+		float max = 0;
+		for(String key:map.keySet()){
+			if(key.length()<3){
+				continue;
+			}
+			if(map.get(key) > max){
+				max = map.get(key);
+				w1 = key;
+			}
+		}
+		max = 0;
+		for(String key:map.keySet()){
+			if(map.get(key) > max && key!=w1){
+				if(key.length()<4){
+					continue;
+				}
+				max = map.get(key);
+				w2 = key;
+			}
+		}
+		max = 0;
+		for(String key:map.keySet()){
+			if(key.length()<4){
+				continue;
+			}
+			if(map.get(key) > max && key != w1 && key != w2){
+				max = map.get(key);
+				w3 = key;
+			}
+		}
+		
+		return Arrays.asList(w1,w2,w3);
+		
 	}
 
 }

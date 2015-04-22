@@ -5,21 +5,21 @@ import java.util.Scanner;
 
 import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.io.data.DataWarehouse;
-import ro.info.asticlib.tags.TagsReader;
-import ro.info.asticlib.tags.TagsReader.Callback;
+import ro.info.asticlib.word.WordProcesor;
+import ro.info.asticlib.word.WordProcesor.Callback;
 
 public class BWTests {
 
 	public void testBWAdd(){
 		final long time = System.currentTimeMillis();
-		TagsReader reader = new TagsReader(Conf.TEST_FILE_2);
+		WordProcesor reader = new WordProcesor(Conf.TEST_FILE_2);
 		DataWarehouse.activateOperators();
-		reader.getMapTagWeight(new Callback() {
+		reader.getMapWordWeight(new Callback() {
 			
 			@Override
-			public void onDone(HashMap<String, Integer> map) {
+			public void onDone(HashMap<String, Float> map,int size) {
 				// TODO Auto-generated method stub
-				DataWarehouse.BW.add(Conf.TEST_FILE_2,map);
+				//DataWarehouse.BW.add(Conf.TEST_FILE_2,map);
 				System.out.println("Done :"+(System.currentTimeMillis() - time));
 			}
 		});

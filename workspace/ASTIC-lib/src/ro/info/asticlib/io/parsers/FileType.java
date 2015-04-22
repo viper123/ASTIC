@@ -33,6 +33,7 @@ public enum FileType {
     
     public static FileType fromExtension(String extension)
     {
+    	extension = extension.toLowerCase();
         for(FileType type:values()){
         	if(type.acceptedExtensions!=null &&
         			type.acceptedExtensions.contains(extension)){

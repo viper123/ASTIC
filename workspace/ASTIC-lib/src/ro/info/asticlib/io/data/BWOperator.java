@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.io.IOHelper;
-import ro.info.asticlib.tags.WordComparator;
+import ro.info.asticlib.word.WordComparator;
 
 public class BWOperator {
 	

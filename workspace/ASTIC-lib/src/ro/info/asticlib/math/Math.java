@@ -1,5 +1,6 @@
 package ro.info.asticlib.math;
 
+
 public class Math {
 	public static int getApxlog(int base,int x){
 		int power = 0;
@@ -21,4 +22,6 @@ public class Math {
         }
         return topSum / (java.lang.Math.sqrt(leftBSum)*java.lang.Math.sqrt(rightBSum)) ;
     }
+	
+	
 }

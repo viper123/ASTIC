@@ -5,11 +5,7 @@
 package ro.info.asticlib.io.parsers.lang;
 
 import java.util.ArrayList;
-
-import org.basex.query.regex.RegExp;
-import org.basex.query.regex.parse.RegExLexer;
-
-import edu.smu.tspell.wordnet.SynsetType;
+import java.util.List;
 
 /**
  *
@@ -38,14 +34,19 @@ public class SupportedLanguage1 extends Language {
 	}
 
 	@Override
-	public boolean isNoun(String word) {
+	public boolean isPowerNoun(String word,List<String> others) {
 		
-		return WordNet.validate(word, SynsetType.NOUN);
+		return WordNet.validateV2(word,others);
 	}
 
 	@Override
 	public boolean isWordSeparator(String ch) {
 		return ch.matches(getWordRegex()) ;
+	}
+
+	@Override
+	public String getNewLineReges() {
+		return "\n";
 	}
     
 }

@@ -1,6 +1,8 @@
 package ro.info.asticlib.clustering;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ro.info.asticlib.clustering.Cluster.DistanceFormula;
@@ -24,38 +26,59 @@ public class HAClusteering {
 
 	public Tree<Cluster> applyLogic(){
 		Tree<Cluster> tree = new Tree<Cluster>();
+		HashMap<String,Cluster> map = new HashMap<String, Cluster>();
 		//sparge input-ul in clusteri cu un singur fisier
-		List<Cluster> newInput = new ArrayList<Cluster>();
 		for(Cluster c : input){
 			if(c.fileWordMap.size()>1){//mai mult de un fisier;
 				for(String file:c.fileWordMap.keySet()){
-					Cluster newCluster = new Cluster();
-					newCluster.fileWordMap.put(file, c.fileWordMap.get(file));
-					newCluster.id = dao.getLastClusterId() + 1;
-					for(String word:newCluster.fileWordMap.get(file)){
-						newCluster.wordWeightMap.put(word, c.wordWeightMap.get(word));
+					Cluster newCluster = map.get(file);
+					if(newCluster == null){
+						newCluster = new Cluster();
+						newCluster.fileWordMap.put(file, c.fileWordMap.get(file));
+						newCluster.id = getClusterId();
+						for(String word:newCluster.fileWordMap.get(file)){
+							newCluster.wordWeightMap.put(word, c.wordWeightMap.get(word));
+							map.put(file, newCluster);
+						}
 					}
+				}
+			}else{
+				if(!map.containsKey(c.fileWordMap.keySet().toArray()[0])){
+					map.put((String)c.fileWordMap.keySet().toArray()[0], c);
 				}
 			}
 		}
+		
+		//convertesc din map in lista de clusteri
+		List<Cluster> newInput = new ArrayList<Cluster>();
+		for(String key:map.keySet()){
+			newInput.add(map.get(key));
+		}
 		input.clear();
 		input.addAll(newInput);
+		
 		//pune input ca frunze la tree;
 		for(Cluster c:input){
 			tree.addFirstNode(new Node<Cluster>(c.id+"", c));
 		}
-		boolean stopCondition = true;
-		do{
+		
+		boolean stopCondition = input.size()>2;
+		
+		while(stopCondition){
 			double [][] distances = new double[input.size()][input.size()];
-			for(int i=input.size();i>=0;i--){
+			for(int i=input.size()-1;i>=0;i--){
 				Cluster selected = input.get(i);
-				distances[i][i] = 0; // distanta dintre un cluster si el insusi este 1 
+				distances[i][i] = 1; // distanta dintre un cluster si el insusi este 0  1 - cosine 
 				//insa pentru ca urmeaza sa calculam maximul este de preferat sa fie valuarea cea mai mica
-				for(int j = input.size(); j>=0&&j!=i; j--){
-					Cluster other = input.get(j);
-					distances[i][j] = 1 - selected.getDistance(other, DistanceFormula.Cosine);
+				for(int j = input.size()-1; j>=0; j--){
+					if(i!=j){
+						Cluster other = input.get(j);
+						double cosine = selected.getDistance(other, DistanceFormula.Cosine);
+						distances[i][j] = 1f - cosine;
+					}
 				}
 			}
+			showMatrix(input,distances);
 			int [] indexs = minIndex(distances);
 			Cluster one = input.get(indexs[0]);
 			Cluster two = input.get(indexs[1]);
@@ -67,31 +90,62 @@ public class HAClusteering {
 			parent.remove(nodeOne);
 			parent.remove(nodeTwo);
 			Node<Cluster> meargedNode = new Node<Cluster>(mearged.id+"",mearged);
+			meargedNode.level = nodeOne.level + 1;
 			meargedNode.addChildren(nodeOne);
 			meargedNode.addChildren(nodeTwo);
 			parent.addChildren(meargedNode);
-			input.remove(indexs[0]);
-			input.remove(indexs[1]);
+			int max = Math.max(indexs[0], indexs[1]);
+			int min = Math.min(indexs[0], indexs[1]);
+			input.remove(max);
+			input.remove(min);
 			input.add(mearged);
-			stopCondition = input.size()>1;
-		}while(stopCondition);
+			stopCondition = input.size()>2;
+		}
 		return tree;
 	}
 	
 	private int[] minIndex(double [][]matrix){
 		int k = 0;
-		double min = 1;
+		double min = 2;
 		int minIIndex = -1;
 		int minJIndex = -1;
-		for(int i=matrix.length*2;i>0;i--){
-			if(min<matrix[k][i%matrix.length]){
+		for(int i=matrix.length*matrix.length-1;i>=0;i--){
+			k = i/matrix.length;
+			if(min>matrix[k][i%matrix.length]){
 				min = matrix[k][i%matrix.length];
-				minIIndex = i;
+				minIIndex = i%matrix.length;
 				minJIndex = k;
-				k = i/matrix.length;
 			}
 		}
 		return new int[]{minIIndex,minJIndex};
+	}
+	private void showMatrix(List<Cluster> list,double [][]matrix){
+		System.out.println("Matrix["+list.size()+"]["+list.size()+"]");
+		for(Cluster c:list){
+			System.out.println(c.fileWordMap.keySet().toArray()[0]);
+		}
+		System.out.print("    ");
+		for(Cluster s:list){
+			System.out.print(s.id+"   ");
+		}
+		System.out.println();
+		for(int i=0;i<matrix.length;i++){
+			System.out.print(" "+list.get(i).id+" ");
+			for(int j=0;j<matrix.length;j++){
+				System.out.print(format(matrix[i][j])+" ");
+			}
+			System.out.println();
+		}
+	}
+	
+	private String format(double nr){
+		String str =new DecimalFormat("#.##").format(nr);
+		if(str.length()<4){
+			for(int i = str.length();i<4;i++){
+				str+=" ";
+			}
+		}
+		return str;
 	}
 	
 	private int getClusterId(){

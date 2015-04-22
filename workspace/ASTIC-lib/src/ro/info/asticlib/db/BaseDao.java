@@ -37,14 +37,17 @@ public class BaseDao {
 			return null;
 		}
 		Statement stmt = connection.createStatement();
-	    return stmt.executeQuery(command);
+	    ResultSet result =  stmt.executeQuery(command);
+	    stmt.close();
+	    return result;
 	}
 	
 	private final void createTables(){
 		for(Tables t:Tables.values()){
 			try{
 				if(!existTable(t)){
-					executeSQLCommand(t.creationSQL);
+					ResultSet result = executeSQLCommand(t.creationSQL);
+					result.close();
 				}
 			}catch(SQLException e){
 				e.printStackTrace();
@@ -55,6 +58,8 @@ public class BaseDao {
 	public final boolean existTable(Tables t) throws SQLException{
 		DatabaseMetaData dbm = connection.getMetaData();
 		ResultSet tables = dbm.getTables(null, null, t.name(), null);
-		return tables.next();
+		boolean exist =  tables.next();
+		tables.close();
+		return exist;
 	}
 }

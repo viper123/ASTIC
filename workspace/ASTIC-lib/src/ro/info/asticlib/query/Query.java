@@ -6,10 +6,12 @@ public class Query {
 	public static final int LEVEL_2 = 2; // resultate sub forma de arbore
 	
 	public static final String QUERY_SEP = " ";
+	public static final int COUNT = 50;
 	
 	private String query;
 	private String [] queryArray;
 	private int level;
+	private int index;
 	
 	public Query(){}
 	
@@ -23,6 +25,20 @@ public class Query {
 		super();
 		this.query = query;
 		this.level = level;
+	}
+	
+	public Query( String[] queryArray,int level,int index) {
+		super();
+		this.queryArray = queryArray;
+		this.level = level;
+		this.index = index;
+	}
+	
+	public Query(String query, int level,int index) {
+		super();
+		this.query = query;
+		this.level = level;
+		this.index = index;
 	}
 	
 	
@@ -43,6 +59,14 @@ public class Query {
 	}
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 	
 	

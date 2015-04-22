@@ -2,6 +2,7 @@ package ro.info.asticlib.io.parsers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import ro.info.asticlib.io.IOHelper;
 import ro.info.asticlib.io.parsers.lang.Language;
@@ -11,6 +12,7 @@ public abstract class Parser {
 	
 	protected File parsableFile;
 	protected Language lang;
+	protected FileType fileType;
 	protected OnWordParsedListener wordParsedListener ;
 	
 	public Parser(File file){
@@ -19,6 +21,8 @@ public abstract class Parser {
 	}
 	
 	public abstract ArrayList<String> getAllValidWords();
+	
+	public abstract List<String> getLines();
 	
 	public abstract void parseWords(OnWordParsedListener listener);
 	public void parseWords(){
@@ -39,6 +43,18 @@ public abstract class Parser {
 	
 	public void setOnWordParsedListener(OnWordParsedListener listener){
 		this.wordParsedListener = listener;
+	}
+	
+	public FileType getFileType(){
+		return this.fileType;
+	}
+	
+	public String getFileName(){
+		String name = parsableFile.getName();
+		if(name.contains(".")){
+			name = name.substring(0,name.lastIndexOf('.'));
+		}
+		return name;
 	}
 	
 	public interface OnWordParsedListener{
