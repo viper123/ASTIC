@@ -187,7 +187,8 @@ public class Dao extends BaseDao {
 		String joinClusterBW = "select b.id, a.file_path, a.word, a.tfidf "+
 				"from bw a,clusters b where a.file_path = b.file_path AND ( LOWER(word) LIKE ?"+
 				" OR LOWER(word) LIKE ?" + 
-				" OR LOWER(word) LIKE ? )";
+				" OR LOWER(word) LIKE ?" + 
+				" OR LOWER(word) LIKE ?)";
 		/*String paginationWrapper = "select * from ( select rownum rnum, aa.* "+
 				"from ("+ joinClusterBW +") aa where rownum < ? )"+
 				"where rnum >= ? ";*/
@@ -198,11 +199,11 @@ public class Dao extends BaseDao {
 		try {
 			stmt = connection.prepareStatement(joinClusterBW);
 			String q = wordQuery.toLowerCase();
-			//stmt.setString(1, q);
+			stmt.setString(1, q);
 			//stmt.setInt(5, index);
-			stmt.setString(1,q+"%");
-			stmt.setString(2,"%"+q+"%");
-			stmt.setString(3,"%"+q);
+			stmt.setString(2,q+"%");
+			stmt.setString(3,"%"+q+"%");
+			stmt.setString(4,"%"+q);
 			//stmt.setInt(4, index + count);
 			result = stmt.executeQuery();
 			HashMap<Integer,Cluster> map = new HashMap<Integer, Cluster>();

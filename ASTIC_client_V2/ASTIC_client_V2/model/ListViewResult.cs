@@ -26,10 +26,10 @@ namespace ASTIC_client_V2
 			
 		}
 
-        public ListViewResult(String filePath,String [] query,String preview)
+        public ListViewResult(String filePath,String [] query)
         {
             FilePath = filePath;
-            Name = new NameClass(System.IO.Path.GetFileName(filePath),preview);
+            Name = new NameClass(System.IO.Path.GetFileName(filePath),getPreview(query,filePath));
             FileTypeName = FileTypeFactory.FromFile(filePath).ToString();
             FileInfo f = new FileInfo(filePath);
             Size = getStringWithMeasurement(f.Length);

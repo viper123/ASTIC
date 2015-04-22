@@ -94,35 +94,6 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 						node.value.fileWordMap.put(key, new HashSet<String>());
 					}
 				}
-				node.value.preview = new ArrayList<>();
-				for(String file_path : node.value.fileWordMap.keySet()){
-				Parser parser = ParserFactory.getParser(new File(file_path));
-				List<String> lines = parser.getLines();
-				StringBuilder lineBuilder = null;
-				StringBuilder builder = new StringBuilder();
-				if(lines != null && !lines.isEmpty()){
-					int selectedLines = 0;
-		            for (String line : lines)
-		            {
-		                for (String query : q.getQueryArray())
-		                {
-		                    if (line.toLowerCase().contains(query.toLowerCase()) && selectedLines < 2)
-		                    {
-		                        lineBuilder = new StringBuilder();
-		                        lineBuilder.append("<Bold>");
-		                        lineBuilder.append(query);
-		                        lineBuilder.append("</Bold>");
-		                        String formatedLine = line.toLowerCase().replace(query.toLowerCase(), lineBuilder.toString());
-		                        builder.append(formatedLine);
-		                        builder.append("...");
-		                        selectedLines++;
-		                    }
-		                }
-		            }
-		           
-				}
-				 node.value.preview.add(builder.toString());
-				}
 			}
 		});
 		QueryResult result = new QueryResult(q);

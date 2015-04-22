@@ -149,10 +149,9 @@ namespace ASTIC_client_V2
         /**
          * Transforma din date de tip file in informatii care se pot afisa in lista
          * */
-        private void displayList(List<String> list,String [] query,List<String> preview)
+        private void displayList(List<String> list,String [] query)
         {
             currentList = list;
-            currentPreviews = preview;
             List<ListViewResult> model = new List<ListViewResult>();
             int k = 0;
             foreach(String file in list)
@@ -160,7 +159,7 @@ namespace ASTIC_client_V2
                 FileType fileType= FileTypeFactory.FromFile(file);
                 if (fileType == filter || filter == FileType.All)
                 {
-                    model.Add(new ListViewResult(file,query,preview[k++]));
+                    model.Add(new ListViewResult(file,query));
                 }
             }
             model.Sort(new RelavanceComparator());
@@ -230,7 +229,7 @@ namespace ASTIC_client_V2
                 Node<Cluster> cluster = (Node<Cluster>)clikedNode.Tag;
                 List<String> files = new List<String>();
                 files.AddRange(cluster.value.fileWordMap.Keys);
-                displayList(files,getCurrentQuery(),cluster.value.preview);
+                displayList(files,getCurrentQuery());
             }
             catch (Exception ex)
             {
@@ -293,7 +292,7 @@ namespace ASTIC_client_V2
             if (currentListViewModel != null)
             {
                 lb_results.Items.Clear();
-                displayList(currentList,getCurrentQuery(),currentPreviews);
+                displayList(currentList,getCurrentQuery());
             }
         }
 
