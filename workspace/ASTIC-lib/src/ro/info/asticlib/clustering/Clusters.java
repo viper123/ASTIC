@@ -41,10 +41,10 @@ public class Clusters {
 		List<Cluster> allClusters = getAllClusters();
 		allClusters = allClusters == null?new ArrayList<Cluster>():allClusters;
 		dao.saveWords(file, wordWeightMap,totalWordsCount);
-		System.out.println("File:"+file);
+		System.out.println("Process file:"+file);
 		for(Cluster c:allClusters){
 			double distance = c.getDistance(newCluster, DistanceFormula.Cosine);
-			System.out.println("\tDistance from "+c.id +"=" + distance);	
+			//System.out.println("\tDistance from "+c.id +"=" + distance);	
 			if(distance > Conf.ACCEPTABLE_DISTANCE){
 				integrated = true;
 				dao.saveCluster(c.id, file);

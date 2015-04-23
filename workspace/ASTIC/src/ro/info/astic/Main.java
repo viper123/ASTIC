@@ -1,8 +1,6 @@
 package ro.info.astic;
 
 import java.awt.AWTException;
-import java.awt.CheckboxMenuItem;
-import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
@@ -13,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import ro.info.asticlib.db.Dao;
 
 
 public class Main {

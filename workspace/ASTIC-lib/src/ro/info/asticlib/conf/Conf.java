@@ -6,6 +6,7 @@ public class Conf {
 	public static String TEST_FILE = "D://Test";
 	public static String TEST_FILE_2 = "D://reptiles.txt"; 
 	public static String ROOT = "D://StudPlace";
+	public static String ROOT_TEST = "D://Docs/TEST";
 	
 	public static final double ACCEPTABLE_DISTANCE = 0.5f;
 	public static final int ACCEPTABLE_MAP_SIZE = 10;
