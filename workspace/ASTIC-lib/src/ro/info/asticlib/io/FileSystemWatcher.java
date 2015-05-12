@@ -70,7 +70,7 @@ public class FileSystemWatcher extends Thread {
     		return ;
     	}
     	registeredDirs.put(path, true);
-    	System.out.println("Watcher: register watcher for:"+path);
+    	//System.out.println("Watcher: register watcher for:"+path);
         Path dir = Paths.get(path);
         try{
             WatchService watcher = dir.getFileSystem().newWatchService();

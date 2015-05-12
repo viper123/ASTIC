@@ -29,8 +29,8 @@ namespace ASTIC_client_V2
         public ListViewResult(String filePath,String [] query)
         {
             FilePath = filePath;
-            Name = new NameClass(System.IO.Path.GetFileName(filePath),getPreview(query,filePath));
             FileTypeName = FileTypeFactory.FromFile(filePath).ToString();
+            Name = new NameClass(System.IO.Path.GetFileName(filePath),getPreview(query,filePath,FileTypeName));
             FileInfo f = new FileInfo(filePath);
             Size = getStringWithMeasurement(f.Length);
             DateTime lastModified = System.IO.File.GetLastWriteTime(filePath);
@@ -41,11 +41,11 @@ namespace ASTIC_client_V2
         {
             if (length > 1024 * 1024 * 1024)
             {
-                return length / 1024 * 1024 * 1024 + "GB";
+                return length / (1024 * 1024 * 1024) + "GB";
             }
             else if (length > 1024 * 1024)
             {
-                return length / 1024 * 1024 + "Mb";
+                return length / (1024 * 1024) + "Mb";
             }
             else if (length > 1024)
             {
@@ -57,8 +57,16 @@ namespace ASTIC_client_V2
             }
         }
 
-        public string getPreview(String []queryArray,String file)
+        public string getPreview(String []queryArray,String file,String fileType)
         {
+            if (file.Contains("."))
+            {
+                String ext = file.Substring(file.LastIndexOf('.'));
+                if(ext.ToLower().Equals(".pdf"))
+                {
+                    return "";
+                }
+            }
             StringBuilder builder = new StringBuilder();
             StringBuilder lineBuilder = new StringBuilder();
             string[] lines = System.IO.File.ReadAllLines(file);

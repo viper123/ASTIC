@@ -180,16 +180,16 @@ public class GUIConsole extends JFrame {
 		lblAsticServerConsole.setBounds(146, 11, 164, 14);
 		contentPane.add(lblAsticServerConsole);
 		
-		if(!PrefUtils.load(KEY_CLUSTERIZED)){
+		//if(!PrefUtils.load(KEY_CLUSTERIZED)){
 			btnStartInitialClustering.setEnabled(true);
 			lblStateInitialClustering.setText("Asteapta");
 			
-		}else{
-			btnStartInitialClustering.setEnabled(false);
-			lblStateInitialClustering.setText("Terminat");
+		//}else{
+			//btnStartInitialClustering.setEnabled(false);
+			//lblStateInitialClustering.setText("Terminat");
 			enableFileSystemWatcher();
 			enableServerQuery();
-		}
+		//}
 		setListeners();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
@@ -198,13 +198,13 @@ public class GUIConsole extends JFrame {
 		if(initialClusteringDeamon != null){
 			return ;
 		}
-		initialClusteringDeamon = new InitialClusteringDaemon(Conf.TEST_FILE,watcher) {
+		initialClusteringDeamon = new InitialClusteringDaemon(Conf.ROOT_TEST,watcher) {
 			public void onFinish(Exception e) {
 				enableFileSystemWatcher();
 				enableServerQuery();
-				if(!initialClusteringDeamon.isForcedStoped()){
+				//if(!initialClusteringDeamon.isForcedStoped()){
 					PrefUtils.save(KEY_CLUSTERIZED, true);
-				}
+				//}
 				initialClusteringDeamon = null;
 				btnStartInitialClustering.setText(START);
 				lblStateInitialClustering.setText("Oprit");
