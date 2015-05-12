@@ -35,12 +35,12 @@ public class Clusters {
 	 */
 	public void processFileWords(String file){
 		HashMap<String, Float> wordWeightMap= dao.getWordsWeightForFile(file);
-		int totalWordsCount = wordWeightMap.size();
+		//int totalWordsCount = wordWeightMap.size();
 		Cluster newCluster = new Cluster(generateID(), file, wordWeightMap);
 		boolean integrated = false;
 		List<Cluster> allClusters = getAllClusters();
 		allClusters = allClusters == null?new ArrayList<Cluster>():allClusters;
-		dao.saveWords(file, wordWeightMap,totalWordsCount);
+		//dao.saveWords(file, wordWeightMap,totalWordsCount); the words are already saved
 		System.out.println("File:"+file);
 		for(Cluster c:allClusters){
 			double distance = c.getDistance(newCluster, DistanceFormula.Cosine);
@@ -48,10 +48,12 @@ public class Clusters {
 			if(distance > Conf.ACCEPTABLE_DISTANCE){
 				integrated = true;
 				dao.saveCluster(c.id, file);
+				dao.updateInvertedClusterIndex(c.id, wordWeightMap);
 			}
 		}
 		if(!integrated){
 			dao.saveCluster(newCluster.id, file);
+			dao.updateInvertedClusterIndex(newCluster.id, wordWeightMap);
 		}
 		
 	}

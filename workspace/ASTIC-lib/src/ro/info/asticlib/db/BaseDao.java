@@ -1,6 +1,11 @@
 package ro.info.asticlib.db;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -61,5 +66,40 @@ public class BaseDao {
 		boolean exist =  tables.next();
 		tables.close();
 		return exist;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public final <T>T load(String key, Class<T> clazz){
+		File file = new File(System.getProperties().getProperty("user.dir"),key);
+		if(!file.exists()){
+			return null;
+		}
+		ObjectInputStream stream = null;
+		try{
+			stream = new ObjectInputStream(new FileInputStream(file));
+			return (T) stream.readObject();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}finally{
+			try{
+				stream.close();
+			}catch(Exception e){}
+		}
+	}
+	
+	public final void save(String key,Object object){
+		File file = new File(System.getProperties().getProperty("user.dir"),key);
+		ObjectOutputStream stream = null;
+		try{
+			stream = new ObjectOutputStream(new FileOutputStream(file));
+			stream.writeObject(object);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				stream.close();
+			}catch(Exception e){			}
+		}
 	}
 }

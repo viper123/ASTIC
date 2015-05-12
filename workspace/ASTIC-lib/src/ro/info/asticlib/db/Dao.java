@@ -25,6 +25,8 @@ import ro.info.asticlib.query.Result;
  *
  */
 public class Dao extends BaseDao {
+
+	private InvertedClusterIndex invertedClusterIndex;
 	
 	public Dao(){
 		super();
@@ -417,6 +419,37 @@ public class Dao extends BaseDao {
 			}
 		}
 		return 0;
+	}
+	
+	public int getClusterCountContaining(String word){
+		return -1;
+	}
+	
+	public void updateInvertedClusterIndex(int clusterId,HashMap<String,Float> words){
+		restoreInvertedClusterIndex();
+		if(invertedClusterIndex == null){
+			invertedClusterIndex = new InvertedClusterIndex();
+		}
+		for(String word:words.keySet()){
+			List<Integer> clusters = invertedClusterIndex.map.get(word);
+			if(clusters == null){
+				clusters = new ArrayList<>();
+				invertedClusterIndex.map.put(word, clusters);
+			}
+			clusters.add(clusterId);
+		}
+		saveInvertedClusterIndex();
+	}
+	
+	private InvertedClusterIndex restoreInvertedClusterIndex(){
+		if(invertedClusterIndex == null){
+			invertedClusterIndex = load(InvertedClusterIndex.class.getName(),InvertedClusterIndex.class);
+		}
+		return invertedClusterIndex;
+	}
+	
+	private void  saveInvertedClusterIndex(){
+		save(InvertedClusterIndex.class.getName(),invertedClusterIndex);
 	}
 	
 	public void updateTfIdf(Map<String,Float> tfIdfMap,Integer N,AcceptanceRule rule){
