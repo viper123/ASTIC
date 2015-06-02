@@ -1,4 +1,4 @@
-!SESSION 2015-01-14 21:25:35.950 -----------------------------------------------
+﻿!SESSION 2015-01-14 21:25:35.950 -----------------------------------------------
 eclipse.buildId=4.4.0.I20140606-1215
 java.version=1.7.0_71
 java.vendor=Oracle Corporation
@@ -7205,3 +7205,4 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!Ignore message
