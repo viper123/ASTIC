@@ -96,7 +96,7 @@ public class HAClusteering {
 			parent.addChildren(meargedNode);
 			int max = Math.max(indexs[0], indexs[1]);
 			int min = Math.min(indexs[0], indexs[1]);
-			input.remove(max);
+			input.remove(max);//prima data remove index-ul mai mare pt ca in caz contrar se va da index-ul pestecap;
 			input.remove(min);
 			input.add(mearged);
 			stopCondition = input.size()>2;
@@ -104,6 +104,11 @@ public class HAClusteering {
 		return tree;
 	}
 	
+	/**
+	 * Returneaza minimul celei  mai mici valori din matrice
+	 * @param matrix
+	 * @return
+	 */
 	private int[] minIndex(double [][]matrix){
 		int k = 0;
 		double min = 2;

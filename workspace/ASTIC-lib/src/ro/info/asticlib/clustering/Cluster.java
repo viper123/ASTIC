@@ -1,9 +1,13 @@
 package ro.info.asticlib.clustering;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import ro.info.asticlib.math.Math;
 
@@ -14,6 +18,7 @@ public class Cluster implements Cloneable {
 	public HashMap<String, Float> wordWeightMap;
 	public HashMap<String, Set<String>> fileWordMap;
 	public List<String> preview;
+	public Map<String,Float> reprezentativeWordsMap;
 	public List<String> reprezentativeWords;
 	
 	public Cluster(){
@@ -84,6 +89,22 @@ public class Cluster implements Cloneable {
 		return true;
 	}
 	
+	public List<String> getReprezentativeWords(int count){
+		List<String> words = new ArrayList<String>();
+		ValueComparator bvc =  new ValueComparator(wordWeightMap);
+        TreeMap<String,Float> sorted_map = new TreeMap<String,Float>(bvc);
+        for(String word:wordWeightMap.keySet()){
+        	sorted_map.put(word, wordWeightMap.get(word));
+        }
+        for(String word:sorted_map.keySet()){
+        	if(count-->0){
+        		words.add(word);
+        	}
+        }
+        reprezentativeWords = words;
+		return words;
+	}
+	
 	private double getDistanceCosine(Cluster other){
 		
 		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
@@ -126,6 +147,23 @@ public class Cluster implements Cloneable {
 	@Override
 	public String toString() {
 		return "Cluster:"+id;
+	}
+	
+	class ValueComparator implements Comparator<String> {
+
+	    Map<String, Float> base;
+	    public ValueComparator(Map<String, Float> base) {
+	        this.base = base;
+	    }
+
+	    // Note: this comparator imposes orderings that are inconsistent with equals.    
+	    public int compare(String a, String b) {
+	        if (base.get(a) >= base.get(b)) {
+	            return 1;
+	        } else {
+	            return -1;
+	        } // returning 0 would merge keys
+	    }
 	}
 	
 	public enum DistanceFormula {

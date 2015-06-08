@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import ro.info.asticlib.tests.TestInvertedClusterIndex;
+import ro.info.asticlib.db.Dao;
 
 
 public class Main {
@@ -55,8 +55,8 @@ public class Main {
 //		}.start();
 		//new QueryTest().queryTest();
 		//new WordProcessorTest().test();
-		//new Dao().dropTables();
-		//GUIConsole.main(args);
+		new Dao().dropTables();
+		GUIConsole.main(args);
 		//setSystemTray();
 		//new TestInvertedClusterIndex().test();
 		
