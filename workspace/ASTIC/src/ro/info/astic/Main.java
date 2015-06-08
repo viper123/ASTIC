@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import ro.info.asticlib.db.Dao;
+import ro.info.asticlib.tests.TestInvertedClusterIndex;
 
 
 public class Main {
@@ -43,7 +43,7 @@ public class Main {
 		//new TestWordNet().testExpandWord();
 		//new TagsReaderTests().testGetTagPDFFile();
 		//new TagsReaderTests().testGetTag();
-		//new Dao().dropTables();
+		//
 		//new BackgroundService(Conf.TEST_FILE).start();
 		//FileSystemWatcher watcher= FileSystemWatcher.getInstance();
 		//watcher.setClusteringService(BaseClusteringService.class);
@@ -55,9 +55,10 @@ public class Main {
 //		}.start();
 		//new QueryTest().queryTest();
 		//new WordProcessorTest().test();
+		//new Dao().dropTables();
 		//GUIConsole.main(args);
-		setSystemTray();
-		
+		//setSystemTray();
+		//new TestInvertedClusterIndex().test();
 		
 	}
 	

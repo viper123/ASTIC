@@ -1,0 +1,94 @@
+File:(D:\StudPlace\Anul_I\Anul_I_sem_I\contract_info1.pdf)
+File:(D:\StudPlace\Anul_I\Anul_I_sem_I\sali-AP-TS2.pdf)
+File:(D:\StudPlace\Anul_I\Anul_I_sem_I\slide-uri logica.pdf)
+File:(D:\StudPlace\Anul_I\Anul_I_sem_I\zi2_infobuget.pdf)
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week1\1.Closures.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week1\Closures.pdf
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week1\TheDragonCurve.pdf)
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week10\VectorSpaces.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week12\Posets.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week15\UnivAlgebras.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week2\3.NumberTheory(I)[fltafcs2010].pdf
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week3\2.MpNT.pdf)
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week3\4.NumberTheory(II)[fltafcs2010].pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week4\5.IntroToCrypto.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week4\IntroToCrypto[fltafcs2011].pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week5\Semigroups.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week6\Semigroups.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week6\TMTE2002.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week7\Groups.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week9\AES.pdf
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week9\Rings.pdf
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\lab1.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\lab1.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\lab2.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\lab2.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\lab3\ex1.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\lab3\ex1.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\laborator 2.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\laborator 2.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\laborator1.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\laborator1.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\assembler\Practica Hard2006.pdf
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\Contacts.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\Contacts.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\Contacts2.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\Contacts2.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\default.txt.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\default.txt.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\exercitii\calculator v1.0\calculator\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\exercitii\calculator v1.0\calculator\ReadMe.txt
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\fisiere in mfc.pdf)
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\agenda.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\agenda.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\agenda_bK.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\agenda_bK.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\agendica.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\agendica.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\default.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\default.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\default_prim.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\default_prim.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\New Text Document.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\New Text Document.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\Agenda(2.8)\Agenda\ReadMe.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc1\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc1\ReadMe.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc2\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc2\ReadMe.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc3\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc3\ReadMe.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc4\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\proiect\mfc\mfc4\ReadMe.txt
+Eror:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\Strategy\ReadMe.txt
+Error parsing:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\Strategy\ReadMe.txt
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c1(p).pdf)
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c2(p).pdf)
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c3(p).pdf)
+File:(D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c4(p).pdf)
+Compute & Update TFIDF for 10 docs
+		0 from 11
+		1 from 11
+		2 from 11
+		3 from 11
+		4 from 11
+		5 from 11
+		6 from 11
+		7 from 11
+		8 from 11
+		9 from 11
+		10 from 11
+Finished updating TFIDF
+File:D:\StudPlace\Anul_I\Anul_I_sem_I\contract_info1.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_I\sali-AP-TS2.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_I\slide-uri logica.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_I\zi2_infobuget.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week1\TheDragonCurve.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Fundamentele algebrice ale informaticii\week3\2.MpNT.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Practica hardware\fisiere in mfc.pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c1(p).pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c2(p).pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c3(p).pdf
+File:D:\StudPlace\Anul_I\Anul_I_sem_II\Probabilitate si statistica\c4(p).pdf
+Final processing

@@ -292,6 +292,20 @@ public class Dao extends BaseDao {
 		return null;
 	}
 	
+	public List<Cluster> getClustersContaining(String word){
+		restoreInvertedClusterIndex();
+		List<Cluster> clusters = new ArrayList<>();
+		List<Integer> clustersId = invertedClusterIndex.getClustersContainingWord(word);
+		if(clustersId == null){
+			return clusters;
+		}
+		for(Integer id:clustersId){
+			Cluster c = getCluster(id.toString());
+			clusters.add(c);
+		}
+		return clusters;
+	}
+	
 	public List<String> getWordsStarting(String q){
 		if(q.length()<2){
 			return new ArrayList<>();
@@ -436,7 +450,9 @@ public class Dao extends BaseDao {
 				clusters = new ArrayList<>();
 				invertedClusterIndex.map.put(word, clusters);
 			}
-			clusters.add(clusterId);
+			if(!clusters.contains(clusterId)){
+				clusters.add(clusterId);
+			}
 		}
 		saveInvertedClusterIndex();
 	}
@@ -450,6 +466,10 @@ public class Dao extends BaseDao {
 	
 	private void  saveInvertedClusterIndex(){
 		save(InvertedClusterIndex.class.getName(),invertedClusterIndex);
+	}
+	
+	private void deleteInvertedClusterIndex(){
+		save(InvertedClusterIndex.class.getName(),null);
 	}
 	
 	public void updateTfIdf(Map<String,Float> tfIdfMap,Integer N,AcceptanceRule rule){
@@ -511,6 +531,7 @@ public class Dao extends BaseDao {
 	}
 	
 	public void dropTables(){
+		deleteInvertedClusterIndex();
 		ResultSet result = null;
 		for(Tables table:Tables.values()){
 			try {

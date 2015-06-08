@@ -88,28 +88,23 @@ ClusteringService {
 	public void clusterizeFilePath(final String file){
 		WordProcesor reader = new WordProcesor(file);
 		if(reader.getFileType() != FileType.Text){
-			//System.out.println(file + " was skiped "+reader.getFileType().name());
 			return ;
 		}
 		File f = new File(file);
 		long modifiedDate = f.lastModified();
 		long lastModifiedDate = dao.getLastModified(file);
 		if(modifiedDate == lastModifiedDate){
-			//System.out.println(file + " was skiped already parsed");
 			return ;
 		}
 		reader.getMapWordWeight(new Callback() {
 			public void onDone(HashMap<String, Float> map,int size) {
 				if(map.size() < Conf.ACCEPTABLE_MAP_SIZE ){
-					//System.out.println(file + " was skiped too small");
 					return ;
 				}
 				System.out.println("File:("+file+")");
-				//System.out.println(map);
 				dao.saveWords(file, map, size);
 				filesBuffer.add(file);
-				if(filesBuffer.size()>Conf.DOC_SET_SIZE){
-					
+				if(filesBuffer.size()>=Conf.DOC_SET_SIZE){
 					updateTfIdfForDocs();
 					processBuffer();
 				}
