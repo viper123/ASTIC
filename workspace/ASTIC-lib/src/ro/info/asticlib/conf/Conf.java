@@ -11,6 +11,7 @@ public class Conf {
 	public static final double ACCEPTABLE_DISTANCE = 0.5f;
 	public static final int ACCEPTABLE_MAP_SIZE = 10;
 	public static final int DOC_SET_SIZE = 10;
+	public static final int CLUSTER_REPREZENTATIVE_WORDS_COUNT = 100;
 	
 	public static final int SERVER_PORT_NUMBER = 6789;
 }

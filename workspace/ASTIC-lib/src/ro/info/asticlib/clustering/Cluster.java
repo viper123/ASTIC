@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.math.Math;
 
 public class Cluster implements Cloneable {
@@ -65,6 +66,8 @@ public class Cluster implements Cloneable {
 		switch (formula) {
 		case Cosine :
 			return getDistanceCosine(other);
+		case CosineRep:
+			return getDistanceCosineRep(other);
 
 		}
 		
@@ -105,6 +108,16 @@ public class Cluster implements Cloneable {
 		return words;
 	}
 	
+	public Map<String,Float> getReprezentativeWordsWordWeightMap(int count ){
+		Map<String,Float> map = new HashMap<>();
+		List<String> words = getReprezentativeWords(count);
+		for(String word:words){
+			map.put(word, wordWeightMap.get(word));
+		}
+		
+		return map;
+	}
+	
 	private double getDistanceCosine(Cluster other){
 		
 		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
@@ -119,8 +132,24 @@ public class Cluster implements Cloneable {
 		return Math.computeCosine(c1Vect, c2Vect);
 	}
 	
-	private Set<String> getWordSet(HashMap<String, Float> map1,
-			HashMap<String, Float> map2){
+	@SuppressWarnings("all")
+	private double getDistanceCosineRep(Cluster other){
+		Map c1Map = getReprezentativeWordsWordWeightMap(Conf.CLUSTER_REPREZENTATIVE_WORDS_COUNT);
+		Map c2Map = other.getReprezentativeWordsWordWeightMap(Conf.CLUSTER_REPREZENTATIVE_WORDS_COUNT);
+		Set<String> wordSet = getWordSet(c1Map,c2Map);
+		
+		double []c1Vect = new double[wordSet.size()];
+		double []c2Vect = new double[wordSet.size()];
+		int k = 0;
+		for(String word:wordSet){
+			c1Vect[k] = getTF(word, c1Map);
+			c2Vect[k++] = getTF(word, c2Map);
+		}
+		return Math.computeCosine(c1Vect, c2Vect);
+	}
+	
+	private Set<String> getWordSet(Map<String, Float> map1,
+			Map<String, Float> map2){
 		 
 		Set<String> wordSet = new HashSet<String>();
 		wordSet.addAll(map1.keySet());
@@ -128,7 +157,7 @@ public class Cluster implements Cloneable {
 		return wordSet;
 	}
 	
-	private float getTF(String word,HashMap<String, Float> map){
+	private float getTF(String word,Map<String, Float> map){
 		if(map.containsKey(word)){
 			return map.get(word);
 		}
@@ -167,6 +196,6 @@ public class Cluster implements Cloneable {
 	}
 	
 	public enum DistanceFormula {
-		Cosine
+		Cosine,CosineRep//Cosine folosind cuvintele reprezentative
 	}
 }

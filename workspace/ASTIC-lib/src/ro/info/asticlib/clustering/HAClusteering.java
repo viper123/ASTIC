@@ -26,37 +26,7 @@ public class HAClusteering {
 
 	public Tree<Cluster> applyLogic(){
 		Tree<Cluster> tree = new Tree<Cluster>();
-		HashMap<String,Cluster> map = new HashMap<String, Cluster>();
-		//sparge input-ul in clusteri cu un singur fisier
-		for(Cluster c : input){
-			if(c.fileWordMap.size()>1){//mai mult de un fisier;
-				for(String file:c.fileWordMap.keySet()){
-					Cluster newCluster = map.get(file);
-					if(newCluster == null){
-						newCluster = new Cluster();
-						newCluster.fileWordMap.put(file, c.fileWordMap.get(file));
-						newCluster.id = getClusterId();
-						for(String word:newCluster.fileWordMap.get(file)){
-							newCluster.wordWeightMap.put(word, c.wordWeightMap.get(word));
-							map.put(file, newCluster);
-						}
-					}
-				}
-			}else{
-				if(!map.containsKey(c.fileWordMap.keySet().toArray()[0])){
-					map.put((String)c.fileWordMap.keySet().toArray()[0], c);
-				}
-			}
-		}
-		
-		//convertesc din map in lista de clusteri
-		List<Cluster> newInput = new ArrayList<Cluster>();
-		for(String key:map.keySet()){
-			newInput.add(map.get(key));
-		}
-		input.clear();
-		input.addAll(newInput);
-		
+		new TfIdfCalculator().computeTfIdf(input, dao);
 		//pune input ca frunze la tree;
 		for(Cluster c:input){
 			tree.addFirstNode(new Node<Cluster>(c.id+"", c));
@@ -156,4 +126,35 @@ public class HAClusteering {
 	private int getClusterId(){
 		return ++lastClusterId;
 	}
+	
+	/*HashMap<String,Cluster> map = new HashMap<String, Cluster>();
+	//sparge input-ul in clusteri cu un singur fisier
+	for(Cluster c : input){
+		if(c.fileWordMap.size()>1){//mai mult de un fisier;
+			for(String file:c.fileWordMap.keySet()){
+				Cluster newCluster = map.get(file);
+				if(newCluster == null){
+					newCluster = new Cluster();
+					newCluster.fileWordMap.put(file, c.fileWordMap.get(file));
+					newCluster.id = getClusterId();
+					for(String word:newCluster.fileWordMap.get(file)){
+						newCluster.wordWeightMap.put(word, c.wordWeightMap.get(word));
+						map.put(file, newCluster);
+					}
+				}
+			}
+		}else{
+			if(!map.containsKey(c.fileWordMap.keySet().toArray()[0])){
+				map.put((String)c.fileWordMap.keySet().toArray()[0], c);
+			}
+		}
+	}
+	
+	//convertesc din map in lista de clusteri
+	List<Cluster> newInput = new ArrayList<Cluster>();
+	for(String key:map.keySet()){
+		newInput.add(map.get(key));
+	}
+	input.clear();
+	input.addAll(newInput);*/
 }
