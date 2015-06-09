@@ -55,7 +55,7 @@ public class Main {
 //		}.start();
 		//new QueryTest().queryTest();
 		//new WordProcessorTest().test();
-		new Dao().dropTables();
+		//new Dao().dropTables();
 		GUIConsole.main(args);
 		//setSystemTray();
 		//new TestInvertedClusterIndex().test();

@@ -27,12 +27,14 @@ import ro.info.asticlib.query.Result;
 public class Dao extends BaseDao {
 
 	private InvertedClusterIndex invertedClusterIndex;
+	private InvertedFileIndex invertedFileIndex;
 	
 	public Dao(){
 		super();
 	}
 	
 	public void saveWords(String path,HashMap<String, Float> wordWeightMap,int size){
+		updateInvertedFileIndex(path, wordWeightMap);
 		String insertSQL = Tables.BW.insertSQL;
 		try{
 			for(String word:wordWeightMap.keySet()){
@@ -293,7 +295,7 @@ public class Dao extends BaseDao {
 	}
 	
 	public List<Cluster> getClustersContaining(String word){
-		restoreInvertedClusterIndex();
+		restoreInvertedIndexes();
 		List<Cluster> clusters = new ArrayList<>();
 		List<Integer> clustersId = invertedClusterIndex.getClustersContainingWord(word);
 		if(clustersId == null){
@@ -409,7 +411,10 @@ public class Dao extends BaseDao {
 	}
 	
 	public int getFileCountContaining(String word){
-		String select = "select count(distinct file_path) as count from bw  where word = ?";
+		restoreInvertedIndexes();
+		List<String> files =  invertedFileIndex.getFilesContainingWord(word);
+		return files!=null?files.size():0;
+		/*String select = "select count(distinct file_path) as count from bw  where word = ?";
 		PreparedStatement pst = null;
 		ResultSet result = null;
 		try{
@@ -432,15 +437,16 @@ public class Dao extends BaseDao {
 			}catch(Exception e){
 			}
 		}
-		return 0;
+		return 0;*/
 	}
 	
 	public int getClusterCountContaining(String word){
-		return -1;
+		List<Integer> clusters = invertedClusterIndex.getClustersContainingWord(word);
+		return clusters!=null?clusters.size():0;
 	}
 	
 	public void updateInvertedClusterIndex(int clusterId,HashMap<String,Float> words){
-		restoreInvertedClusterIndex();
+		restoreInvertedIndexes();
 		if(invertedClusterIndex == null){
 			invertedClusterIndex = new InvertedClusterIndex();
 		}
@@ -454,22 +460,44 @@ public class Dao extends BaseDao {
 				clusters.add(clusterId);
 			}
 		}
-		saveInvertedClusterIndex();
+		saveInvertedIndexes();
 	}
 	
-	private InvertedClusterIndex restoreInvertedClusterIndex(){
+	public void updateInvertedFileIndex(String filePath,HashMap<String,Float> words){
+		restoreInvertedIndexes();
+		if(invertedFileIndex == null){
+			invertedFileIndex = new InvertedFileIndex();
+		}
+		for(String word:words.keySet()){
+			List<String> files = invertedFileIndex.map.get(word);
+			if(files == null){
+				files = new ArrayList<>();
+				invertedFileIndex.map.put(word, files);
+			}
+			if(!files.contains(filePath)){
+				files.add(filePath);
+			}
+		}
+		saveInvertedIndexes();
+	}
+	
+	private void restoreInvertedIndexes(){
 		if(invertedClusterIndex == null){
 			invertedClusterIndex = load(InvertedClusterIndex.class.getName(),InvertedClusterIndex.class);
 		}
-		return invertedClusterIndex;
+		if(invertedFileIndex == null){
+			invertedFileIndex = load(InvertedFileIndex.class.getName(),InvertedFileIndex.class);
+		}
 	}
 	
-	private void  saveInvertedClusterIndex(){
+	private void  saveInvertedIndexes(){
 		save(InvertedClusterIndex.class.getName(),invertedClusterIndex);
+		save(InvertedFileIndex.class.getName(),invertedFileIndex);
 	}
 	
-	private void deleteInvertedClusterIndex(){
+	private void deleteInvertedIndexes(){
 		save(InvertedClusterIndex.class.getName(),null);
+		save(InvertedFileIndex.class.getName(),null);
 	}
 	
 	public void updateTfIdf(Map<String,Float> tfIdfMap,Integer N,AcceptanceRule rule){
@@ -531,7 +559,7 @@ public class Dao extends BaseDao {
 	}
 	
 	public void dropTables(){
-		deleteInvertedClusterIndex();
+		deleteInvertedIndexes();
 		ResultSet result = null;
 		for(Tables table:Tables.values()){
 			try {

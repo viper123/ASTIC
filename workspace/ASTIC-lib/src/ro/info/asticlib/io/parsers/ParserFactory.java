@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class ParserFactory {
     
-    private static HashMap<Integer,Parser> mParserPool;
+    private static HashMap<String,Parser> mParserPool;
     public static Parser getParser(File inputFile)
     {
     	FileType type = FileType.fromFile(inputFile);
@@ -42,12 +42,12 @@ public class ParserFactory {
     }
     
     private static void ensureParsersPoolExistance(){
-        mParserPool=mParserPool==null?new HashMap<Integer,Parser>():mParserPool;
+        mParserPool=mParserPool==null?new HashMap<String,Parser>():mParserPool;
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Parser retrive(FileType type,Class parserClass,File inputFile){
-        Parser p = mParserPool.get(type.ordinal());
+        Parser p = mParserPool.get(type.selectedExtension);
         if(p!=null){
         	p.setParsableFile(inputFile);
             return p;
@@ -55,7 +55,7 @@ public class ParserFactory {
         Parser parser;
 		try {
 			parser = (Parser) parserClass.getConstructor(File.class).newInstance(inputFile);
-			mParserPool.put(type.ordinal(), parser);
+			mParserPool.put(type.selectedExtension, parser);
 	        return parser;
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
