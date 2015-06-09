@@ -42,7 +42,7 @@ public class Clusters {
 		allClusters = allClusters == null?new ArrayList<Cluster>():allClusters;
 
 		//dao.saveWords(file, wordWeightMap,totalWordsCount); the words are already saved
-		System.out.println("File:"+file);
+		//System.out.println("File:"+file);
 
 		//dao.saveWords(file, wordWeightMap,totalWordsCount);
 		//System.out.println("Process file:"+file);

@@ -107,6 +107,7 @@ ClusteringService {
 				if(filesBuffer.size()>=Conf.DOC_SET_SIZE){
 					updateTfIdfForDocs();
 					processBuffer();
+					filesBuffer.clear();
 				}
 			}
 		});
@@ -126,7 +127,6 @@ ClusteringService {
 		for(String file:filesBuffer){
 			Clusters.instance().processFileWords(file);
 		}
-		filesBuffer.clear();
 	}
 	
 	@Override
