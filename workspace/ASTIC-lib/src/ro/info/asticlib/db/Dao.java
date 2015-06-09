@@ -441,6 +441,7 @@ public class Dao extends BaseDao {
 	}
 	
 	public int getClusterCountContaining(String word){
+		restoreInvertedIndexes();
 		List<Integer> clusters = invertedClusterIndex.getClustersContainingWord(word);
 		return clusters!=null?clusters.size():0;
 	}

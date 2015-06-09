@@ -16,5 +16,9 @@ namespace ASTIC_client.clustering
         public Dictionary<String, List<String>> fileWordMap;
         [JsonProperty]
         public List<String> preview;
+        [JsonProperty]
+        public Dictionary<String, float> reprezentativeWordsMap;
+        [JsonProperty]
+        public List<String> reprezentativeWords;
     }
 }

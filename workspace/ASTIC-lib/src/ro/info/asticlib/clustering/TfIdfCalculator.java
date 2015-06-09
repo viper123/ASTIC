@@ -1,5 +1,6 @@
 package ro.info.asticlib.clustering;
 
+import java.util.HashMap;
 import java.util.List;
 
 import ro.info.asticlib.db.Dao;
@@ -29,6 +30,9 @@ public class TfIdfCalculator {
 			for(String word:c.wordWeightMap.keySet()){
 				double tf = (1+Math.log(c.wordWeightMap.get(word))) ;
 				double idf = Math.log(((float)size/(float)dao.getClusterCountContaining(word)));
+				if(c.reprezentativeWordsMap == null){
+					c.reprezentativeWordsMap = new HashMap<String, Float>();
+				}
 				c.reprezentativeWordsMap.put(word, (float)(tf*idf));
 			}
 		}
