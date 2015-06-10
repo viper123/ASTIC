@@ -70,7 +70,8 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 				if(node.value == null){
 					return ;
 				}
-				List<String> mostSignificantWords = getMostSignifiatWords(node.value.wordWeightMap);
+				node.value.getReprezentativeWords(10);
+				/*List<String> mostSignificantWords = getMostSignifiatWords(node.value.wordWeightMap);
 				float weight1 = 0,weight2 = 0,weight3 = 0;
 				if(mostSignificantWords.get(0) != null){
 					 weight1 = node.value.wordWeightMap.get(mostSignificantWords.get(0));
@@ -93,7 +94,7 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 					}else{
 						node.value.fileWordMap.put(key, new HashSet<String>());
 					}
-				}
+				}*/
 			}
 		});
 		QueryResult result = new QueryResult(q);

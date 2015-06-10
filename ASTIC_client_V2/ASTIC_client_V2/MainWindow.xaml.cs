@@ -45,6 +45,9 @@ namespace ASTIC_client_V2
             cb_types.Items.Add(FileType.Text);
             cb_types.Items.Add(FileType.Other);
             cb_types.SelectedIndex = 0;
+            cb_view_type.Items.Add(DisplayType.CLASSIC);
+            cb_view_type.Items.Add(DisplayType.GRAPH);
+            cb_view_type.SelectedIndex = 0;
             filter = FileType.All;
         }
 
@@ -176,10 +179,14 @@ namespace ASTIC_client_V2
             StringBuilder builder = new StringBuilder();
             builder.Append("[");
             int k = 0;
-            foreach(String str in c.wordWeightMap.Keys){
+            foreach(String str in c.reprezentativeWords){
                 builder.Append(str);
                 if(k++ < c.wordWeightMap.Keys.Count-1){
                     builder.Append("+");
+                }
+                if (k > 3)
+                {
+                    break;
                 }
             }
             builder.Append("]");
@@ -293,6 +300,24 @@ namespace ASTIC_client_V2
             {
                 lb_results.Items.Clear();
                 displayList(currentList,getCurrentQuery());
+            }
+        }
+
+        private void cb_display_types_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayType type = (DisplayType)cb_view_type.SelectedItem;
+            switch (type)
+            {
+                case DisplayType.CLASSIC:
+                    lb_results.Visibility = System.Windows.Visibility.Visible;
+                    treeView1.Visibility = Visibility.Visible;
+                    canvas.Visibility = Visibility.Collapsed;
+                    break;
+                case DisplayType.GRAPH:
+                    lb_results.Visibility = System.Windows.Visibility.Collapsed;
+                    treeView1.Visibility = Visibility.Collapsed;
+                    canvas.Visibility = Visibility.Visible;
+                    break;
             }
         }
 

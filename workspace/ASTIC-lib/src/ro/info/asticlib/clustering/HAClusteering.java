@@ -43,7 +43,7 @@ public class HAClusteering {
 				for(int j = input.size()-1; j>=0; j--){
 					if(i!=j){
 						Cluster other = input.get(j);
-						double cosine = selected.getDistance(other, DistanceFormula.Cosine);
+						double cosine = selected.getDistance(other, DistanceFormula.CosineRep);
 						distances[i][j] = 1f - cosine;
 					}
 				}

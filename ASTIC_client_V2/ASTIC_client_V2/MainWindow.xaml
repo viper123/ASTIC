@@ -6,10 +6,12 @@
         Title="ASTIC" Height="473.2" Width="807" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
         <Label Content="Interogare:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="98.153" FontSize="16" FontWeight="Bold"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="27.28" Margin="113.153,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="426.4" FontSize="16" KeyUp="textBox1_KeyUp_1" GotFocus="textBox1_GotFocus"/>
-        <Button Content="Cauta" HorizontalAlignment="Left" Margin="556.4,10.396,0,0" VerticalAlignment="Top" Width="90.2" Height="33.884" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
-        <ComboBox x:Name="cb_types" HorizontalAlignment="Left" Margin="664.2,10,0,0" VerticalAlignment="Top" Width="120.4" Height="34.28" FontSize="16" FontWeight="Bold" SelectionChanged="cb_types_SelectionChanged"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="27" Margin="113,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="352" FontSize="16" KeyUp="textBox1_KeyUp_1" GotFocus="textBox1_GotFocus"/>
+        <Button Content="Cauta" HorizontalAlignment="Left" Margin="474,10,0,0" VerticalAlignment="Top" Width="90" Height="34" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
+        <ComboBox x:Name="cb_types" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Width="82" Height="34" 
+                  FontSize="16" FontWeight="Bold" SelectionChanged="cb_types_SelectionChanged"/>
         <TreeView x:Name="treeView1" HorizontalAlignment="Left" Height="353.2" Margin="0,55.2,0,0" VerticalAlignment="Top" Width="309.6" SelectedItemChanged="treeView1_SelectedItemChanged"/>
+        <Canvas x:Name="canvas" Background="Azure" Margin="0,55,9.8,37.6" Visibility="Collapsed"/>
         <ListView x:Name="lb_results" 
                   HorizontalAlignment="Left" Height="353.2" 
                   Margin="309.6,55.2,0,0" VerticalAlignment="Top" Width="484.6"
@@ -19,15 +21,15 @@
                 <GridView>
                     <GridViewColumn Width="240" Header="Nume" >
                         <GridViewColumn.CellTemplate>
-                                   <DataTemplate>
-                                         <StackPanel Orientation="Vertical">
-                                            <TextBlock FontSize="20" FontStyle="Normal"  
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock FontSize="20" FontStyle="Normal"  
                                                        Text="{Binding Path=Name.FilePath}"/>
                                     <TextBlock FontSize="10" 
                                                        TextWrapping="Wrap" 
                                                local:Attached.FormattedText="{Binding Path=Name.Preview}"/>
                                 </StackPanel>
-                                   </DataTemplate>
+                            </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Width="40" Header="Tip" DisplayMemberBinding="{Binding FileTypeName}"/>
@@ -36,14 +38,18 @@
 
                 </GridView>
             </ListView.View>
+
         </ListView>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="28" Margin="0,408.4,0,0" VerticalAlignment="Top" Width="309.6">
             <Label x:Name="toolStripStatusLabel1" Content="Incepeti sa cautati" Margin="0,0,-1,0"/>
         </Border>
         <ProgressBar x:Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="28" Margin="309.6,408.4,0,0" VerticalAlignment="Top" Width="484.6"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55.2" VerticalAlignment="Top" Width="794.2">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="794" Margin="-2,0,0,0">
             <ListBox x:Name="lb_predictions" Margin="113.2,41.2,253.8,-80.4" Visibility="Hidden"  KeyUp="lb_predictions_KeyUp"/>
         </Border>
+        <ComboBox x:Name="cb_view_type" HorizontalAlignment="Left" 
+                  Margin="675,10,0,0" VerticalAlignment="Top" Width="111" Height="34" FontSize="16" FontWeight="Bold" 
+                  SelectionChanged="cb_display_types_SelectionChanged"/>
 
     </Grid>
 </Window>

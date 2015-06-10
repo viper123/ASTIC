@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.io.AsticStream;
@@ -19,10 +20,13 @@ public abstract class BaseServer implements Runnable {
 	protected ServerSocket welcomeSocket;
 	protected Socket connectionSocket;
 	protected int retries;
-	protected Gson gson = new Gson();
+	protected Gson gson ;
 	private boolean stoped = false;
 	
 	public BaseServer(){
+		gson = new GsonBuilder()
+					.serializeSpecialFloatingPointValues()
+					.create();
 		try {
 			welcomeSocket = new ServerSocket(Conf.SERVER_PORT_NUMBER);
 		} catch (IOException e) {

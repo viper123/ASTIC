@@ -62,6 +62,7 @@
     <Compile Include="BaseClient.cs" />
     <Compile Include="BindableTextBlock.cs" />
     <Compile Include="Conf.cs" />
+    <Compile Include="DisplayType.cs" />
     <Compile Include="EncodeUtil.cs" />
     <Compile Include="FileLauncher.cs" />
     <Compile Include="Math.cs" />
