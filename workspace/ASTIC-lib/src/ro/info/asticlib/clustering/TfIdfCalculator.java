@@ -33,7 +33,12 @@ public class TfIdfCalculator {
 				if(c.reprezentativeWordsMap == null){
 					c.reprezentativeWordsMap = new HashMap<String, Float>();
 				}
-				c.reprezentativeWordsMap.put(word, (float)(tf*idf));
+				if(!Double.isInfinite(tf*idf)){
+					c.reprezentativeWordsMap.put(word, (float)(tf*idf));
+				}else{
+					System.out.println("is infite"+word);
+				}
+				
 			}
 		}
 	}

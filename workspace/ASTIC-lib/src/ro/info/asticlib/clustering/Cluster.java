@@ -94,14 +94,22 @@ public class Cluster implements Cloneable {
 	
 	public List<String> getReprezentativeWords(int count){
 		List<String> words = new ArrayList<String>();
-		ValueComparator bvc =  new ValueComparator(wordWeightMap);
+		ValueComparator bvc =  new ValueComparator(reprezentativeWordsMap);
         TreeMap<String,Float> sorted_map = new TreeMap<String,Float>(bvc);
-        for(String word:wordWeightMap.keySet()){
-        	sorted_map.put(word, wordWeightMap.get(word));
+        for(String word:reprezentativeWordsMap.keySet()){
+        	sorted_map.put(word, reprezentativeWordsMap.get(word));
         }
+        String endKey = (String) sorted_map.keySet().toArray()[sorted_map.keySet().size()-1];
+        String startKey = (String)sorted_map.keySet().toArray()[0];
+        float min = reprezentativeWordsMap.get(endKey);
+        float max = reprezentativeWordsMap.get(startKey);
+        float median = (max - min) /2 ;
+        
         for(String word:sorted_map.keySet()){
-        	if(count-->0){
-        		words.add(word);
+        	if(isAround(reprezentativeWordsMap.get(word), median, 2)){
+        		if(count-->0){
+        			words.add(word);
+        		}
         	}
         }
         reprezentativeWords = words;
@@ -164,6 +172,10 @@ public class Cluster implements Cloneable {
 		return 0;
 	}
 	
+	private boolean isAround(float value,float centroid,int tollerance){
+		return value >= (centroid - tollerance)  && value <= (centroid + tollerance) ;
+	}
+	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		Cluster c = new Cluster();
@@ -188,9 +200,9 @@ public class Cluster implements Cloneable {
 	    // Note: this comparator imposes orderings that are inconsistent with equals.    
 	    public int compare(String a, String b) {
 	        if (base.get(a) >= base.get(b)) {
-	            return 1;
-	        } else {
 	            return -1;
+	        } else {
+	            return 1;
 	        } // returning 0 would merge keys
 	    }
 	}
