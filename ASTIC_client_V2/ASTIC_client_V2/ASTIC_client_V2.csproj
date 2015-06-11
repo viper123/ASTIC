@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,6 +66,15 @@
     <Compile Include="DisplayType.cs" />
     <Compile Include="EncodeUtil.cs" />
     <Compile Include="FileLauncher.cs" />
+    <Compile Include="Hexagonal\Board.cs" />
+    <Compile Include="Hexagonal\BoardState.cs" />
+    <Compile Include="Hexagonal\FlatVertice.cs" />
+    <Compile Include="Hexagonal\GraphicsEngine.cs" />
+    <Compile Include="Hexagonal\Hex.cs" />
+    <Compile Include="Hexagonal\HexOrientation.cs" />
+    <Compile Include="Hexagonal\HexState.cs" />
+    <Compile Include="Hexagonal\Math.cs" />
+    <Compile Include="Hexagonal\PointyVertice.cs" />
     <Compile Include="Math.cs" />
     <Compile Include="Predictor.cs" />
     <Compile Include="QueryWorker.cs" />

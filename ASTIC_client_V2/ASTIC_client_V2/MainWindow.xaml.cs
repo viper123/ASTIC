@@ -106,6 +106,7 @@ namespace ASTIC_client_V2
             changeStatus(predictions != null ? predictions.Count + " predictii gasite" : 
                 "Nicio predictie gasita");
             setAutoCompleteItems(predictions);
+             
         }
         
         private Tree<Cluster> currentTree;
