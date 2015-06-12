@@ -22,6 +22,7 @@ public class Cluster implements Cloneable {
 	public Map<String,Float> reprezentativeWordsMap;
 	public List<String> reprezentativeWords;
 	
+	
 	public Cluster(){
 		fileWordMap = new HashMap<String, Set<String>>();
 		wordWeightMap = new HashMap<String, Float>();

@@ -1,0 +1,14 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ASTIC_client_V2.Hexagonal
+{
+    public class Model
+    {
+
+    }
+}

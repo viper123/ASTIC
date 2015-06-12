@@ -18,6 +18,8 @@ namespace ASTIC_client.query
 	    private Tree<Cluster> resultTree;
         [JsonProperty]
         private List<String> predictions;
+        [JsonProperty]
+        private List<Cluster> 
 	
 	    public QueryResult() {
 	    }

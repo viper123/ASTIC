@@ -1,17 +1,13 @@
 package ro.info.asticlib.query;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import ro.info.asticlib.clustering.Cluster;
 import ro.info.asticlib.clustering.HAClusteering;
 import ro.info.asticlib.db.Dao;
-import ro.info.asticlib.io.parsers.Parser;
-import ro.info.asticlib.io.parsers.ParserFactory;
 import ro.info.asticlib.tree.Node;
 import ro.info.asticlib.tree.Tree;
 import ro.info.asticlib.tree.Tree.OnNodeProcessListener;
@@ -52,6 +48,7 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 	}
 	
 	private QueryResult queryL2(final Query q){
+		QueryResult result = new QueryResult(q);
 		List<Cluster> allSelectedClusters = new ArrayList<Cluster>();
 		for(String wordQuery:q.getQueryArray()){
 			List<Cluster> clusters = dao.selectInClusters(wordQuery,q.getIndex(),Query.COUNT,true);//index and count are ignored
@@ -61,8 +58,10 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 		for(Cluster c:allSelectedClusters){
 			fullClusters.add(dao.getCluster(c.id+""));
 		}
+		result.clusterList = fullClusters;
 		HAClusteering logic = new HAClusteering(fullClusters);
 		Tree<Cluster> tree = logic.applyLogic();
+		result.distanceMatrix = logic.matrixDistance;
 		tree.visitNodes(new OnNodeProcessListener<Cluster>() {
 
 			@Override
@@ -97,12 +96,13 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 				}*/
 			}
 		});
-		QueryResult result = new QueryResult(q);
+		
 		result.setResultTree(tree);
 		result.setSize(allSelectedClusters.size());
 		return result;
 	}
 	
+	@SuppressWarnings("all")
 	private List<String> getMostSignifiatWords(HashMap<String, Float> map){
 		String w1 = null,w2 = null,w3 = null;
 		float max = 0;

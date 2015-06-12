@@ -1,8 +1,6 @@
 package ro.info.asticlib.clustering;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import ro.info.asticlib.clustering.Cluster.DistanceFormula;
@@ -15,6 +13,7 @@ public class HAClusteering {
 	private List<Cluster> input;
 	private Dao dao;
 	private int lastClusterId = 0;
+	public double[][] matrixDistance;
 	
 	
 	public HAClusteering(List<Cluster> input) {
@@ -49,6 +48,9 @@ public class HAClusteering {
 				}
 			}
 			showMatrix(input,distances);
+			if(matrixDistance==null){
+				matrixDistance = distances;
+			}
 			int [] indexs = minIndex(distances);
 			Cluster one = input.get(indexs[0]);
 			Cluster two = input.get(indexs[1]);

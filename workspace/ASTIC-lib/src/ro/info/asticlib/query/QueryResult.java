@@ -3,6 +3,7 @@ package ro.info.asticlib.query;
 import java.util.ArrayList;
 import java.util.List;
 
+import ro.info.asticlib.clustering.Cluster;
 import ro.info.asticlib.tree.Tree;
 
 public class QueryResult  {
@@ -11,6 +12,8 @@ public class QueryResult  {
 	private List<Result> results;
 	@SuppressWarnings("rawtypes")
 	private Tree resultTree;
+	public List<Cluster> clusterList;
+	public double [][] distanceMatrix;
 	/**
 	 * Numarul de grupuri care a dus la crearea structurii arborescente
 	 */

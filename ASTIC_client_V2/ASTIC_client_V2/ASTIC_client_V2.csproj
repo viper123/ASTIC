@@ -74,6 +74,7 @@
     <Compile Include="Hexagonal\HexOrientation.cs" />
     <Compile Include="Hexagonal\HexState.cs" />
     <Compile Include="Hexagonal\Math.cs" />
+    <Compile Include="Hexagonal\Model.cs" />
     <Compile Include="Hexagonal\PointyVertice.cs" />
     <Compile Include="Math.cs" />
     <Compile Include="Predictor.cs" />
