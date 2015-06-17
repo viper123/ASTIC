@@ -19,7 +19,9 @@ namespace ASTIC_client.query
         [JsonProperty]
         private List<String> predictions;
         [JsonProperty]
-        private List<Cluster> 
+        public List<Cluster> clusterList;
+        [JsonProperty]
+        public double[][] distanceMatrix;
 	
 	    public QueryResult() {
 	    }
@@ -65,5 +67,7 @@ namespace ASTIC_client.query
         {
             this.predictions = predictions;
         }
+
+        
     }
 }

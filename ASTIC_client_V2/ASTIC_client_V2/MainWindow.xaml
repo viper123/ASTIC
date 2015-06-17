@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ASTIC_client_V2.MainWindow"
         xmlns:local="clr-namespace:ASTIC_client_V2"
+        xmlns:graphxctrl="clr-namespace:GraphX.Controls;assembly=GraphX.WPF.Controls"
         Title="ASTIC" Height="473.2" Width="807" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Grid>
         <Label Content="Interogare:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="98.153" FontSize="16" FontWeight="Bold"/>
@@ -11,7 +12,10 @@
         <ComboBox x:Name="cb_types" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Width="82" Height="34" 
                   FontSize="16" FontWeight="Bold" SelectionChanged="cb_types_SelectionChanged"/>
         <TreeView x:Name="treeView1" HorizontalAlignment="Left" Height="353.2" Margin="0,55.2,0,0" VerticalAlignment="Top" Width="309.6" SelectedItemChanged="treeView1_SelectedItemChanged"/>
-        <Canvas x:Name="canvas" Background="Azure" Margin="0,55,9.8,37.6" Visibility="Collapsed"/>
+        <Canvas x:Name="canvas" Background="Azure" Margin="0,55,9.8,37.6"/>
+        <!--<graphxctrl:ZoomControl x:Name="gg_zoomctrl" >
+            <local:GraphAreaExample x:Name="gg_Area"/>
+        </graphxctrl:ZoomControl>-->
         <ListView x:Name="lb_results" 
                   HorizontalAlignment="Left" Height="353.2" 
                   Margin="309.6,55.2,0,0" VerticalAlignment="Top" Width="484.6"

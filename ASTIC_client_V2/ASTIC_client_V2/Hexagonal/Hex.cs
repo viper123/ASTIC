@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using ASTIC_client.clustering;
 
 namespace Hexagonal
 {
@@ -15,6 +16,7 @@ namespace Hexagonal
 		private float x;
 		private float y;
 		private HexState hexState;
+        private Cluster cluster;
 	
 		/// <param name="side">length of one side of the hexagon</param>
 		public Hex(int x, int y, int side, Hexagonal.HexOrientation orientation)
@@ -181,6 +183,19 @@ namespace Hexagonal
 				throw new System.NotImplementedException();
 			}
 		}
+
+        public Cluster Cluster
+        {
+            get
+            {
+                return cluster;
+            }
+            set
+            {
+                cluster = value;
+                hexState = new HexState(cluster.fileWordMap.Count);
+            }
+        }
 
 	}
 }

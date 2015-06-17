@@ -44,6 +44,15 @@ public class QueryResult  {
 		}else{
 			predictions.addAll(result.predictions);
 		}
+		if(result.clusterList!=null){
+			if(clusterList == null){
+				clusterList = new ArrayList<>();
+			}
+			clusterList.addAll(result.clusterList);
+		}
+		if(result.distanceMatrix!=null){
+			distanceMatrix =result.distanceMatrix;
+		}
 	}
 
 	public Query getQuery() {

@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.math.Math;
+import ro.info.asticlib.query.Query;
 
 public class Cluster implements Cloneable {
 
@@ -21,6 +22,7 @@ public class Cluster implements Cloneable {
 	public List<String> preview;
 	public Map<String,Float> reprezentativeWordsMap;
 	public List<String> reprezentativeWords;
+	public float queryScore;
 	
 	
 	public Cluster(){
@@ -175,6 +177,16 @@ public class Cluster implements Cloneable {
 	
 	private boolean isAround(float value,float centroid,int tollerance){
 		return value >= (centroid - tollerance)  && value <= (centroid + tollerance) ;
+	}
+	
+	public void computeScor(Query q){
+		queryScore = 0;
+		for(String query:q.getQueryArray()){
+			if(reprezentativeWordsMap.containsKey(query)){
+				queryScore+=reprezentativeWordsMap.get(query);
+			}
+		}
+		
 	}
 	
 	@Override

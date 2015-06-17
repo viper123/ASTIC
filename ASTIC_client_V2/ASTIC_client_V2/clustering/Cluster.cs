@@ -20,5 +20,9 @@ namespace ASTIC_client.clustering
         public Dictionary<String, float> reprezentativeWordsMap;
         [JsonProperty]
         public List<String> reprezentativeWords;
+        [JsonProperty]
+        public float queryScore;
+
+
     }
 }

@@ -1,8 +1,10 @@
 waiting for clients:
 client accepted
-{"query":"d","queryArray":null,"level":0}
-{"query":"den","queryArray":null,"level":0}
-{"query":"dens","queryArray":null,"level":0}
+{"query":"de","queryArray":null,"level":0}
 {"query":"densi","queryArray":null,"level":0}
-{"query":null,"queryArray":["density"],"level":2}
-is infiteusing
+{"query":"densit","queryArray":null,"level":0}
+{"query":"densita","queryArray":null,"level":0}
+{"query":"densitat","queryArray":null,"level":0}
+{"query":"densitate","queryArray":null,"level":0}
+{"query":"densitatea","queryArray":null,"level":0}
+{"query":null,"queryArray":["densitatea"],"level":2}

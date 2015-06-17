@@ -34,10 +34,43 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accordion">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\Accordion.dll</HintPath>
+    </Reference>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphX.PCL.Common">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\GraphX.PCL.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphX.PCL.Logic">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\GraphX.PCL.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphX.WPF.Controls">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\GraphX.WPF.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ASTIC_client\Json60r8\Bin\Net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -53,6 +86,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="YAXLib">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\YAXLib.dll</HintPath>
+    </Reference>
+    <Reference Include="YAXLib.PCL.Common">
+      <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\YAXLib.PCL.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -66,6 +105,7 @@
     <Compile Include="DisplayType.cs" />
     <Compile Include="EncodeUtil.cs" />
     <Compile Include="FileLauncher.cs" />
+    <Compile Include="GraphX.cs" />
     <Compile Include="Hexagonal\Board.cs" />
     <Compile Include="Hexagonal\BoardState.cs" />
     <Compile Include="Hexagonal\FlatVertice.cs" />
@@ -85,6 +125,7 @@
     <Compile Include="query\Result.cs" />
     <Compile Include="RelavanceComparator.cs" />
     <Compile Include="ServerIO.cs" />
+    <Compile Include="SpecialCanvas.cs" />
     <Compile Include="tree\Base64Coder.cs" />
     <Compile Include="tree\Node.cs" />
     <Compile Include="tree\Tree.cs" />

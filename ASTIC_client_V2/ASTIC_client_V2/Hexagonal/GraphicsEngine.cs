@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
 
 namespace Hexagonal
 {
@@ -55,7 +57,7 @@ namespace Hexagonal
 			this.boardYOffset = yOffset;
 		}
 
-		public void Draw(Graphics graphics)
+        public void Draw(System.Windows.Media.DrawingContext graphics)
 		{ 
 		
 			int width =  Convert.ToInt32(System.Math.Ceiling(board.PixelWidth));
@@ -121,7 +123,11 @@ namespace Hexagonal
 			//
 			// Draw internal bitmap to screen
 			//
-			graphics.DrawImage(bitmap, new Point(this.boardXOffset , this.boardYOffset));
+            
+            
+            graphics.DrawImage(Bitmap2BitmapImage(bitmap),
+            new System.Windows.Rect(0, 0, bitmap.Width, bitmap.Height));
+			//graphics.DrawImage(bitmap, new Point(this.boardXOffset , this.boardYOffset));
 			
 			//
 			// Release objects
@@ -130,6 +136,30 @@ namespace Hexagonal
 			bitmap.Dispose();
 
 		}
+
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        public static extern bool DeleteObject(IntPtr hObject);
+
+        private BitmapImage Bitmap2BitmapImage(Bitmap bitmap)
+        {
+            IntPtr hBitmap = bitmap.GetHbitmap();
+            BitmapImage retval;
+
+            try
+            {
+                retval =(BitmapImage) Imaging.CreateBitmapSourceFromHBitmap(
+                             hBitmap,
+                             IntPtr.Zero,
+                             System.Windows.Int32Rect.Empty,
+                             BitmapSizeOptions.FromEmptyOptions());
+            }
+            finally
+            {
+                DeleteObject(hBitmap);
+            }
+
+            return retval;
+        }
 
 	}
 }

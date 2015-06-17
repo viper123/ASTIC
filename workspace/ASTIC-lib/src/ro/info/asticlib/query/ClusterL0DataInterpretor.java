@@ -56,12 +56,16 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 		}
 		List<Cluster> fullClusters = new ArrayList<Cluster>();
 		for(Cluster c:allSelectedClusters){
-			fullClusters.add(dao.getCluster(c.id+""));
+			Cluster cluster = dao.getCluster(c.id+"");
+			cluster.computeScor(q);
+			fullClusters.add(cluster);
+			
 		}
 		result.clusterList = fullClusters;
 		HAClusteering logic = new HAClusteering(fullClusters);
 		Tree<Cluster> tree = logic.applyLogic();
 		result.distanceMatrix = logic.matrixDistance;
+		
 		tree.visitNodes(new OnNodeProcessListener<Cluster>() {
 
 			@Override

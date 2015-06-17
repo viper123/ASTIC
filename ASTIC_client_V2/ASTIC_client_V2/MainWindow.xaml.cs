@@ -16,6 +16,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GraphX.Controls;
+using GraphX;
+using System.Data;
+using GraphX.GraphSharp.Algorithms.OverlapRemoval;
+using GraphX.GraphSharp.Algorithms.Layout.Simple.FDP;
+using Hexagonal;
+using ASTIC_client_V2.Hexagonal;
+
 
 namespace ASTIC_client_V2
 {
@@ -33,6 +41,7 @@ namespace ASTIC_client_V2
         private List<String> currentList;
         private List<String> currentPreviews;
         private QueryWorker queryer;
+        
 
         public MainWindow()
         {
@@ -79,6 +88,7 @@ namespace ASTIC_client_V2
             {
                 Console.WriteLine("Sucess");
                 displayTree(result.getQuery(), result.getResultTree());
+                displayGraph(result.clusterList);
                 changeStatus("Rezultate gasite");
             }
             else
@@ -157,7 +167,6 @@ namespace ASTIC_client_V2
         {
             currentList = list;
             List<ListViewResult> model = new List<ListViewResult>();
-            int k = 0;
             foreach(String file in list)
             {
                 FileType fileType= FileTypeFactory.FromFile(file);
@@ -241,7 +250,7 @@ namespace ASTIC_client_V2
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
         }
 
@@ -373,26 +382,98 @@ namespace ASTIC_client_V2
             }
         }
 
-        
+        #region GraphX
+
+        private void displayHexGraph(List<Cluster> list, double [][]matrix)
+        {
+            Board board = new Model().drawHexGraphics(list, matrix);
+            GraphicsEngine engine = new GraphicsEngine(board);
+            
+            
+            //canvas.Children.Add()
+        }
 
         
 
-        
+        private void displayGraph(List<Cluster> clusters)
+        {
+            Random Rand = new Random();
 
-        
+            //Create data graph object
+            var graph = new GraphExample();
+            
+            //Create and add vertices using some DataSource for ID's
+            foreach (var item in clusters)
+                graph.AddVertex(new DataVertex() { ID = Int32.Parse(item.id), Text = item.id });
 
-        
+            var vlist = graph.Vertices.ToList();
+            //Generate random edges for the vertices
+            foreach (var item in vlist)
+            {
+                
+                var vertex2 = vlist[Rand.Next(0, graph.VertexCount - 1)];
+                graph.AddEdge(new DataEdge(item, vertex2, Rand.Next(1, 50)) { 
+                    Text = string.Format("{0} -> {1}", item, vertex2) });
+            }
 
-        
+            var LogicCore = new GXLogicCoreExample();
+            //This property sets layout algorithm that will be used to calculate vertices positions
+            //Different algorithms uses different values and some of them uses edge Weight property.
+            LogicCore.DefaultLayoutAlgorithm = GraphX.LayoutAlgorithmTypeEnum.KK;
+            //Now we can set optional parameters using AlgorithmFactory
+            //NOTE: default parameters can be automatically created each time you change Default algorithms
+            LogicCore.DefaultLayoutAlgorithmParams =
+                               LogicCore.AlgorithmFactory.CreateLayoutParameters(GraphX.LayoutAlgorithmTypeEnum.KK);
+            //Unfortunately to change algo parameters you need to specify params type which is different for every algorithm.
+            ((KKLayoutParameters)LogicCore.DefaultLayoutAlgorithmParams).MaxIterations = 100;
 
-        
+            //This property sets vertex overlap removal algorithm.
+            //Such algorithms help to arrange vertices in the layout so no one overlaps each other.
+            LogicCore.DefaultOverlapRemovalAlgorithm = GraphX.OverlapRemovalAlgorithmTypeEnum.FSA;
+            //Setup optional params
+            LogicCore.DefaultOverlapRemovalAlgorithmParams =
+                              LogicCore.AlgorithmFactory.CreateOverlapRemovalParameters(GraphX.OverlapRemovalAlgorithmTypeEnum.FSA);
+            ((OverlapRemovalParameters)LogicCore.DefaultOverlapRemovalAlgorithmParams).HorizontalGap = 50;
+            ((OverlapRemovalParameters)LogicCore.DefaultOverlapRemovalAlgorithmParams).VerticalGap = 50;
 
-       
+            //This property sets edge routing algorithm that is used to build route paths according to algorithm logic.
+            //For ex., SimpleER algorithm will try to set edge paths around vertices so no edge will intersect any vertex.
+            LogicCore.DefaultEdgeRoutingAlgorithm = GraphX.EdgeRoutingAlgorithmTypeEnum.SimpleER;
 
-        
+            //This property sets async algorithms computation so methods like: Area.RelayoutGraph() and Area.GenerateGraph()
+            //will run async with the UI thread. Completion of the specified methods can be catched by corresponding events:
+            //Area.RelayoutFinished and Area.GenerateGraphFinished.
+            LogicCore.AsyncAlgorithmCompute = false;
 
-        
-        
+            //Finally assign logic core to GraphArea object
+            LogicCore.Graph = graph;
+            //gg_Area.LogicCore = LogicCore;
+            //gg_Area.GenerateGraph(true);
+            
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 	
 	

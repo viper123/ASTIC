@@ -169,11 +169,11 @@ public class GUIConsole extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(textPane); 
 		scrollPane.setBounds(10, 165, 449, 194);
 		contentPane.add(scrollPane);
-		try {
+		/*try {
 			Log.setup(textPane);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		JLabel lblAsticServerConsole = new JLabel("Astic Server Console");
 		lblAsticServerConsole.setFont(new Font("Tahoma", Font.BOLD, 15));
