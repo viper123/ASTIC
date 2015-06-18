@@ -48,16 +48,16 @@
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tests.TestInvertedClusterIndex"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.util.TreeMap"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.clustering.TfIdfCalculator"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.conf.Conf"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.db.InvertedFileIndex"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.google.gson.GsonBuilder"/>
 <fullyQualifiedTypeName name="java.lang.SuppressWarnings"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.query.Query"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.clustering.TfIdfCalculator"/>
 </qualifiedTypeNameHistroy>

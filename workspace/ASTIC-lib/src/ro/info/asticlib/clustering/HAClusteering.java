@@ -26,7 +26,8 @@ public class HAClusteering {
 
 	public Tree<Cluster> applyLogic(Query q){
 		Tree<Cluster> tree = new Tree<Cluster>();
-		new TfIdfCalculator().computeTfIdf(input, dao);
+		TfIdfCalculator tfIdfCalculator = new TfIdfCalculator();
+		tfIdfCalculator.computeTfIdf(input, dao);
 		//pune input ca frunze la tree;
 		for(Cluster c:input){
 			tree.addFirstNode(new Node<Cluster>(c.id+"", c));
@@ -92,6 +93,7 @@ public class HAClusteering {
 			input.remove(max);//prima data remove index-ul mai mare pt ca in caz contrar se va da index-ul pestecap;
 			input.remove(min);
 			input.add(mearged);
+			tfIdfCalculator.computeTfIdf(input, dao);
 			stopCondition = input.size()>2;
 		}
 		return tree;

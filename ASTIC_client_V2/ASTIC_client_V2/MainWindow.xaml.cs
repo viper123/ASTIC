@@ -56,7 +56,7 @@ namespace ASTIC_client_V2
             cb_types.SelectedIndex = 0;
             cb_view_type.Items.Add(DisplayType.CLASSIC);
             cb_view_type.Items.Add(DisplayType.GRAPH);
-            cb_view_type.SelectedIndex = 0;
+            cb_view_type.SelectedIndex = 1;
             filter = FileType.All;
         }
 
@@ -391,7 +391,7 @@ namespace ASTIC_client_V2
             GraphicsEngine engine = new GraphicsEngine(board);
             ((SpecialCanvas)canvas).Engine = engine;
             scroll.ScrollToVerticalOffset(engine.Height / 2 - 100);
-            //canvas.Children.Add()
+
         }
 
         

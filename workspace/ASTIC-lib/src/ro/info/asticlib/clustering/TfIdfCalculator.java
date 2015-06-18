@@ -26,11 +26,11 @@ public class TfIdfCalculator {
 	public void computeTfIdf(List<Cluster> clusters,Dao dao){
 		List<Cluster> allClusters = dao.getAllClusters();
 		int size = allClusters.size();
-		int k=0;
+		//int k=0;
 		for(Cluster c:clusters){
-			k = 0;
+			//k = 0;
 			for(String word:c.wordWeightMap.keySet()){
-				System.out.println(c.id+":"+k++);
+				//System.out.println(c.id+":"+k++);
 				double tf = (1+Math.log(c.wordWeightMap.get(word))) ;
 				double idf = Math.log(((float)size/(float)dao.getClusterCountContaining(word)));
 				if(c.reprezentativeWordsMap == null){

@@ -50,17 +50,24 @@ public class Cluster implements Cloneable {
 	
 	public Cluster add(Cluster other){
 		Cluster newCluster = new Cluster();
+		
+		//adauga in noul cluster cluster-ul curent 
 		newCluster.fileWordMap.putAll(fileWordMap);
 		newCluster.wordWeightMap.putAll(wordWeightMap);
-		//adauga la fileWordMap
+		
+		
+		//adauga in noul cluster fileWordMap din other
 		for(String file:other.fileWordMap.keySet()){
 			newCluster.fileWordMap.put(file, other.fileWordMap.get(file));
 		}
-		//adauga la wordWeightMap
+		
+		//adauga in noul cluster wordWeightMap din other
 		for(String word:other.wordWeightMap.keySet()){
 			float currentTf = getTF(word, newCluster.wordWeightMap);
 			newCluster.wordWeightMap.put(word, (currentTf + other.wordWeightMap.get(word)));
 		}
+		
+		
 		return newCluster;
 	}
 	
