@@ -193,7 +193,10 @@ namespace Hexagonal
             set
             {
                 cluster = value;
-                hexState = new HexState(cluster.fileWordMap.Count);
+                if (cluster != null)
+                {
+                    hexState = new HexState(cluster.fileWordMap.Count);
+                }
             }
         }
 

@@ -88,7 +88,8 @@ namespace ASTIC_client_V2
             {
                 Console.WriteLine("Sucess");
                 displayTree(result.getQuery(), result.getResultTree());
-                displayGraph(result.clusterList);
+                //displayGraph(result.clusterList);
+                displayHexGraph(result.clusterList, result.distanceMatrix);
                 changeStatus("Rezultate gasite");
             }
             else
@@ -388,8 +389,8 @@ namespace ASTIC_client_V2
         {
             Board board = new Model().drawHexGraphics(list, matrix);
             GraphicsEngine engine = new GraphicsEngine(board);
-            
-            
+            ((SpecialCanvas)canvas).Engine = engine;
+            scroll.ScrollToVerticalOffset(engine.Height / 2 - 100);
             //canvas.Children.Add()
         }
 

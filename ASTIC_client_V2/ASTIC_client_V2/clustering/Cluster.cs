@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ASTIC_client.clustering
 {
-    class Cluster
+    public class Cluster
     {
         [JsonProperty]
         public String id;

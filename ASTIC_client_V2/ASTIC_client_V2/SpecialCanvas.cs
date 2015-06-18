@@ -13,6 +13,21 @@ namespace ASTIC_client_V2
     {
         GraphicsEngine engine;
 
+        public GraphicsEngine Engine
+        {
+            get
+            {
+                return engine;
+            }
+            set
+            {
+                engine = value;
+                Height = engine.Height;
+                Width = engine.Weight;
+                InvalidateVisual();
+            }
+        }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import ro.info.asticlib.clustering.Cluster.DistanceFormula;
 import ro.info.asticlib.db.Dao;
+import ro.info.asticlib.query.Query;
 import ro.info.asticlib.tree.Node;
 import ro.info.asticlib.tree.Tree;
 
@@ -23,16 +24,31 @@ public class HAClusteering {
 		lastClusterId = dao.getLastClusterId();
 	}
 
-	public Tree<Cluster> applyLogic(){
+	public Tree<Cluster> applyLogic(Query q){
 		Tree<Cluster> tree = new Tree<Cluster>();
 		new TfIdfCalculator().computeTfIdf(input, dao);
 		//pune input ca frunze la tree;
 		for(Cluster c:input){
 			tree.addFirstNode(new Node<Cluster>(c.id+"", c));
+			c.computeScor(q);
 		}
 		
 		boolean stopCondition = input.size()>2;
-		
+		if(!stopCondition){
+			matrixDistance = new double[input.size()][input.size()];
+			for(int i=input.size()-1;i>=0;i--){
+				Cluster selected = input.get(i);
+				matrixDistance[i][i] = 1; // distanta dintre un cluster si el insusi este 0  1 - cosine 
+				//insa pentru ca urmeaza sa calculam maximul este de preferat sa fie valuarea cea mai mica
+				for(int j = input.size()-1; j>=0; j--){
+					if(i!=j){
+						Cluster other = input.get(j);
+						double cosine = selected.getDistance(other, DistanceFormula.CosineRep);
+						matrixDistance[i][j] = 1f - cosine;
+					}
+				}
+			}
+		}
 		while(stopCondition){
 			double [][] distances = new double[input.size()][input.size()];
 			for(int i=input.size()-1;i>=0;i--){
@@ -48,8 +64,13 @@ public class HAClusteering {
 				}
 			}
 			showMatrix(input,distances);
-			if(matrixDistance==null){
-				matrixDistance = distances;
+			if(matrixDistance == null){
+				matrixDistance = new double[input.size()][input.size()];
+				for(int i=0;i<matrixDistance.length;i++){
+					for(int j=0;j<matrixDistance.length;j++){
+						matrixDistance[i][j] = distances[i][j];
+					}
+				}
 			}
 			int [] indexs = minIndex(distances);
 			Cluster one = input.get(indexs[0]);

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Media.Imaging;
 using System.Windows.Interop;
+using System.IO;
 
 namespace Hexagonal
 {
@@ -15,6 +16,8 @@ namespace Hexagonal
 		private float boardPixelHeight;
 		private int boardXOffset;
 		private int boardYOffset;
+
+       
 	
 		public GraphicsEngine(Hexagonal.Board board)
 		{
@@ -49,6 +52,22 @@ namespace Hexagonal
 				throw new System.NotImplementedException();
 			}
 		}
+
+        public int Height
+        {
+            get
+            {
+                return (int)board.PixelHeight;
+            }
+        }
+
+        public int Weight
+        {
+            get
+            {
+                return (int)board.PixelWidth;
+            }
+        }
 		
 		private void Initialize(Hexagonal.Board board, int xOffset, int yOffset)
 		{
@@ -89,7 +108,8 @@ namespace Hexagonal
 				for (int j = 0; j < board.Hexes.GetLength(1); j++)
 				{
 					//bitmapGraphics.DrawPolygon(p, board.Hexes[i, j].Points);
-					bitmapGraphics.FillPolygon(new SolidBrush(board.Hexes[i,j].HexState.BackgroundColor), board.Hexes[i, j].Points);
+					bitmapGraphics.FillPolygon(new SolidBrush(board.Hexes[i,j].HexState.BackgroundColor), 
+                        board.Hexes[i, j].Points);
 				}
 			}
 
@@ -106,7 +126,7 @@ namespace Hexagonal
 					bitmapGraphics.DrawPolygon(p, board.Hexes[i, j].Points);
                     Font f = SystemFonts.CaptionFont;
                     Brush b = Brushes.Black;
-                    bitmapGraphics.DrawString("Cluster", f, b, board.Hexes[i, j].Points[0]);
+                    //bitmapGraphics.DrawString(board.Hexes[i, j].Cluster.reprezentativeWords[0], f, b, board.Hexes[i, j].Points[0]);
 				}
 			}
 
@@ -125,7 +145,7 @@ namespace Hexagonal
 			//
             
             
-            graphics.DrawImage(Bitmap2BitmapImage(bitmap),
+            graphics.DrawImage(ToBitmapImage2(bitmap),
             new System.Windows.Rect(0, 0, bitmap.Width, bitmap.Height));
 			//graphics.DrawImage(bitmap, new Point(this.boardXOffset , this.boardYOffset));
 			
@@ -137,28 +157,21 @@ namespace Hexagonal
 
 		}
 
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
-
-        private BitmapImage Bitmap2BitmapImage(Bitmap bitmap)
+        public  BitmapImage ToBitmapImage2( Bitmap bitmap)
         {
-            IntPtr hBitmap = bitmap.GetHbitmap();
-            BitmapImage retval;
-
-            try
+            using (var memory = new MemoryStream())
             {
-                retval =(BitmapImage) Imaging.CreateBitmapSourceFromHBitmap(
-                             hBitmap,
-                             IntPtr.Zero,
-                             System.Windows.Int32Rect.Empty,
-                             BitmapSizeOptions.FromEmptyOptions());
-            }
-            finally
-            {
-                DeleteObject(hBitmap);
-            }
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                memory.Position = 0;
 
-            return retval;
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
         }
 
 	}
