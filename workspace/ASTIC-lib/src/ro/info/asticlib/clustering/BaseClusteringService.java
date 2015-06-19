@@ -1,6 +1,5 @@
 package ro.info.asticlib.clustering;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 

@@ -91,7 +91,7 @@ public class HAClusteering {
 			int max = Math.max(indexs[0], indexs[1]);
 			int min = Math.min(indexs[0], indexs[1]);
 			input.remove(max);//prima data remove index-ul mai mare pt ca in caz contrar se va da index-ul pestecap;
-			input.remove(min);
+			input.remove(min);//problema este ca i=j asa ca se va da remove din lista la aceeasi chestie
 			input.add(mearged);
 			tfIdfCalculator.computeTfIdf(input, dao);
 			stopCondition = input.size()>2;

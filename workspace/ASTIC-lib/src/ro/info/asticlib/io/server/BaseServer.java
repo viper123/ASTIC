@@ -1,16 +1,14 @@
 package ro.info.asticlib.io.server;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.io.AsticStream;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public abstract class BaseServer implements Runnable {
 
