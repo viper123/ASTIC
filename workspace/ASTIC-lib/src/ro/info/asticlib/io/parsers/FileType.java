@@ -58,7 +58,9 @@ public enum FileType {
     }
   
     public enum Extension{
-    	Pdf("pdf"),Txt("txt");
+    	Pdf("pdf"),Txt("txt"),
+    	Docx("docx"),Doc("doc"),
+    	Ppt("ppt"),Pptx("pptx");
     	
     	public String extension;
     	

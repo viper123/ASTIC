@@ -104,31 +104,13 @@
     <Compile Include="Conf.cs" />
     <Compile Include="DisplayType.cs" />
     <Compile Include="EncodeUtil.cs" />
-    <Compile Include="FileLauncher.cs" />
     <Compile Include="GraphX.cs" />
-    <Compile Include="Hexagonal\Board.cs" />
-    <Compile Include="Hexagonal\BoardState.cs" />
-    <Compile Include="Hexagonal\FlatVertice.cs" />
-    <Compile Include="Hexagonal\GraphicsEngine.cs" />
-    <Compile Include="Hexagonal\Hex.cs" />
-    <Compile Include="Hexagonal\HexOrientation.cs" />
-    <Compile Include="Hexagonal\HexState.cs" />
-    <Compile Include="Hexagonal\Math.cs" />
-    <Compile Include="Hexagonal\Model.cs" />
-    <Compile Include="Hexagonal\PointyVertice.cs" />
     <Compile Include="Math.cs" />
     <Compile Include="Predictor.cs" />
     <Compile Include="QueryWorker.cs" />
-    <Compile Include="query\Cache.cs" />
-    <Compile Include="query\Query.cs" />
-    <Compile Include="query\QueryResult.cs" />
-    <Compile Include="query\Result.cs" />
     <Compile Include="RelavanceComparator.cs" />
     <Compile Include="ServerIO.cs" />
     <Compile Include="SpecialCanvas.cs" />
-    <Compile Include="tree\Base64Coder.cs" />
-    <Compile Include="tree\Node.cs" />
-    <Compile Include="tree\Tree.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,15 +119,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="clustering\Cluster.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="model\FileType.cs" />
-    <Compile Include="model\ListViewResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -171,6 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ASITIC_client_lib\ASITIC_client_lib.csproj">
+      <Project>{aebdde2e-f8d7-4785-ac01-c6eebe83caf0}</Project>
+      <Name>ASITIC_client_lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

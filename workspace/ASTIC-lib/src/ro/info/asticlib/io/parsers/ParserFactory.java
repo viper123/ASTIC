@@ -31,7 +31,15 @@ public class ParserFactory {
             		parser = retrive(type,PDFParser.class,inputFile);
             	} else if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Txt.extension)){
             		parser = retrive(type, TxtParser.class ,inputFile);
-            	}
+            	} else if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Doc.extension)){
+            		parser = retrive(type, DocParser.class, inputFile);
+            	} else if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Docx.extension)){
+            		parser = retrive(type, DocxParser.class, inputFile);
+            	} else if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Ppt.extension)){
+            		parser = retrive(type, PptParser.class, inputFile);
+            	} else if(type.selectedExtension.toLowerCase().equals(FileType.Extension.Pptx.extension)){
+             		parser = retrive(type, PptxParser.class, inputFile);
+             	}
                 break;
             case Other:
                 parser = retrive(type, NameParser.class ,inputFile);

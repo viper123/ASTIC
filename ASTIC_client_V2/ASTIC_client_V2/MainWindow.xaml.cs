@@ -362,6 +362,18 @@ namespace ASTIC_client_V2
             }
         }
 
+        private void cluster_preview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int selectedIndex = clusterPreview.SelectedIndex;
+            
+            if (currentListViewModel != null &&
+                selectedIndex >= 0 &&
+                selectedIndex < currentListViewModel.Count)
+            {
+                FileLauncher.launchFile(currentListViewModel[selectedIndex].FilePath);
+            }
+        }
+
         #endregion
 
         #region ClientServer
@@ -387,7 +399,15 @@ namespace ASTIC_client_V2
 
         private void changeProgress(int progress)
         {
-            this.toolStripProgressBar1.Value = progress;
+            if (progress < 100)
+            {
+                this.toolStripProgressBar1.IsIndeterminate = true;
+            }
+            else
+            {
+                this.toolStripProgressBar1.IsIndeterminate = false;
+            }
+            
         }
 
         private bool match(String s1, String s2)

@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASTIC_client_V2", "ASTIC_client_V2\ASTIC_client_V2.csproj", "{06D2D8F5-229A-4B35-ADD5-B52FD218F203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASITIC_client_lib", "ASITIC_client_lib\ASITIC_client_lib.csproj", "{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,5 +17,12 @@ Global
 		{06D2D8F5-229A-4B35-ADD5-B52FD218F203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06D2D8F5-229A-4B35-ADD5-B52FD218F203}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06D2D8F5-229A-4B35-ADD5-B52FD218F203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

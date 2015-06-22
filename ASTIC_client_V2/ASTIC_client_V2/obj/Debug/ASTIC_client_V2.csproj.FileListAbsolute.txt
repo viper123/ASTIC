@@ -44,3 +44,5 @@ D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\obj\De
 D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\obj\Debug\ASTIC_client_V2.exe
 D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\obj\Debug\ASTIC_client_V2.pdb
 D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\obj\Debug\ASTIC_client_V2.csprojResolveAssemblyReference.cache
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\ASITIC_client_lib.dll
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\ASITIC_client_lib.pdb

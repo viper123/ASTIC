@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ASTIC_client_V2
 {
-    class QueryWorker
+    public class QueryWorker
     {
         public delegate void OnProgressChanged(int progress);
         public delegate void OnCompleted(QueryResult result);

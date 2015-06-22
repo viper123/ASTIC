@@ -1,0 +1,7 @@
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.csprojResolveAssemblyReference.cache
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\ASITIC_client_lib.dll
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\ASITIC_client_lib.pdb
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\Newtonsoft.Json.dll
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\Newtonsoft.Json.pdb
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.dll
+D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.pdb

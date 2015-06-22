@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASTIC_HTTP_Server", "ASTIC_HTTP_Server\ASTIC_HTTP_Server.csproj", "{967AC76B-053B-450C-A449-49A39D2178EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASITIC_client_lib", "..\ASTIC_client_V2\ASITIC_client_lib\ASITIC_client_lib.csproj", "{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{967AC76B-053B-450C-A449-49A39D2178EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{967AC76B-053B-450C-A449-49A39D2178EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{967AC76B-053B-450C-A449-49A39D2178EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBDDE2E-F8D7-4785-AC01-C6EEBE83CAF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

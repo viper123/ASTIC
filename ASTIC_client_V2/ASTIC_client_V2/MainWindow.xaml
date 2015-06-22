@@ -21,7 +21,7 @@
                   VerticalAlignment="Top" Width="309.6" SelectedItemChanged="treeView1_SelectedItemChanged"/>
         <ListView x:Name="clusterPreview" Height="352" Width="0" Margin="0,56,0,0" 
                   VerticalAlignment="Top" HorizontalAlignment="Left"
-                  MouseDoubleClick="lb_results_MouseDoubleClick">
+                  MouseDoubleClick="cluster_preview_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Width="220" Header="Nume" >
@@ -74,7 +74,10 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="28" Margin="0,408.4,0,0" VerticalAlignment="Top" Width="309.6">
             <Label x:Name="toolStripStatusLabel1" Content="Incepeti sa cautati" Margin="0,0,-1,0"/>
         </Border>
-        <ProgressBar x:Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="28" Margin="309.6,408.4,0,0" VerticalAlignment="Top" Width="484.6"/>
+        <ProgressBar x:Name="toolStripProgressBar1" HorizontalAlignment="Left" 
+                     Height="28" Margin="309.6,408.4,0,0" VerticalAlignment="Top" Width="484.6" 
+                     IsIndeterminate="false"
+                     />
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="794" Margin="-2,0,0,0">
             <ListBox x:Name="lb_predictions" Margin="113.2,41.2,253.8,-80.4" Visibility="Hidden"  KeyUp="lb_predictions_KeyUp"/>
         </Border>
