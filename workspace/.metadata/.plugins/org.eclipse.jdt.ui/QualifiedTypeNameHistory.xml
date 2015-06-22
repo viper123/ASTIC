@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.concurrent.BlockingQueue"/>
-<fullyQualifiedTypeName name="java.util.concurrent.LinkedBlockingQueue"/>
-<fullyQualifiedTypeName name="ro.info.astic.FileSystemWatcher.QueueState"/>
 <fullyQualifiedTypeName name="ro.info.astic.FileSystemWatcher.RequestQueue"/>
 <fullyQualifiedTypeName name="ro.info.astic.ClusteringService"/>
 <fullyQualifiedTypeName name="ro.info.astic.BaseClusteringService.State"/>
@@ -35,18 +32,14 @@
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.FileSystemWatcher"/>
 <fullyQualifiedTypeName name="ro.info.astic.PrefUtils"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.ParserFactory"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Parser"/>
 <fullyQualifiedTypeName name="java.nio.file.Files"/>
 <fullyQualifiedTypeName name="java.nio.file.Path"/>
 <fullyQualifiedTypeName name="java.nio.file.Paths"/>
-<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.db.InvertedClusterIndex"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.tests.TestInvertedClusterIndex"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.util.TreeMap"/>
@@ -55,9 +48,16 @@
 <fullyQualifiedTypeName name="ro.info.asticlib.db.InvertedFileIndex"/>
 <fullyQualifiedTypeName name="com.google.gson.GsonBuilder"/>
 <fullyQualifiedTypeName name="java.lang.SuppressWarnings"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.query.Query"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.clustering.TfIdfCalculator"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Parser"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.ParserFactory"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Parser.OnWordParsedListener"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.PreviewHelper"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="org.basex.io.serial.BuilderSerializer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 </qualifiedTypeNameHistroy>

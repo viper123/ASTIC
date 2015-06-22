@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Media.Imaging;
 using System.Windows.Interop;
 using System.IO;
+using ASTIC_client.clustering;
 
 namespace Hexagonal
 {
@@ -123,10 +124,10 @@ namespace Hexagonal
 			{
 				for (int j = 0; j < board.Hexes.GetLength(1); j++)
 				{
+                    
+                    p.Color = board.Hexes[i, j].HexState.BorderColor;
 					bitmapGraphics.DrawPolygon(p, board.Hexes[i, j].Points);
-                    Font f = SystemFonts.CaptionFont;
-                    Brush b = Brushes.Black;
-                    //bitmapGraphics.DrawString(board.Hexes[i, j].Cluster.reprezentativeWords[0], f, b, board.Hexes[i, j].Points[0]);
+                    DrawText(bitmapGraphics, board.Hexes[i, j].Cluster, board.Hexes[i, j].Points);
 				}
 			}
 
@@ -156,6 +157,52 @@ namespace Hexagonal
 			bitmap.Dispose();
 
 		}
+
+        const float bts = 15;
+        const int sts = 10;
+
+        public void DrawText(Graphics bitmapGraphics,Cluster c,PointF [] points)
+        {
+            if (c == null)
+            {
+                return;
+            }
+            //draw the big text
+            Font bigFont = new Font(FontFamily.GenericSansSerif, bts, FontStyle.Bold,GraphicsUnit.Point);
+            Brush bigBrush = Brushes.Black;
+
+            float ox = (points[0].X + points[4].X + points[5].X) / 3;
+            float oy = (points[0].Y + points[4].Y + points[5].Y) / 3;
+
+            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(0),7), 
+            bigFont, bigBrush, new PointF(ox-10,oy-13));
+
+            //draw the small 1 text
+            Font smallFont = new Font(FontFamily.GenericSansSerif, sts, FontStyle.Regular, GraphicsUnit.Point);
+            Brush smallBrush = Brushes.Black;
+
+            ox = points[0].X;
+            oy = points[0].Y;
+
+            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(1),7),
+            smallFont, smallBrush, new PointF(ox, oy + 13));
+            //draw the small 2 text
+            ox = points[4].X;
+            oy = points[4].Y;
+
+            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(2),7),
+            smallFont, smallBrush, new PointF(ox, oy - 28));
+        }
+
+        public string limit(String input,int size)
+        {
+            if (input.Length > size)
+            {
+                return input.Substring(0, size);
+            }
+
+            return input;
+        }
 
         public  BitmapImage ToBitmapImage2( Bitmap bitmap)
         {

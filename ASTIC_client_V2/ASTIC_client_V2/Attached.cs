@@ -40,6 +40,7 @@ namespace ASTIC_client_V2
         }
 
         var formattedText = (string)e.NewValue ?? string.Empty;
+        
         formattedText = string.Format("<Span xml:space=\"preserve\" xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">{0}</Span>", formattedText);
 
         textBlock.Inlines.Clear();

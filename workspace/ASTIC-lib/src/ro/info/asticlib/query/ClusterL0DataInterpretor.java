@@ -8,6 +8,7 @@ import java.util.List;
 import ro.info.asticlib.clustering.Cluster;
 import ro.info.asticlib.clustering.HAClusteering;
 import ro.info.asticlib.db.Dao;
+import ro.info.asticlib.io.parsers.PreviewHelper;
 import ro.info.asticlib.tree.Node;
 import ro.info.asticlib.tree.Tree;
 import ro.info.asticlib.tree.Tree.OnNodeProcessListener;
@@ -58,9 +59,11 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 		for(Cluster c:allSelectedClusters){
 			Cluster cluster = dao.getCluster(c.id+"");
 			fullClusters.add(cluster);
-			
+			//assign preview
+			PreviewHelper.assignPreview(cluster, q.getQueryArray());
 		}
-		result.clusterList = fullClusters;
+		result.clusterList = new ArrayList<>();
+		result.clusterList.addAll(fullClusters);
 		HAClusteering logic = new HAClusteering(fullClusters);
 		Tree<Cluster> tree = logic.applyLogic(q);
 		result.distanceMatrix = logic.matrixDistance;
@@ -73,6 +76,9 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 					return ;
 				}
 				node.value.getReprezentativeWords(10);
+				if(node.value.previewMap.isEmpty()){
+					
+				}
 				/*List<String> mostSignificantWords = getMostSignifiatWords(node.value.wordWeightMap);
 				float weight1 = 0,weight2 = 0,weight3 = 0;
 				if(mostSignificantWords.get(0) != null){

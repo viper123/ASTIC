@@ -1,0 +1,6 @@
+D:\Projects\ASTIC_HTTP_Server\ASTIC_HTTP_Server\obj\Debug\ASTIC_HTTP_Server.csprojResolveAssemblyReference.cache
+D:\Projects\ASTIC_HTTP_Server\ASTIC_HTTP_Server\bin\ASTIC_HTTP_Server.dll.config
+D:\Projects\ASTIC_HTTP_Server\ASTIC_HTTP_Server\bin\ASTIC_HTTP_Server.dll
+D:\Projects\ASTIC_HTTP_Server\ASTIC_HTTP_Server\bin\ASTIC_HTTP_Server.pdb
+D:\Projects\ASTIC_HTTP_Server\ASTIC_HTTP_Server\obj\Debug\ASTIC_HTTP_Server.dll
+D:\Projects\ASTIC_HTTP_Server\ASTIC_HTTP_Server\obj\Debug\ASTIC_HTTP_Server.pdb

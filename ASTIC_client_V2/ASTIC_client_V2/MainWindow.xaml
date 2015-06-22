@@ -11,10 +11,35 @@
         <Button Content="Cauta" HorizontalAlignment="Left" Margin="474,10,0,0" VerticalAlignment="Top" Width="90" Height="34" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
         <ComboBox x:Name="cb_types" HorizontalAlignment="Left" Margin="577,10,0,0" VerticalAlignment="Top" Width="82" Height="34" 
                   FontSize="16" FontWeight="Bold" SelectionChanged="cb_types_SelectionChanged"/>
-        <TreeView x:Name="treeView1" HorizontalAlignment="Left" Height="353.2" Margin="0,55,0,0" VerticalAlignment="Top" Width="309.6" SelectedItemChanged="treeView1_SelectedItemChanged"/>
+        
         <ScrollViewer x:Name="scroll"  Margin="0,55,9.8,37.6" VerticalScrollBarVisibility="Auto" >
-        <local:SpecialCanvas x:Name="canvas" Background="Azure" Margin="0,0,0,0" />
+            <local:SpecialCanvas x:Name="canvas" Background="Azure" Margin="0,0,0,0" MouseDown="clusterPreview_MouseLeftButtonDown" >
+
+            </local:SpecialCanvas>
         </ScrollViewer>
+        <TreeView x:Name="treeView1" HorizontalAlignment="Left" Height="353.2" Margin="0,55,0,0" 
+                  VerticalAlignment="Top" Width="309.6" SelectedItemChanged="treeView1_SelectedItemChanged"/>
+        <ListView x:Name="clusterPreview" Height="352" Width="0" Margin="0,56,0,0" 
+                  VerticalAlignment="Top" HorizontalAlignment="Left"
+                  MouseDoubleClick="lb_results_MouseDoubleClick">
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Width="220" Header="Nume" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock FontSize="20" FontStyle="Normal"  
+                                                       Text="{Binding Path=Name.FilePath}"/>
+                                    <TextBlock FontSize="10" 
+                                                       TextWrapping="Wrap" 
+                                               local:Attached.FormattedText="{Binding Path=Name.Preview}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <!--<graphxctrl:ZoomControl x:Name="gg_zoomctrl" >
             <local:GraphAreaExample x:Name="gg_Area"/>
         </graphxctrl:ZoomControl>-->

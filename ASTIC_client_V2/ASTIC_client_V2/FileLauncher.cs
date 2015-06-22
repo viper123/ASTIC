@@ -11,7 +11,7 @@ namespace ASTIC_client_V2
 {
     class FileLauncher
     {
-        public static void launchFile(string fn)
+        public static void launchFile( String fn)
         {
             System.Diagnostics.Process.Start(fn);
             ////majority was taken from

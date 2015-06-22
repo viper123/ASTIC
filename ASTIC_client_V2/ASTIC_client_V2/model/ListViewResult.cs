@@ -20,17 +20,22 @@ namespace ASTIC_client_V2
 		public string FileTypeName {get;set;}
 		public string Size {get;set;}
 		public string Date {get ;set;}
+        public List<String> Preview
+        {
+            get;
+            set;
+        }
 		
 		public ListViewResult()
 		{
 			
 		}
 
-        public ListViewResult(String filePath,String [] query)
+        public ListViewResult(String filePath,List<String> preview,String [] query)
         {
             FilePath = filePath;
             FileTypeName = FileTypeFactory.FromFile(filePath).ToString();
-            Name = new NameClass(System.IO.Path.GetFileName(filePath),getPreview(query,filePath,FileTypeName));
+            Name = new NameClass(System.IO.Path.GetFileName(filePath),getPreview(preview));
             FileInfo f = new FileInfo(filePath);
             Size = getStringWithMeasurement(f.Length);
             DateTime lastModified = System.IO.File.GetLastWriteTime(filePath);
@@ -57,38 +62,43 @@ namespace ASTIC_client_V2
             }
         }
 
-        public string getPreview(String []queryArray,String file,String fileType)
+        public string getPreview(List<String> preview)
         {
-            if (file.Contains("."))
-            {
-                String ext = file.Substring(file.LastIndexOf('.'));
-                if(ext.ToLower().Equals(".pdf"))
-                {
-                    return "";
-                }
-            }
             StringBuilder builder = new StringBuilder();
-            StringBuilder lineBuilder = new StringBuilder();
-            string[] lines = System.IO.File.ReadAllLines(file);
-            int selectedLines = 0;
-            foreach (string line in lines)
-            {
-                foreach (String query in queryArray)
-                {
-                    if (line.ToLower().Contains(query.ToLower()) && selectedLines < 2)
-                    {
-                        lineBuilder.Clear();
-                        lineBuilder.Append("<Bold>");
-                        lineBuilder.Append(query);
-                        lineBuilder.Append("</Bold>");
-                        String formatedLine = line.ToLower().Replace(query.ToLower(), lineBuilder.ToString());
-                        builder.Append(formatedLine);
-                        builder.Append("...");
-                        selectedLines++;
-                    }
-                }
+            foreach(String line in preview){
+                builder.Append(line);
             }
             return builder.ToString();
+            //if (file.Contains("."))
+            //{
+            //    String ext = file.Substring(file.LastIndexOf('.'));
+            //    if(ext.ToLower().Equals(".pdf"))
+            //    {
+            //        return "";
+            //    }
+            //}
+            //StringBuilder builder = new StringBuilder();
+            //StringBuilder lineBuilder = new StringBuilder();
+            //string[] lines = System.IO.File.ReadAllLines(file);
+            //int selectedLines = 0;
+            //foreach (string line in lines)
+            //{
+            //    foreach (String query in queryArray)
+            //    {
+            //        if (line.ToLower().Contains(query.ToLower()) && selectedLines < 2)
+            //        {
+            //            lineBuilder.Clear();
+            //            lineBuilder.Append("<Bold>");
+            //            lineBuilder.Append(query);
+            //            lineBuilder.Append("</Bold>");
+            //            String formatedLine = line.ToLower().Replace(query.ToLower(), lineBuilder.ToString());
+            //            builder.Append(formatedLine);
+            //            builder.Append("...");
+            //            selectedLines++;
+            //        }
+            //    }
+            //}
+            //return builder.ToString();
         } 
 	}
 	

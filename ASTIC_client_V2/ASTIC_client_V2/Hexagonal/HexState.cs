@@ -8,6 +8,7 @@ namespace Hexagonal
 	public class HexState
 	{
 		private System.Drawing.Color backgroundColor;
+        private System.Drawing.Color borderColor;
 		
 
 		public System.Drawing.Color BackgroundColor
@@ -22,14 +23,28 @@ namespace Hexagonal
 			}
 		}
 
+        public System.Drawing.Color BorderColor
+        {
+            get
+            {
+                return borderColor;
+            }
+            set
+            {
+                borderColor = value;
+            }
+        }
+
 
 		public HexState()
 		{
 			this.backgroundColor = Color.White;
+            this.borderColor = Color.LightGray;
 		}
 
         public HexState(int size)
         {
+            this.borderColor = Color.LightGray;
             switch (size)
             {
                 case 1:

@@ -90,9 +90,11 @@ public class TxtParser extends Parser {
 			return Files.readAllLines(parsableFile.toPath(), Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-		return null;
+		return new ArrayList<>();
 	}
+	
+	
 
 }

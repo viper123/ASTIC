@@ -19,15 +19,18 @@ public class Cluster implements Cloneable {
 	
 	public HashMap<String, Float> wordWeightMap;
 	public HashMap<String, Set<String>> fileWordMap;
-	public List<String> preview;
+	public Map<String,List<String>> previewMap;
 	public Map<String,Float> reprezentativeWordsMap;
 	public List<String> reprezentativeWords;
+	public Map<String,Map<String,Float>> fileReprezentativeWordsMap;
 	public float queryScore;
 	
 	
 	public Cluster(){
 		fileWordMap = new HashMap<String, Set<String>>();
 		wordWeightMap = new HashMap<String, Float>();
+		previewMap = new HashMap<>();
+		fileReprezentativeWordsMap = new HashMap<>();
 	}
 	
 	public Cluster(int id){
@@ -48,13 +51,14 @@ public class Cluster implements Cloneable {
 		this.wordWeightMap = wordTfMap;
 	}
 	
-	public Cluster add(Cluster other){
+	public Cluster addToNew(Cluster other){
 		Cluster newCluster = new Cluster();
 		
 		//adauga in noul cluster cluster-ul curent 
 		newCluster.fileWordMap.putAll(fileWordMap);
 		newCluster.wordWeightMap.putAll(wordWeightMap);
-		
+		newCluster.previewMap.putAll(previewMap);
+		newCluster.previewMap.putAll(other.previewMap);
 		
 		//adauga in noul cluster fileWordMap din other
 		for(String file:other.fileWordMap.keySet()){
@@ -68,8 +72,24 @@ public class Cluster implements Cloneable {
 		}
 		
 		
+		
+		
 		return newCluster;
 	}
+	
+	public void add(Cluster other){
+		for(String file:other.fileWordMap.keySet()){
+			fileWordMap.put(file, other.fileWordMap.get(file));
+		}
+		
+		//adauga in noul cluster wordWeightMap din other
+		for(String word:other.wordWeightMap.keySet()){
+			float currentTf = getTF(word, wordWeightMap);
+			wordWeightMap.put(word, (currentTf + other.wordWeightMap.get(word)));
+		}
+	}
+	
+	
 	
 	public double getDistance(Cluster other,DistanceFormula formula){
 		

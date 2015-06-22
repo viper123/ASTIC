@@ -11,7 +11,7 @@ namespace ASTIC_client_V2.Hexagonal
 {
     public class Model
     {
-        public Board drawHexGraphics(List<Cluster> clusters,double [][] distanceMatrix)
+        public Board getHexBoard(List<Cluster> clusters,double [][] distanceMatrix)
         {
             Cluster max = null;
             float maxScore = 0;
@@ -26,30 +26,55 @@ namespace ASTIC_client_V2.Hexagonal
                 }
                 k++;
             }
-            Board board = new Board(5 * 2+2, 5 * 2, 44, HexOrientation.Flat);
+            Board board = new Board(5 * 2, 5 * 2, 44, HexOrientation.Flat);
             int n = 5;
             board.Hexes[n, n].Cluster = max;
-            for (int i = 0; i < distanceMatrix[index].Length; i++)
+            List<Int32> listIndex = new List<Int32>();
+            listIndex.Add(index);
+            while (listIndex.Count < clusters.Count)
             {
-                if (i == index)
+                double min = 2;
+                int minIndex = 0;
+                for (int i = 0; i < distanceMatrix[index].Length; i++)
                 {
-                    continue;
+                    if (listIndex.Contains(i))
+                    {
+                        continue;
+                    }
+                    if (distanceMatrix[index][i] < min)
+                    {
+                        minIndex = i;
+                        min = distanceMatrix[index][i];
+                    }
                 }
-                Cluster other = clusters.ElementAt(i);
-                double distance = distanceMatrix[index][i];
-                int ii = n;
-                int jj = n - getHexIndexFromDistance(distance);
-                if (board.Hexes[ii, jj].Cluster != null)
-                {
-                    
-                }
-                else
-                {
-                    board.Hexes[ii, jj].Cluster = other;
-                }
+                listIndex.Add(minIndex);
             }
+            FillMatrix(board.Hexes, 10, listIndex, clusters);
 
             return board;
+
+            //double[] array = new double[distanceMatrix[index].Length];
+            //for (int i = 0; i < distanceMatrix[index].Length; i++)
+            //{
+            //    array[i] = distanceMatrix[index][i];
+            //}
+            //Array.Sort(array);
+            //int[] indexInOrder = new int[distanceMatrix[index].Length];
+            //for (int i = 0; i < indexInOrder.Length; i++)
+            //{
+            //    double d = array[i];
+            //    int l ;
+            //    for (l = 0; l < array.Length; l++)
+            //    {
+            //        if (d == distanceMatrix[index][l])
+            //        {
+            //            break;
+            //        }
+            //    }
+            //    indexInOrder[i]=l;
+            //}
+
+            
         }
 
         public int getHexIndexFromDistance(double distance)
@@ -59,6 +84,57 @@ namespace ASTIC_client_V2.Hexagonal
                 return 5;
             }
             return (int)(distance * 10)/2;
+        }
+
+        //original source:http://www.introprogramming.info/tag/spiral-matrix/
+        private static void FillMatrix(Hex[,] matrix, int n,List<Int32> indexArray,List<Cluster> clusterList)
+        {
+            int positionX = n / 2; // The middle of the matrix
+            int positionY = n % 2 == 0 ? (n / 2) - 1 : (n / 2);
+
+            int direction = 0; // The initial direction is "down"
+            int stepsCount = 1; // Perform 1 step in current direction
+            int stepPosition = 0; // 0 steps already performed
+            int stepChange = 0; // Steps count changes after 2 steps
+
+            for (int i = 0; i <indexArray.Count; i++)
+            {
+                // Fill the current cell with the current value
+                matrix[positionY, positionX].Cluster = clusterList.ElementAt(indexArray[i]);
+                
+                // Check for direction / step changes
+                if (stepPosition < stepsCount)
+                {
+                    stepPosition++;
+                }
+                else
+                {
+                    stepPosition = 1;
+                    if (stepChange == 1)
+                    {
+                        stepsCount++;
+                    }
+                    stepChange = (stepChange + 1) % 2;
+                    direction = (direction + 1) % 4;
+                }
+
+                // Move to the next cell in the current direction
+                switch (direction)
+                {
+                    case 0:
+                        positionY++;
+                        break;
+                    case 1:
+                        positionX--;
+                        break;
+                    case 2:
+                        positionY--;
+                        break;
+                    case 3:
+                        positionX++;
+                        break;
+                }
+            }
         }
     }
 }

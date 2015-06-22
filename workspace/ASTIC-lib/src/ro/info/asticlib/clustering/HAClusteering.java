@@ -76,7 +76,10 @@ public class HAClusteering {
 			int [] indexs = minIndex(distances);
 			Cluster one = input.get(indexs[0]);
 			Cluster two = input.get(indexs[1]);
-			Cluster mearged = one.add(two);
+			if(one == two){//caz special nu mai pot uni
+				break;
+			}
+			Cluster mearged = one.addToNew(two);
 			mearged.id = getClusterId();
 			Node<Cluster> parent = tree.getNode(one.id+"").parent;
 			Node<Cluster> nodeOne = tree.getNode(one.id+"");
@@ -90,6 +93,7 @@ public class HAClusteering {
 			parent.addChildren(meargedNode);
 			int max = Math.max(indexs[0], indexs[1]);
 			int min = Math.min(indexs[0], indexs[1]);
+			
 			input.remove(max);//prima data remove index-ul mai mare pt ca in caz contrar se va da index-ul pestecap;
 			input.remove(min);//problema este ca i=j asa ca se va da remove din lista la aceeasi chestie
 			input.add(mearged);

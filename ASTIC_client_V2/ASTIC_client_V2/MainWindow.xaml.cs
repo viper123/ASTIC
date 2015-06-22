@@ -23,6 +23,7 @@ using GraphX.GraphSharp.Algorithms.OverlapRemoval;
 using GraphX.GraphSharp.Algorithms.Layout.Simple.FDP;
 using Hexagonal;
 using ASTIC_client_V2.Hexagonal;
+using System.Windows.Media.Animation;
 
 
 namespace ASTIC_client_V2
@@ -39,8 +40,11 @@ namespace ASTIC_client_V2
         private FileType filter;
         private List<ListViewResult> currentListViewModel;
         private List<String> currentList;
-        private List<String> currentPreviews;
+        private Dictionary<String,List<String>> currentPreviews;
         private QueryWorker queryer;
+        private Model hexModel;
+        private Board board;
+        private GraphicsEngine engine;
         
 
         public MainWindow()
@@ -161,24 +165,32 @@ namespace ASTIC_client_V2
             }
         }
 
+        public void displayList()
+        {
+            displayList(currentList, currentPreviews, getCurrentQuery());
+        }
+
         /**
          * Transforma din date de tip file in informatii care se pot afisa in lista
          * */
-        private void displayList(List<String> list,String [] query)
+        private void displayList(List<String> list,Dictionary<String,List<String>> previewMap, string [] query)
         {
             currentList = list;
+            currentPreviews = previewMap;
             List<ListViewResult> model = new List<ListViewResult>();
             foreach(String file in list)
             {
                 FileType fileType= FileTypeFactory.FromFile(file);
                 if (fileType == filter || filter == FileType.All)
                 {
-                    model.Add(new ListViewResult(file,query));
+                    model.Add(new ListViewResult(file,previewMap[file],query));
                 }
             }
             model.Sort(new RelavanceComparator());
             currentListViewModel = model;
             model.ForEach(item => { lb_results.Items.Add(item); });
+            clusterPreview.Items.Clear();
+            model.ForEach(item => { clusterPreview.Items.Add(item); });
         }
 
 
@@ -247,7 +259,8 @@ namespace ASTIC_client_V2
                 Node<Cluster> cluster = (Node<Cluster>)clikedNode.Tag;
                 List<String> files = new List<String>();
                 files.AddRange(cluster.value.fileWordMap.Keys);
-                displayList(files,getCurrentQuery());
+
+                displayList(files, cluster.value.previewMap, getCurrentQuery());
             }
             catch (Exception ex)
             {
@@ -310,7 +323,7 @@ namespace ASTIC_client_V2
             if (currentListViewModel != null)
             {
                 lb_results.Items.Clear();
-                displayList(currentList,getCurrentQuery());
+                displayList(currentList,currentPreviews, getCurrentQuery());
             }
         }
 
@@ -323,11 +336,13 @@ namespace ASTIC_client_V2
                     lb_results.Visibility = System.Windows.Visibility.Visible;
                     treeView1.Visibility = Visibility.Visible;
                     canvas.Visibility = Visibility.Collapsed;
+                    clusterPreview.Visibility = Visibility.Collapsed;
                     break;
                 case DisplayType.GRAPH:
                     lb_results.Visibility = System.Windows.Visibility.Collapsed;
                     treeView1.Visibility = Visibility.Collapsed;
                     canvas.Visibility = Visibility.Visible;
+                    clusterPreview.Visibility = Visibility.Visible;
                     break;
             }
         }
@@ -335,6 +350,10 @@ namespace ASTIC_client_V2
         private void lb_results_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int selectedIndex = lb_results.SelectedIndex;
+            if (selectedIndex == -1)
+            {
+                selectedIndex = clusterPreview.SelectedIndex;
+            }
             if (currentListViewModel != null &&
                 selectedIndex >= 0 &&
                 selectedIndex < currentListViewModel.Count)
@@ -387,10 +406,14 @@ namespace ASTIC_client_V2
 
         private void displayHexGraph(List<Cluster> list, double [][]matrix)
         {
-            Board board = new Model().drawHexGraphics(list, matrix);
-            GraphicsEngine engine = new GraphicsEngine(board);
+            if (hexModel == null)
+            {
+                hexModel = new Model();
+            }
+            board = hexModel.getHexBoard(list, matrix);
+            engine = new GraphicsEngine(board);
             ((SpecialCanvas)canvas).Engine = engine;
-            scroll.ScrollToVerticalOffset(engine.Height / 2 - 100);
+            scroll.ScrollToVerticalOffset(engine.Height / 2 - 120);
 
         }
 
@@ -454,6 +477,66 @@ namespace ASTIC_client_V2
         }
 
         #endregion
+
+        private void showPreviewForCluster(Cluster c)
+        {
+            List<String> files = c.fileWordMap.Keys.ToList();
+            displayList(files,c.previewMap, getCurrentQuery());
+            if (clusterPreview.Width > 0)
+            {
+                return;
+            }
+            DoubleAnimation sizeAnimation = new DoubleAnimation(0.0, 220.0,
+                    new Duration(TimeSpan.FromMilliseconds(300)));
+
+            clusterPreview.BeginAnimation(ListView.WidthProperty, sizeAnimation);
+        }
+
+        private void hidePreview()
+        {
+            if (clusterPreview.Width == 0)
+            {
+                return;
+            }
+            DoubleAnimation sizeAnimation = new DoubleAnimation(220.0, 0.0,
+                    new Duration(TimeSpan.FromMilliseconds(300)));
+
+            clusterPreview.BeginAnimation(ListView.WidthProperty, sizeAnimation);
+        }
+
+        private void clusterPreview_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (board == null)
+            {
+                return;
+            }
+            Point mouseClick = new Point(e.GetPosition(canvas).X - board.XOffset,
+                e.GetPosition(canvas).Y - board.YOffset);
+            Hex clickedHex = board.FindHexMouseClick((int)mouseClick.X, (int)mouseClick.Y);
+
+            if (clickedHex == null)
+            {
+                Console.WriteLine("No hex was clicked.");
+                board.BoardState.ActiveHex = null;
+                hidePreview();
+            }
+
+            else
+            {
+                Console.WriteLine("Hex was clicked.");
+                board.BoardState.ActiveHex = clickedHex;
+                if (clickedHex.Cluster == null)
+                {
+                    hidePreview();
+                }
+                else
+                {
+                    showPreviewForCluster(clickedHex.Cluster);
+                }
+            }
+            ((SpecialCanvas)canvas).Engine = engine;
+        }
+
 
 
 

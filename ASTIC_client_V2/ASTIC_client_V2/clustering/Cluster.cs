@@ -15,7 +15,7 @@ namespace ASTIC_client.clustering
         [JsonProperty]
         public Dictionary<String, List<String>> fileWordMap;
         [JsonProperty]
-        public List<String> preview;
+        public Dictionary<String,List<String>> previewMap;
         [JsonProperty]
         public Dictionary<String, float> reprezentativeWordsMap;
         [JsonProperty]
@@ -23,6 +23,13 @@ namespace ASTIC_client.clustering
         [JsonProperty]
         public float queryScore;
 
-
+        public string GetReprezentativeWord(int index)
+        {
+            if (reprezentativeWords!= null && index< reprezentativeWords.Count)
+            {
+                return reprezentativeWords[index];
+            }
+            return null;
+        }
     }
 }

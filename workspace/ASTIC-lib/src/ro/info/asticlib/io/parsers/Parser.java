@@ -24,6 +24,42 @@ public abstract class Parser {
 	
 	public abstract List<String> getLines();
 	
+	public  List<String> getPreview(String [] queryArray){
+		StringBuilder builder = new StringBuilder();
+        StringBuilder lineBuilder = new StringBuilder();
+		List<String> res = new ArrayList<>();
+		List<String> lines =getLines();
+		for(String line : lines)
+        {
+            for(String query : queryArray)
+            {
+                if (line.toLowerCase().contains(query.toLowerCase()) && res.size() < 2)
+                {
+                    lineBuilder = new StringBuilder();
+                    builder = new StringBuilder();
+                    lineBuilder.append("<Bold>");
+                    lineBuilder.append(query);
+                    lineBuilder.append("</Bold>");
+                    line = line.replace("<", "");
+                    line =line.replace(">", "");
+                    String formatedLine = line.toLowerCase().replace(query.toLowerCase(), lineBuilder.toString());
+                    builder.append(formatedLine);
+                    if(res.size()==2){
+                    	builder.append("...");
+                    }
+                    res.add(builder.toString());
+                }
+                if(res.size()>=2){
+                	break;
+                }
+            }
+            if(res.size()>=2){
+            	break;
+            }
+        }
+		return res;
+	}
+	
 	public abstract void parseWords(OnWordParsedListener listener);
 	public void parseWords(){
 		parseWords(wordParsedListener);

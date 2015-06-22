@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ASTIC_HTTP_Server.QueryService" CodeBehind="QueryService.svc.cs" %>
