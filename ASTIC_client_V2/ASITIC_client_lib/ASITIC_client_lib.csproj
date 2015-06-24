@@ -51,6 +51,7 @@
     <Compile Include="file\FileLauncher.cs" />
     <Compile Include="Hexagonal\Board.cs" />
     <Compile Include="Hexagonal\BoardState.cs" />
+    <Compile Include="Hexagonal\ColorsUtil.cs" />
     <Compile Include="Hexagonal\FlatVertice.cs" />
     <Compile Include="Hexagonal\GraphicsEngine.cs" />
     <Compile Include="Hexagonal\Hex.cs" />

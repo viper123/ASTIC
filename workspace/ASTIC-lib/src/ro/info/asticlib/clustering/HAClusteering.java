@@ -44,7 +44,7 @@ public class HAClusteering {
 				for(int j = input.size()-1; j>=0; j--){
 					if(i!=j){
 						Cluster other = input.get(j);
-						double cosine = selected.getDistance(other, DistanceFormula.CosineRep);
+						double cosine = selected.getSimilarity(other, DistanceFormula.CosineRep);
 						matrixDistance[i][j] = 1f - cosine;
 					}
 				}
@@ -59,7 +59,7 @@ public class HAClusteering {
 				for(int j = input.size()-1; j>=0; j--){
 					if(i!=j){
 						Cluster other = input.get(j);
-						double cosine = selected.getDistance(other, DistanceFormula.CosineRep);
+						double cosine = selected.getSimilarity(other, DistanceFormula.CosineRep);
 						distances[i][j] = 1f - cosine;
 					}
 				}

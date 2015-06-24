@@ -17,6 +17,8 @@ namespace Hexagonal
 		private float y;
 		private HexState hexState;
         private Cluster cluster;
+        public float minScore;
+        public float maxScore;
 	
 		/// <param name="side">length of one side of the hexagon</param>
 		public Hex(int x, int y, int side, Hexagonal.HexOrientation orientation)
@@ -195,7 +197,7 @@ namespace Hexagonal
                 cluster = value;
                 if (cluster != null)
                 {
-                    hexState = new HexState(cluster.fileWordMap.Count);
+                    hexState = new HexState(cluster.queryScore,minScore,maxScore);
                 }
             }
         }

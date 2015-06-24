@@ -45,6 +45,7 @@ namespace ASTIC_client_V2
         private Model hexModel;
         private Board board;
         private GraphicsEngine engine;
+        private PreviewHelper previewHelper;
         
 
         public MainWindow()
@@ -84,10 +85,17 @@ namespace ASTIC_client_V2
                 queryer = new QueryWorker(onQueryProgressChanged, onQueryComplete, IO);
             }
             queryer.query(q);
+            previewHelper = new PreviewHelper();
         }
 
         private void onQueryComplete(QueryResult result)
         {
+            if (result.clusterList.Count == 0)
+            {
+                changeStatus("No results found");
+                changeProgress(100);
+                return;
+            }
             if (result.getResultTree() != null)
             {
                 Console.WriteLine("Sucess");
@@ -95,6 +103,7 @@ namespace ASTIC_client_V2
                 //displayGraph(result.clusterList);
                 displayHexGraph(result.clusterList, result.distanceMatrix);
                 changeStatus("Rezultate gasite");
+                changeProgress(100);
             }
             else
             {
@@ -102,7 +111,7 @@ namespace ASTIC_client_V2
                 changeStatus("Eruare");
                 treeView1.Items.Clear();
             }
-            changeProgress(0);
+            changeProgress(100);
         }
 
         private void onQueryProgressChanged(int progress)
@@ -167,27 +176,29 @@ namespace ASTIC_client_V2
 
         public void displayList()
         {
-            displayList(currentList, currentPreviews, getCurrentQuery());
+            displayList(currentList, getCurrentQuery());
         }
 
         /**
          * Transforma din date de tip file in informatii care se pot afisa in lista
          * */
-        private void displayList(List<String> list,Dictionary<String,List<String>> previewMap, string [] query)
+        private void displayList(List<String> list, string [] query)
         {
             currentList = list;
-            currentPreviews = previewMap;
+            
             List<ListViewResult> model = new List<ListViewResult>();
             foreach(String file in list)
             {
                 FileType fileType= FileTypeFactory.FromFile(file);
                 if (fileType == filter || filter == FileType.All)
                 {
-                    model.Add(new ListViewResult(file,previewMap[file],query));
+                    List<String> preview = previewHelper.getPreview(query, file);
+                    model.Add(new ListViewResult(file,preview,query));
                 }
             }
             model.Sort(new RelavanceComparator());
             currentListViewModel = model;
+            lb_results.Items.Clear();
             model.ForEach(item => { lb_results.Items.Add(item); });
             clusterPreview.Items.Clear();
             model.ForEach(item => { clusterPreview.Items.Add(item); });
@@ -246,8 +257,9 @@ namespace ASTIC_client_V2
         #region Actions
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            startQuery(textBox1.Text);
+            startQuery(textBox1.Text.Trim());
             lb_predictions.Visibility = Visibility.Hidden;
+            changeStatus("Se cauta interogarea, va rugam asteptati");
         }
 
         private void treeView1_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -260,7 +272,7 @@ namespace ASTIC_client_V2
                 List<String> files = new List<String>();
                 files.AddRange(cluster.value.fileWordMap.Keys);
 
-                displayList(files, cluster.value.previewMap, getCurrentQuery());
+                displayList(files, getCurrentQuery());
             }
             catch (Exception ex)
             {
@@ -281,7 +293,12 @@ namespace ASTIC_client_V2
             String selected = (String)lb_predictions.SelectedItem;
             if (selected != null)
             {
-                textBox1.Text = selected;
+                String[] queryArray = getCurrentQuery();
+                queryArray[queryArray.Length - 1] = selected;
+                textBox1.Text = "";
+                foreach(String query in queryArray){
+                    textBox1.Text +=query + " ";
+                }
                 lb_predictions.Visibility = System.Windows.Visibility.Hidden;
                 textBox1.Focus();
                 changeStatus("Apasa \"Cauta\" pentru a incepe cautarea");
@@ -309,7 +326,8 @@ namespace ASTIC_client_V2
             }
             changeStatus("Cauta predictie");
             changeProgress(40);
-            predictor.predict(text);
+            String [] queryArray = getCurrentQuery();
+            predictor.predict(queryArray[queryArray.Length-1]);
         }
 
         private void textBox1_GotFocus(object sender, RoutedEventArgs e)
@@ -323,7 +341,7 @@ namespace ASTIC_client_V2
             if (currentListViewModel != null)
             {
                 lb_results.Items.Clear();
-                displayList(currentList,currentPreviews, getCurrentQuery());
+                displayList(currentList, getCurrentQuery());
             }
         }
 
@@ -437,71 +455,12 @@ namespace ASTIC_client_V2
 
         }
 
-        
-
-        private void displayGraph(List<Cluster> clusters)
-        {
-            Random Rand = new Random();
-
-            //Create data graph object
-            var graph = new GraphExample();
-            
-            //Create and add vertices using some DataSource for ID's
-            foreach (var item in clusters)
-                graph.AddVertex(new DataVertex() { ID = Int32.Parse(item.id), Text = item.id });
-
-            var vlist = graph.Vertices.ToList();
-            //Generate random edges for the vertices
-            foreach (var item in vlist)
-            {
-                
-                var vertex2 = vlist[Rand.Next(0, graph.VertexCount - 1)];
-                graph.AddEdge(new DataEdge(item, vertex2, Rand.Next(1, 50)) { 
-                    Text = string.Format("{0} -> {1}", item, vertex2) });
-            }
-
-            var LogicCore = new GXLogicCoreExample();
-            //This property sets layout algorithm that will be used to calculate vertices positions
-            //Different algorithms uses different values and some of them uses edge Weight property.
-            LogicCore.DefaultLayoutAlgorithm = GraphX.LayoutAlgorithmTypeEnum.KK;
-            //Now we can set optional parameters using AlgorithmFactory
-            //NOTE: default parameters can be automatically created each time you change Default algorithms
-            LogicCore.DefaultLayoutAlgorithmParams =
-                               LogicCore.AlgorithmFactory.CreateLayoutParameters(GraphX.LayoutAlgorithmTypeEnum.KK);
-            //Unfortunately to change algo parameters you need to specify params type which is different for every algorithm.
-            ((KKLayoutParameters)LogicCore.DefaultLayoutAlgorithmParams).MaxIterations = 100;
-
-            //This property sets vertex overlap removal algorithm.
-            //Such algorithms help to arrange vertices in the layout so no one overlaps each other.
-            LogicCore.DefaultOverlapRemovalAlgorithm = GraphX.OverlapRemovalAlgorithmTypeEnum.FSA;
-            //Setup optional params
-            LogicCore.DefaultOverlapRemovalAlgorithmParams =
-                              LogicCore.AlgorithmFactory.CreateOverlapRemovalParameters(GraphX.OverlapRemovalAlgorithmTypeEnum.FSA);
-            ((OverlapRemovalParameters)LogicCore.DefaultOverlapRemovalAlgorithmParams).HorizontalGap = 50;
-            ((OverlapRemovalParameters)LogicCore.DefaultOverlapRemovalAlgorithmParams).VerticalGap = 50;
-
-            //This property sets edge routing algorithm that is used to build route paths according to algorithm logic.
-            //For ex., SimpleER algorithm will try to set edge paths around vertices so no edge will intersect any vertex.
-            LogicCore.DefaultEdgeRoutingAlgorithm = GraphX.EdgeRoutingAlgorithmTypeEnum.SimpleER;
-
-            //This property sets async algorithms computation so methods like: Area.RelayoutGraph() and Area.GenerateGraph()
-            //will run async with the UI thread. Completion of the specified methods can be catched by corresponding events:
-            //Area.RelayoutFinished and Area.GenerateGraphFinished.
-            LogicCore.AsyncAlgorithmCompute = false;
-
-            //Finally assign logic core to GraphArea object
-            LogicCore.Graph = graph;
-            //gg_Area.LogicCore = LogicCore;
-            //gg_Area.GenerateGraph(true);
-            
-        }
-
         #endregion
 
         private void showPreviewForCluster(Cluster c)
         {
             List<String> files = c.fileWordMap.Keys.ToList();
-            displayList(files,c.previewMap, getCurrentQuery());
+            displayList(files, getCurrentQuery());
             if (clusterPreview.Width > 0)
             {
                 return;

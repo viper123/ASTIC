@@ -51,16 +51,17 @@ public class ClusterL0DataInterpretor implements IDataInterpretor {
 	private QueryResult queryL2(final Query q){
 		QueryResult result = new QueryResult(q);
 		List<Cluster> allSelectedClusters = new ArrayList<Cluster>();
-		for(String wordQuery:q.getQueryArray()){
-			List<Cluster> clusters = dao.selectInClusters(wordQuery,q.getIndex(),Query.COUNT,true);//index and count are ignored
-			allSelectedClusters.addAll(clusters);
-		}
+		List<Cluster> clusters = dao.selectInClusters(q.getQueryArray(),q.getIndex(),Query.COUNT,true);//index and count are ignored
+		allSelectedClusters.addAll(clusters);
+		
 		List<Cluster> fullClusters = new ArrayList<Cluster>();
+		PreviewHelper helper = new PreviewHelper();
 		for(Cluster c:allSelectedClusters){
-			Cluster cluster = dao.getCluster(c.id+"");
-			fullClusters.add(cluster);
 			//assign preview
-			PreviewHelper.assignPreview(cluster, q.getQueryArray());
+			Cluster cluster = dao.getCluster(c.id+"");
+			
+			fullClusters.add(cluster);//am sters partea de preview de aici;
+			
 		}
 		result.clusterList = new ArrayList<>();
 		result.clusterList.addAll(fullClusters);

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.nio.file.WatchEvent.Kind"/>
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
@@ -37,16 +36,12 @@
 <fullyQualifiedTypeName name="com.google.gson.GsonBuilder"/>
 <fullyQualifiedTypeName name="java.lang.SuppressWarnings"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.query.Query"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.clustering.TfIdfCalculator"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Parser"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.ParserFactory"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.Parser.OnWordParsedListener"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.PreviewHelper"/>
-<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="org.basex.io.serial.BuilderSerializer"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="org.apache.poi.xwpf.usermodel.Document"/>
@@ -60,4 +55,9 @@
 <fullyQualifiedTypeName name="org.apache.poi.hslf.extractor.PowerPointExtractor"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.PptParser"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.tests.DaoTests"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="ro.info.asticlib.io.parsers.PreviewHelper"/>
 </qualifiedTypeNameHistroy>

@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import ro.info.asticlib.db.Dao;
+import ro.info.asticlib.tests.DaoTests;
 
 
 public class Main {
@@ -55,8 +56,9 @@ public class Main {
 //		}.start();
 		//new QueryTest().queryTest();
 		//new WordProcessorTest().test();
-		//new Dao().dropTables();
+		new Dao().dropTables();
 		GUIConsole.main(args);
+		//new DaoTests().testSelect();
 		//setSystemTray();
 		//new TestInvertedClusterIndex().test();
 		

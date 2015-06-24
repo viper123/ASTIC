@@ -29,11 +29,11 @@ public abstract class Parser {
         StringBuilder lineBuilder = new StringBuilder();
 		List<String> res = new ArrayList<>();
 		List<String> lines =getLines();
-		for(String line : lines)
+		for(String query : queryArray)
         {
-            for(String query : queryArray)
-            {
-                if (line.toLowerCase().contains(query.toLowerCase()) && res.size() < 2)
+			for(String line : lines)
+			{
+				if (line.toLowerCase().contains(query.toLowerCase()))
                 {
                     lineBuilder = new StringBuilder();
                     builder = new StringBuilder();
@@ -44,18 +44,13 @@ public abstract class Parser {
                     line =line.replace(">", "");
                     String formatedLine = line.toLowerCase().replace(query.toLowerCase(), lineBuilder.toString());
                     builder.append(formatedLine);
-                    if(res.size()==2){
-                    	builder.append("...");
-                    }
+                    builder.append("...");
                     res.add(builder.toString());
+                    break;
                 }
-                if(res.size()>=2){
-                	break;
-                }
+                
             }
-            if(res.size()>=2){
-            	break;
-            }
+            
         }
 		return res;
 	}

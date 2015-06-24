@@ -53,6 +53,15 @@
     <Reference Include="GraphX.WPF.Controls">
       <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\GraphX.WPF.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\ExLibs\itextsharp-all-5.5.6\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>..\..\ExLibs\itextsharp-all-5.5.6\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xtra">
+      <HintPath>..\..\ExLibs\itextsharp-all-5.5.6\itextsharp.xtra.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\..\..\..\..\..\Licenta\SourceCode\ASTIC\ExLibs\graphX\GraphX_v2.1.8_wpf_showcase\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -101,12 +110,15 @@
     <Compile Include="Attached.cs" />
     <Compile Include="BaseClient.cs" />
     <Compile Include="BindableTextBlock.cs" />
+    <Compile Include="ColorsUtil.cs" />
     <Compile Include="Conf.cs" />
     <Compile Include="DisplayType.cs" />
     <Compile Include="EncodeUtil.cs" />
     <Compile Include="GraphX.cs" />
     <Compile Include="Math.cs" />
+    <Compile Include="PDFParser.cs" />
     <Compile Include="Predictor.cs" />
+    <Compile Include="PreviewHelper.cs" />
     <Compile Include="QueryWorker.cs" />
     <Compile Include="RelavanceComparator.cs" />
     <Compile Include="ServerIO.cs" />

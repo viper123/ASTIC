@@ -186,6 +186,8 @@ public class Dao extends BaseDao {
 		return null;
 	}
 	
+	
+	@Deprecated
 	public List<Cluster> selectInClusters(String wordQuery,int index,int count,
 			boolean returnCluster){
 		String joinClusterBW = "select b.id, a.file_path, a.word, a.tfidf "+
@@ -250,6 +252,110 @@ public class Dao extends BaseDao {
 			}
 		}
 		return null;
+	}
+	
+	public List<Cluster> selectInClusters(String []wordQuery,int index,int count,
+			boolean returnCluster){
+		/*String joinClusterBW = "select b.id, a.file_path, a.word, a.tfidf "+
+				"from bw a,clusters b where a.file_path = b.file_path AND ( LOWER(word) LIKE ?"+
+				" OR LOWER(word) LIKE ?" + 
+				" OR LOWER(word) LIKE ?" + 
+				" OR LOWER(word) LIKE ?)";*/
+		String joinClusterBW = "select b.id, a.file_path, a.word, a.tfidf "+
+				"from bw a,clusters b where a.file_path = b.file_path AND (";
+		StringBuilder builder = new StringBuilder();
+				builder.append(joinClusterBW);
+				for(int i=0;i<wordQuery.length;i++){
+				builder.append("( LOWER(word) LIKE ?"+
+				" OR LOWER(word) LIKE ?" + 
+				" OR LOWER(word) LIKE ?" + 
+				" OR LOWER(word) LIKE ?)");
+				if(i+1<wordQuery.length){
+					builder.append(" OR ");
+				}else{
+					builder.append(")");
+				}
+				}
+		/*String paginationWrapper = "select * from ( select rownum rnum, aa.* "+
+				"from ("+ joinClusterBW +") aa where rownum < ? )"+
+				"where rnum >= ? ";*/
+		/*String joinClusterBW = "select b.id, a.file_path, a.word, a.weight "+
+				"from bw a,clusters b where a.file_path = b.file_path AND LOWER(word) = ?";*/
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		try {
+			stmt = connection.prepareStatement(builder.toString());
+			int k=1;
+			for(String q:wordQuery){
+				q = q.toLowerCase();
+				stmt.setString(k++, q);
+			//stmt.setInt(5, index);
+				stmt.setString(k++,q+"%");
+				stmt.setString(k++,"%"+q+"%");
+				stmt.setString(k++,"%"+q);
+			}
+			//stmt.setInt(4, index + count);
+			result = stmt.executeQuery();
+			HashMap<Integer,Cluster> map = new HashMap<Integer, Cluster>();
+			List<Cluster> allClusters = new ArrayList<Cluster>();
+			while(result.next()){
+				int id = result.getInt("ID");
+				String word = result.getString("WORD");
+				
+				float weight = result.getFloat("TFIDF");
+				String file_path = result.getString("FILE_PATH");
+				//validate the word against other words for this filepath
+				/*if(!allWordsExistIn(wordQuery, file_path)){
+					continue;
+				}*/
+				Cluster c = map.get(id);
+				if(c==null){
+					c = new Cluster(id);
+					allClusters.add(c);
+					map.put(id, c);
+				}
+				Set<String> words = c.fileWordMap.get(file_path);
+				if(words==null){
+					words = new HashSet<>();
+					c.fileWordMap.put(file_path, words);
+				}
+				words.add(word);
+				Float savedWeight = c.wordWeightMap.get(word);
+				savedWeight = savedWeight==null?0:savedWeight;
+				weight+=savedWeight;
+				c.wordWeightMap.put(word, weight);
+			}
+			stmt.close();
+			result.close();
+			return allClusters;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				stmt.close();
+			}catch(Exception e){}
+			try{
+				result.close();
+			}catch(Exception e){
+			}
+		}
+		return null;
+	}
+	
+	public boolean allWordsExistIn(String words[],String filePath){
+		restoreInvertedIndexes();
+		for(String word:words){
+			word = word.toLowerCase();
+			List<String> files = invertedFileIndex.getFilesContainingWord(word);
+			if(files == null){
+				return false;
+			}
+			if(!files.contains(filePath)){
+				//System.out.println(word+" does not exist in"+filePath);
+				return false; 
+			}
+		}
+		return true;
 	}
 	
 	public Cluster getCluster(String id){

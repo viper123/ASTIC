@@ -46,8 +46,17 @@ namespace ASTIC_client_V2
         textBlock.Inlines.Clear();
         using (var xmlReader = XmlReader.Create(new StringReader(formattedText)))
         {
-            var result = (Span)XamlReader.Load(xmlReader);
-            textBlock.Inlines.Add(result);
+            try
+            {
+                var result = (Span)XamlReader.Load(xmlReader);
+                textBlock.Inlines.Add(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                textBlock.Inlines.Add((String)e.NewValue);
+            }
+            
         }
     }
 }

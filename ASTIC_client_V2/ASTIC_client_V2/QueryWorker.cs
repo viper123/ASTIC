@@ -41,22 +41,22 @@ namespace ASTIC_client_V2
             Query query = new Query();
             query.setLevel(Query.LEVEL_2);
             string[] queryParts = queryStr.Split(' ');
-            string[] queryArray;
-            if (queryParts.Length > 1)
-            {
-                queryArray = new string[queryParts.Length + 1];
-                int k = 0;
-                foreach (String part in queryParts)
-                {
-                    queryArray[k++] = part;
-                }
-                queryArray[queryParts.Length] = queryStr;
-            }
-            else
-            {
-                queryArray = queryParts;
-            }
-            query.setQueryArray(queryArray);
+            //string[] queryArray;
+            //if (queryParts.Length > 1)
+            //{
+            //    queryArray = new string[queryParts.Length + 1];
+            //    int k = 0;
+            //    foreach (String part in queryParts)
+            //    {
+            //        queryArray[k++] = part;
+            //    }
+            //    //queryArray[queryParts.Length] = queryStr;
+            //}
+            //else
+            //{
+            //    queryArray = queryParts;
+            //}
+            query.setQueryArray(queryParts);
             worker.ReportProgress(20);
             string queryString = JsonConvert.SerializeObject(query);
             worker.ReportProgress(25);

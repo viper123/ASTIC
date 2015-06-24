@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import ro.info.asticlib.clustering.AcceptanceRule;
+import ro.info.asticlib.clustering.Cluster;
 import ro.info.asticlib.clustering.Document;
 import ro.info.asticlib.clustering.TfIdfAcceptanceRule;
 import ro.info.asticlib.clustering.TfIdfCalculator;
@@ -44,6 +45,12 @@ public class DaoTests {
 			System.out.println("update tfidf for: "+d.path);
 			dao.updateTfIdf(d.tfidfMap, docs.size(), rule);
 		}
+	}
+	
+	public void testSelect(){
+		Dao dao = new Dao();
+		List<Cluster> cls = dao.selectInClusters(new String []{"numere","prime"}, 0, 0, true);
+		System.out.println(cls.size());
 	}
 	
 }

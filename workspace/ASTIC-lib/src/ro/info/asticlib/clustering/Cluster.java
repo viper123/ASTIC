@@ -91,13 +91,13 @@ public class Cluster implements Cloneable {
 	
 	
 	
-	public double getDistance(Cluster other,DistanceFormula formula){
+	public double getSimilarity(Cluster other,DistanceFormula formula){
 		
 		switch (formula) {
 		case Cosine :
-			return getDistanceCosine(other);
+			return getCosineSimilarity(other);
 		case CosineRep:
-			return getDistanceCosineRep(other);
+			return getCosineSimilarityRep(other);
 
 		}
 		
@@ -156,7 +156,7 @@ public class Cluster implements Cloneable {
 		return map;
 	}
 	
-	private double getDistanceCosine(Cluster other){
+	private double getCosineSimilarity(Cluster other){
 		
 		Set<String> wordSet = getWordSet(wordWeightMap, other.wordWeightMap);
 		
@@ -171,7 +171,7 @@ public class Cluster implements Cloneable {
 	}
 	
 	@SuppressWarnings("all")
-	private double getDistanceCosineRep(Cluster other){
+	private double getCosineSimilarityRep(Cluster other){
 		Map c1Map = getReprezentativeWordsWordWeightMap(Conf.CLUSTER_REPREZENTATIVE_WORDS_COUNT);
 		Map c2Map = other.getReprezentativeWordsWordWeightMap(Conf.CLUSTER_REPREZENTATIVE_WORDS_COUNT);
 		Set<String> wordSet = getWordSet(c1Map,c2Map);
@@ -214,6 +214,14 @@ public class Cluster implements Cloneable {
 			}
 		}
 		
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Cluster){
+			return ((Cluster)obj).id == id;
+		}
+		return false;
 	}
 	
 	@Override

@@ -48,9 +48,6 @@ ClusteringService {
 				sleepCounter = isWorking()?0:sleepCounter+1;
 				sleep(SLEEP_TIME);
 			}
-			System.out.println("Final processing");
-			//tfidfCalc.computeTfIdf(dao);
-			processBuffer();
 			onFinish(null);
 		}catch(Exception e){
 			onFinish(e);
@@ -81,7 +78,6 @@ ClusteringService {
 		//dao.dropTables();
 		visitor = new FileVisitor(root,this,this);
 		visitor.startVisitor();
-		
 	}
 	
 	
@@ -105,16 +101,14 @@ ClusteringService {
 				dao.saveWords(file, map, size);
 				filesBuffer.add(file);
 				if(filesBuffer.size()>=Conf.DOC_SET_SIZE){
-					updateTfIdfForDocs();
 					processBuffer();
-					filesBuffer.clear();
 				}
 			}
 		});
 	}
 	
 	private void updateTfIdfForDocs(){
-		System.out.println("Compute & Update TFIDF for "+Conf.DOC_SET_SIZE + " docs");
+		System.out.println("Compute & Update TFIDF for docs");
 		List<Document> docs = tfidfCalc.computeTfIdf(dao);
 		AcceptanceRule rule = new TfIdfAcceptanceRule();
 		for(Document d:docs){
@@ -125,9 +119,11 @@ ClusteringService {
 	}
 	
 	private void processBuffer(){
+		updateTfIdfForDocs();
 		for(String file:filesBuffer){
 			Clusters.instance().processFileWords(file);
 		}
+		filesBuffer.clear();
 	}
 	
 	@Override
@@ -160,7 +156,9 @@ ClusteringService {
 	
 	@Override
 	public void onFinish(Exception e) {
-		
+		System.out.println("Final processing");
+		processBuffer();
+		System.out.println("Daemon is stoped");
 	}
 	
 	enum  State{

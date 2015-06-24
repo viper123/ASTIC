@@ -14,7 +14,7 @@ namespace ASTIC_client_V2.Hexagonal
         public Board getHexBoard(List<Cluster> clusters,double [][] distanceMatrix)
         {
             Cluster max = null;
-            float maxScore = 0;
+            float maxScore = 0, minScore=Int32.MaxValue;
             int index = 0,k=0;
             foreach (Cluster c in clusters)
             {
@@ -24,32 +24,42 @@ namespace ASTIC_client_V2.Hexagonal
                     maxScore = c.queryScore;
                     index = k;
                 }
+                if (c.queryScore < minScore)
+                {
+                    minScore = c.queryScore;
+                }
                 k++;
             }
             Board board = new Board(5 * 2, 5 * 2, 44, HexOrientation.Flat);
             int n = 5;
+            board.Hexes[n, n].minScore = minScore;
+            board.Hexes[n, n].maxScore = maxScore;
             board.Hexes[n, n].Cluster = max;
-            List<Int32> listIndex = new List<Int32>();
-            listIndex.Add(index);
-            while (listIndex.Count < clusters.Count)
+            if (clusters.Count > 1)
             {
-                double min = 2;
-                int minIndex = 0;
-                for (int i = 0; i < distanceMatrix[index].Length; i++)
+                List<Int32> listIndex = new List<Int32>();
+                listIndex.Add(index);
+                while (listIndex.Count < clusters.Count)
                 {
-                    if (listIndex.Contains(i))
+                    double min = 2;
+                    int minIndex = 0;
+                    for (int i = 0; i < distanceMatrix[index].Length; i++)
                     {
-                        continue;
+                        if (listIndex.Contains(i))
+                        {
+                            continue;
+                        }
+                        if (distanceMatrix[index][i] < min)
+                        {
+                            minIndex = i;
+                            min = distanceMatrix[index][i];
+                        }
                     }
-                    if (distanceMatrix[index][i] < min)
-                    {
-                        minIndex = i;
-                        min = distanceMatrix[index][i];
-                    }
+                    listIndex.Add(minIndex);
                 }
-                listIndex.Add(minIndex);
+                FillMatrix(board.Hexes, 10, listIndex, clusters,minScore,maxScore);
             }
-            FillMatrix(board.Hexes, 10, listIndex, clusters);
+            
 
             return board;
 
@@ -87,7 +97,8 @@ namespace ASTIC_client_V2.Hexagonal
         }
 
         //original source:http://www.introprogramming.info/tag/spiral-matrix/
-        private static void FillMatrix(Hex[,] matrix, int n,List<Int32> indexArray,List<Cluster> clusterList)
+        private static void FillMatrix(Hex[,] matrix, int n,List<Int32> indexArray,
+            List<Cluster> clusterList,float min, float max)
         {
             int positionX = n / 2; // The middle of the matrix
             int positionY = n % 2 == 0 ? (n / 2) - 1 : (n / 2);
@@ -99,6 +110,8 @@ namespace ASTIC_client_V2.Hexagonal
 
             for (int i = 0; i <indexArray.Count; i++)
             {
+                matrix[positionY, positionX].maxScore = max;
+                matrix[positionY, positionX].minScore = min;
                 // Fill the current cell with the current value
                 matrix[positionY, positionX].Cluster = clusterList.ElementAt(indexArray[i]);
                 

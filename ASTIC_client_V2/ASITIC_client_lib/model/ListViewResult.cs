@@ -57,6 +57,10 @@ namespace ASTIC_client_V2
 
         public string getPreview(List<String> preview)
         {
+            if (preview == null)
+            {
+                return null;
+            }
             StringBuilder builder = new StringBuilder();
             foreach(String line in preview){
                 builder.Append(line);
@@ -103,7 +107,14 @@ namespace ASTIC_client_V2
         public NameClass(string name,string preview)
         {
             FilePath = name;
-            Preview = preview;
+            if (preview != null)
+            {
+                Preview = preview;
+            }
+            else
+            {
+                preview = "";
+            }
         }
 	}
 }
