@@ -47,3 +47,6 @@ D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\obj\De
 D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\ASITIC_client_lib.dll
 D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\ASITIC_client_lib.pdb
 D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\itextsharp.xml
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\ASITIC_client_lib.dll
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\ASITIC_client_lib.pdb
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASTIC_client_V2\bin\Debug\itextsharp.xml

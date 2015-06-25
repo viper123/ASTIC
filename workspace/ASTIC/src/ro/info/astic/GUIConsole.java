@@ -198,7 +198,7 @@ public class GUIConsole extends JFrame {
 		if(initialClusteringDeamon != null){
 			return ;
 		}
-		initialClusteringDeamon = new InitialClusteringDaemon(Conf.ROOT_TEST_2,watcher) {
+		initialClusteringDeamon = new InitialClusteringDaemon(Conf.ROOT,watcher) {
 			public void onFinish(Exception e) {
 				super.onFinish(e);
 				enableFileSystemWatcher();

@@ -5,3 +5,10 @@ D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\Newtonso
 D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\Newtonsoft.Json.pdb
 D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.dll
 D:\Licenta\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.pdb
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\ASITIC_client_lib.dll
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\ASITIC_client_lib.pdb
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\Newtonsoft.Json.dll
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\bin\Debug\Newtonsoft.Json.pdb
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.csprojResolveAssemblyReference.cache
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.dll
+D:\StudPlace\Licenta\svn\SourceCode\ASTIC\ASTIC_client_V2\ASITIC_client_lib\obj\Debug\ASITIC_client_lib.pdb

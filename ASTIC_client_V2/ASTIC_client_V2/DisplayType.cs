@@ -8,6 +8,6 @@ namespace ASTIC_client_V2
 {
     enum DisplayType
     {
-        CLASSIC,GRAPH
+        CLASIC,GRAFIC
     }
 }

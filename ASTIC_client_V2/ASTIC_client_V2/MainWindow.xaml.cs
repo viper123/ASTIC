@@ -59,8 +59,8 @@ namespace ASTIC_client_V2
             cb_types.Items.Add(FileType.Text);
             cb_types.Items.Add(FileType.Other);
             cb_types.SelectedIndex = 0;
-            cb_view_type.Items.Add(DisplayType.CLASSIC);
-            cb_view_type.Items.Add(DisplayType.GRAPH);
+            cb_view_type.Items.Add(DisplayType.CLASIC);
+            cb_view_type.Items.Add(DisplayType.GRAFIC);
             cb_view_type.SelectedIndex = 1;
             filter = FileType.All;
         }
@@ -350,13 +350,13 @@ namespace ASTIC_client_V2
             DisplayType type = (DisplayType)cb_view_type.SelectedItem;
             switch (type)
             {
-                case DisplayType.CLASSIC:
+                case DisplayType.CLASIC:
                     lb_results.Visibility = System.Windows.Visibility.Visible;
                     treeView1.Visibility = Visibility.Visible;
                     canvas.Visibility = Visibility.Collapsed;
                     clusterPreview.Visibility = Visibility.Collapsed;
                     break;
-                case DisplayType.GRAPH:
+                case DisplayType.GRAFIC:
                     lb_results.Visibility = System.Windows.Visibility.Collapsed;
                     treeView1.Visibility = Visibility.Collapsed;
                     canvas.Visibility = Visibility.Visible;
