@@ -118,6 +118,7 @@
     <Compile Include="Math.cs" />
     <Compile Include="PDFParser.cs" />
     <Compile Include="Predictor.cs" />
+    <Compile Include="Previewer.cs" />
     <Compile Include="PreviewHelper.cs" />
     <Compile Include="QueryWorker.cs" />
     <Compile Include="RelavanceComparator.cs" />

@@ -8,7 +8,7 @@ import ro.info.asticlib.word.WordProcesor.Callback;
 public class WordProcessorTest {
 
 	public void test(){
-		WordProcesor wp = new WordProcesor("d://Test//Ana.txt");
+		WordProcesor wp = new WordProcesor("d://Docs//TEST//birds1.txt");
 		wp.getMapWordWeight(new Callback() {
 			
 			@Override

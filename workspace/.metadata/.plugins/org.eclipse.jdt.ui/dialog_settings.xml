@@ -10,7 +10,7 @@
 	<item value="500" key="CallHierarchyViewPart.ratio3"/>
 	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
 	<item value="0" key="CallHierarchyViewPart.call_mode"/>
-	<item value="D:\Licenta\SourceCode\ASTIC\ExLibs\poi-3.12" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="D:\Licenta\SourceCode\ASTIC\ExLibs\poi-3.12\ooxml-lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="3" key="CallHierarchyViewPart.orientation"/>
 	<item value="filter_imports;" key="filters_last_used"/>
 	<list key="SearchScopeActionGroup.working_set">

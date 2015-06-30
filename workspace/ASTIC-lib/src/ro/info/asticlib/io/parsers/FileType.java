@@ -18,7 +18,7 @@ public enum FileType {
     Video("mp4","avi"),
     Audio("mp3","wav"),
     Photo("jpg","png"),
-    Text("txt","pdf"),
+    Text("txt","pdf","ppt","pptx","doc","docx"),
     Other;
     
     public List<String> acceptedExtensions;

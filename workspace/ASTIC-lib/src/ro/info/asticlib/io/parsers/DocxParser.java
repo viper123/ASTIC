@@ -43,19 +43,19 @@ public class DocxParser extends Parser {
 		XWPFWordExtractor we = null;
 		try {
 			docx = new XWPFDocument(
-					   new FileInputStream(getFileName()));
+					   new FileInputStream(parsableFile));
 			we = new XWPFWordExtractor(docx);
 			return we.getText();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} finally {
 			try {
 				we.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				//e.printStackTrace();
 			}
 		}
-		return null;
+		return "";
 	}
 
 }

@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 
 import ro.info.asticlib.db.Dao;
 import ro.info.asticlib.tests.DaoTests;
+import ro.info.asticlib.tests.WordProcessorTest;
 
 
 public class Main {
@@ -61,6 +62,7 @@ public class Main {
 		//new DaoTests().testSelect();
 		//setSystemTray();
 		//new TestInvertedClusterIndex().test();
+		//new WordProcessorTest().test();
 		
 	}
 	

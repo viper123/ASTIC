@@ -45,6 +45,7 @@ namespace ASTIC_client_V2
         private Model hexModel;
         private Board board;
         private GraphicsEngine engine;
+        private Previewer previewer;
         private PreviewHelper previewHelper;
         
 
@@ -85,7 +86,13 @@ namespace ASTIC_client_V2
                 queryer = new QueryWorker(onQueryProgressChanged, onQueryComplete, IO);
             }
             queryer.query(q);
+            previewer = new Previewer(onHavePreview);
             previewHelper = new PreviewHelper();
+        }
+
+        private void onHavePreview(Dictionary<String, List<String>> preview)
+        {
+
         }
 
         private void onQueryComplete(QueryResult result)

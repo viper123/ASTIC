@@ -42,18 +42,18 @@ public class PptxParser extends Parser {
 	public String getContentAsString() {
 		XSLFPowerPointExtractor we = null;
 		try {
-			we = new XSLFPowerPointExtractor(new XSLFSlideShow(getFileName()));
+			we = new XSLFPowerPointExtractor(new XSLFSlideShow(parsableFile.getAbsolutePath()));
 			return we.getText();
 		} catch (IOException | XmlException | OpenXML4JException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} finally {
 			try {
 				we.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				//e.printStackTrace();
 			}
 		}
-		return null;
+		return "";
 	}
 
 }

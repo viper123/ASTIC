@@ -38,6 +38,9 @@ public class Dao extends BaseDao {
 		String insertSQL = Tables.BW.insertSQL;
 		try{
 			for(String word:wordWeightMap.keySet()){
+				if(word.trim().length()<2){//final check for small words
+					continue ;
+				}
 				PreparedStatement pst = connection.prepareStatement(insertSQL);
 				String wordTrimed = trim(word,40);
 				pst.setString(1, wordTrimed.substring(0,1));

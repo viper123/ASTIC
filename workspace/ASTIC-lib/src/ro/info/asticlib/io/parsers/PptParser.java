@@ -40,18 +40,18 @@ public class PptParser extends Parser {
 	public String getContentAsString() {
 		PowerPointExtractor we = null;
 		try {
-			we = new PowerPointExtractor(new FileInputStream(getFileName()));
+			we = new PowerPointExtractor(new FileInputStream(parsableFile));
 			return we.getText();
 		} catch (IOException  e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} finally {
 			try {
 				we.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				//e.printStackTrace();
 			}
 		}
-		return null;
+		return "";
 	}
 
 }

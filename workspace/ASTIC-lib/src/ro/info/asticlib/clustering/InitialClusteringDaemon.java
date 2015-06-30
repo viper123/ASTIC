@@ -98,6 +98,7 @@ ClusteringService {
 					return ;
 				}
 				System.out.println("File:("+file+")");
+				
 				dao.saveWords(file, map, size);
 				filesBuffer.add(file);
 				if(filesBuffer.size()>=Conf.DOC_SET_SIZE){
