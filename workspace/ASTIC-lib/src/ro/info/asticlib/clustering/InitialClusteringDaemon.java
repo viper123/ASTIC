@@ -113,7 +113,7 @@ ClusteringService {
 		List<Document> docs = tfidfCalc.computeTfIdf(dao);
 		AcceptanceRule rule = new TfIdfAcceptanceRule();
 		for(Document d:docs){
-			System.out.println("Update tfidf for:"+d.path);
+			//System.out.println("Update tfidf for:"+d.path);
 			dao.updateTfIdf(d.tfidfMap, docs.size(), rule);
 		}
 		System.out.println("Finished updating TFIDF");

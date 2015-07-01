@@ -182,8 +182,8 @@ namespace Hexagonal
 
 		}
 
-        const float bts = 13;
-        const int sts = 8;
+        const float bts = 10;
+        const int sts = 6;
 
         public void DrawText(Graphics bitmapGraphics,Cluster c,PointF [] points)
         {
@@ -198,7 +198,7 @@ namespace Hexagonal
             float ox = (points[0].X + points[4].X + points[5].X) / 3;
             float oy = (points[0].Y + points[4].Y + points[5].Y) / 3;
 
-            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(0),6), 
+            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(0),10), 
             bigFont, bigBrush, new PointF(ox-10,oy-13));
 
             //draw the small 1 text
@@ -208,7 +208,7 @@ namespace Hexagonal
             ox = points[0].X;
             oy = points[0].Y;
 
-            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(1),7),
+            bitmapGraphics.DrawString(limit(c.GetReprezentativeWord(1),12),
             smallFont, smallBrush, new PointF(ox-5, oy + 13));
             //draw the small 2 text
             ox = points[4].X;

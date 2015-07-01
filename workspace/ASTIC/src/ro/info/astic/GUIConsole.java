@@ -6,9 +6,9 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,17 +16,13 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import ro.info.asticlib.clustering.BaseClusteringService;
 import ro.info.asticlib.clustering.InitialClusteringDaemon;
 import ro.info.asticlib.conf.Conf;
 import ro.info.asticlib.io.FileSystemWatcher;
 
-import java.awt.Component;
-
-import javax.swing.Box;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class GUIConsole extends JFrame {
@@ -53,7 +49,10 @@ public class GUIConsole extends JFrame {
 	private JButton btnStartServer;
 	private JLabel lblServerState;
 	private Server queryServer;
-	private boolean forcedStoped = false;
+	private JTextField textField;
+	private JButton btnSelectRoot;
+	private String root ;
+	
 	
 
 	/**
@@ -167,7 +166,7 @@ public class GUIConsole extends JFrame {
 		JTextPane textPane = new JTextPane();
 		textPane.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(textPane); 
-		scrollPane.setBounds(10, 165, 449, 194);
+		scrollPane.setBounds(10, 206, 449, 153);
 		contentPane.add(scrollPane);
 		/*try {
 			Log.setup(textPane);
@@ -181,8 +180,30 @@ public class GUIConsole extends JFrame {
 		contentPane.add(lblAsticServerConsole);
 		
 		//if(!PrefUtils.load(KEY_CLUSTERIZED)){
+		
+		root = Conf.ROOT;
+		
 			btnStartInitialClustering.setEnabled(true);
 			lblStateInitialClustering.setText("Asteapta");
+			
+			JPanel panel = new JPanel();
+			panel.setBounds(10, 163, 449, 31);
+			contentPane.add(panel);
+			panel.setLayout(null);
+			
+			JLabel lblRadacina = new JLabel("Radacina");
+			lblRadacina.setBounds(24, 9, 52, 16);
+			panel.add(lblRadacina);
+			
+			textField = new JTextField();
+			textField.setBounds(92, 6, 219, 22);
+			panel.add(textField);
+			textField.setColumns(10);
+			textField.setText(root);
+			
+			btnSelectRoot = new JButton("Selecteaza ...");
+			btnSelectRoot.setBounds(316, 5, 121, 25);
+			panel.add(btnSelectRoot);
 			
 		//}else{
 			//btnStartInitialClustering.setEnabled(false);
@@ -198,7 +219,7 @@ public class GUIConsole extends JFrame {
 		if(initialClusteringDeamon != null){
 			return ;
 		}
-		initialClusteringDeamon = new InitialClusteringDaemon(Conf.ROOT_TEST,watcher) {
+		initialClusteringDeamon = new InitialClusteringDaemon(root,watcher) {
 			public void onFinish(Exception e) {
 				super.onFinish(e);
 				enableFileSystemWatcher();
@@ -282,5 +303,22 @@ public class GUIConsole extends JFrame {
 				}
 			}
 		});
+		btnSelectRoot.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(root == null){
+					root = Conf.ROOT;
+				}
+				JFileChooser fc = new JFileChooser();
+				fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int rss = fc.showOpenDialog(GUIConsole.this);
+				if (rss == JFileChooser.APPROVE_OPTION){
+					root =  fc.getSelectedFile().getAbsolutePath();
+					textField.setText(root);
+				}
+			}
+		});
+		
 	}
 }

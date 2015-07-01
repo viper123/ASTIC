@@ -34,6 +34,8 @@ public class Clusters {
 	 * @param wordMapWeight
 	 */
 	public void processFileWords(String file){
+		double acceptableSimilarity = Conf.getAcceptableSimilarity();
+		System.out.println("Accepted similarity: "+acceptableSimilarity);
 		HashMap<String, Float> wordWeightMap= dao.getWordsWeightForFile(file);
 		//int totalWordsCount = wordWeightMap.size();
 		Cluster newCluster = new Cluster(generateID(), file, wordWeightMap);
@@ -49,8 +51,9 @@ public class Clusters {
 
 		for(Cluster c:allClusters){
 			double similarity = c.getSimilarity(newCluster, DistanceFormula.Cosine);
-			//System.out.println("\tDistance from "+c.id +"=" + distance);	
-			if(similarity > Conf.ACCEPTABLE_DISTANCE){
+			//System.out.println("\tSimilarity from "+c.id +"=" + similarity);	
+			if(similarity > acceptableSimilarity){
+				System.out.println("Join clusters: < nou,"+c.id+">");
 				integrated = true;
 				dao.saveCluster(c.id, file);
 				dao.updateInvertedClusterIndex(c.id, wordWeightMap);
